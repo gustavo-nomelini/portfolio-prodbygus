@@ -7,7 +7,7 @@ import Footer from '@/components/layout/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Your Name - Portfolio',
+  title: 'Prod by GUS - Portfolio',
   description: 'Web developer and designer portfolio',
 };
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col bg-background text-foreground">
           <Header />
           <main className="flex-grow">{children}</main>
           <Footer />
