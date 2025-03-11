@@ -10,6 +10,8 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [logoAnimated, setLogoAnimated] = useState(false);
+  // Ano atual - armazenado em um estado para garantir consistência na hidratação
+  const [currentYear, setCurrentYear] = useState('');
 
   // Função para verificar se o link está ativo
   const isActive = (path: string) => pathname === path;
@@ -69,6 +71,11 @@ const Header = () => {
     }, 10000); // Intervalo mais longo para ser menos frequente
     
     return () => clearInterval(interval);
+  }, []);
+
+  // Efeito para inicializar o ano atual no cliente
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear().toString());
   }, []);
 
   // Links de navegação (incluindo "Home")
@@ -209,7 +216,6 @@ const Header = () => {
                       transform transition-transform duration-300 ease-out
                       ${isActive(link.href) ? 'scale-x-100' : 'scale-x-0'}
                       origin-center
-                      group-hover:scale-x-100
                     `}></span>
                   </Link>
                 </li>
@@ -218,9 +224,9 @@ const Header = () => {
           </nav>
         </div>
         
-        {/* Rodapé do menu */}
+        {/* Rodapé do menu - Corrigido para evitar problemas de hidratação */}
         <div className="py-6 text-center text-sm text-[var(--foreground-muted)]">
-          © {new Date().getFullYear()} Prod by GUS
+          {currentYear ? `© ${currentYear} Prod by GUS` : '© Prod by GUS'}
         </div>
       </div>
     </>

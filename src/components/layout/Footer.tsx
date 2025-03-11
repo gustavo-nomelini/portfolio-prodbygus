@@ -1,12 +1,25 @@
+"use client";
+
 import { FaGithub } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 
 const Footer = () => {
+  // Ano atual - armazenado em um estado para garantir consistência na hidratação
+  const [currentYear, setCurrentYear] = useState('');
+
+  // Efeito para inicializar o ano atual no cliente
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear().toString());
+  }, []);
+
   return (
     <footer className="bg-[var(--color4)] text-[var(--foreground)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <p className="text-sm">© {new Date().getFullYear()} Prod by GUS. All rights reserved.</p>
+            <p className="text-sm">
+              {currentYear ? `© ${currentYear} Prod by GUS. All rights reserved.` : '© Prod by GUS. All rights reserved.'}
+            </p>
           </div>
           
           {/* Link para o repositório do código-fonte */}
