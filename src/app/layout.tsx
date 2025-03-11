@@ -21,7 +21,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col bg-background text-foreground">
           <Header />
-          <main className="flex-grow">{children}</main>
+          {/* Adicionado padding-top para compensar o header fixo */}
+          <main className="flex-grow pt-16">{children}</main>
           <Footer />
         </div>
       </body>
