@@ -18,14 +18,13 @@ const About = () => {
           {/* Coluna da foto - responsiva */}
           <div className="lg:w-2/5 flex justify-center">
             <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-4 border-[var(--color3)] shadow-lg">
-              {/* Substitua pelo caminho da sua foto */}
               <Image
-                src="/images/profile.jpg"
-                alt="Gustavo - Desenvolvedor Web"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
+              src="/profile.jpg"
+              alt="Gustavo - Desenvolvedor Web"
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           </div>
@@ -33,7 +32,7 @@ const About = () => {
           {/* Coluna de informações */}
           <div className="lg:w-3/5">
             <h3 className="text-2xl font-semibold text-[var(--color1)] mb-4">
-              Desenvolvedor Web & Designer
+              Desenvolvedor<br/>Web Fullstack
             </h3>
             
             <p className="text-[var(--foreground-muted)] mb-6">
@@ -43,9 +42,9 @@ const About = () => {
             </p>
             
             <p className="text-[var(--foreground-muted)] mb-6">
-              Minha jornada no desenvolvimento web começou com [sua história pessoal] e 
-              desde então tenho aprimorado minhas habilidades em React, Next.js, TypeScript e 
-              design de interfaces.
+              Minha jornada no desenvolvimento web começou em 2020 e 
+              desde então tenho aprimorado minhas habilidades em JavaScript, TypeScript, React, Next.js 
+              e UI/UX.
             </p>
             
             {/* Habilidades */}
@@ -55,10 +54,22 @@ const About = () => {
               </h4>
               
               <div className="flex flex-wrap gap-2">
-                {['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'UI/UX Design', 'Responsive Design', 'Node.js'].map((skill) => (
+                {['Algoritmos', 'Estrutura de Dados', 'Engenharia de Software', 'UX/UI', 'TailwindCSS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Node.js'].map((skill) => (
                   <span 
                     key={skill}
-                    className="px-4 py-2 bg-[var(--color4)] text-[var(--foreground)] rounded-full text-sm"
+                    className="px-4 py-2 bg-[var(--color4)] text-[var(--foreground)] rounded-full text-sm
+                    relative overflow-hidden cursor-pointer
+                    transition-all duration-300 ease-in-out
+                    hover:bg-[var(--color3)] hover:text-[var(--background)]
+                    hover:shadow-[0_0_12px_rgba(var(--glow-color),0.6)]
+                    hover:scale-105 transform hover:-translate-y-0.5
+                    before:content-[''] before:absolute before:inset-0
+                    before:bg-gradient-to-r before:from-transparent
+                    before:via-[rgba(var(--color5-rgb),0.2)] before:to-transparent
+                    before:opacity-0 before:translate-x-[-100%]
+                    hover:before:opacity-100 hover:before:translate-x-[100%]
+                    before:transition-all before:duration-1000 before:ease-in-out
+                    text-shadow-none" /* Adicionado text-shadow-none */
                   >
                     {skill}
                   </span>

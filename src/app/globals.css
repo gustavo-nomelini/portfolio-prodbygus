@@ -15,6 +15,12 @@
   --foreground: #E8D7EB;
   --foreground-muted: #C2A5C7;
   
+  /* Valores RGB para efeitos de brilho e transparência */
+  --color1-rgb: 159, 112, 169; /* RGB de #9F70A9 */
+  --color3-rgb: 194, 165, 199; /* RGB de #C2A5C7 */
+  --color5-rgb: 232, 215, 235; /* RGB de #E8D7EB */
+  --glow-color: 215, 180, 220; /* Nova cor para efeito de brilho (tom entre color3 e color5) */
+  
   /* Configurações de fonte */
   --font-family-main: var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --letter-spacing: -0.025em;
@@ -48,6 +54,7 @@ body {
   font-family: var(--font-family-main);
   letter-spacing: var(--letter-spacing);
   font-feature-settings: "calt" 1, "ss01" 1, "ss02" 1; /* Habilitar ligaduras */
+  text-shadow: none;
 }
 
 /* Estilo para blocos de código - aparência de terminal */
@@ -59,6 +66,7 @@ code, pre {
 /* Ajustar espaçamento de texto para melhor legibilidade com a nova fonte */
 h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.03em;
+  text-shadow: none;
 }
 
 /* Customizações específicas para realçar a aparência de "desenvolvedor" */
@@ -66,4 +74,14 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--color1);
   color: var(--background);
   text-shadow: none;
+}
+
+/* Remover sombras de texto indesejadas */
+body, h1, h2, h3, h4, h5, h6, p, span, a, div {
+  text-shadow: none;
+}
+
+/* Aplicar sombra apenas onde explicitamente definido pela classe 'text-shadow' */
+.text-shadow {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }

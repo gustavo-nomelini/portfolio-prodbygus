@@ -125,7 +125,7 @@ const Header = () => {
                 <span className={`
                   text-xl font-bold transition-all duration-700 ease-in-out
                   ${logoAnimated 
-                    ? 'text-[var(--color3)] drop-shadow-[0_0_3px_var(--color3)]' 
+                    ? 'text-[var(--color3)]' 
                     : 'text-[var(--color1)]'} 
                   group-hover:text-[var(--color3)]
                   relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-0.5
