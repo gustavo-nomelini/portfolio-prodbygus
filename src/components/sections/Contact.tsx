@@ -41,7 +41,7 @@ const Contact = () => {
           </h2>
           <div className="mt-2 w-24 h-1 bg-[var(--color1)] mx-auto"></div>
           <p className="mt-6 text-xl text-[var(--foreground-muted)] max-w-2xl mx-auto">
-            Interessado em trabalharmos juntos? Entre em contato através de um dos canais abaixo.
+            Interessado em trabalharmos juntos?<br />Quer me contratar para um freelance?<br />Entre em contato através de um dos canais abaixo.
           </p>
         </div>
 

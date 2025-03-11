@@ -80,129 +80,150 @@ const Header = () => {
   ];
 
   return (
-    <header 
-      className={`
-        fixed top-0 left-0 right-0 z-50 
-        transition-all duration-300 ease-in-out
-        ${scrolled 
-          ? 'bg-[var(--background)]/65 backdrop-blur-xl shadow-lg shadow-[var(--color2)]/30' 
-          : 'bg-[var(--background)]/85 backdrop-blur-md shadow-sm shadow-transparent'
-        }
-      `}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo melhorado - Versão unificada para desktop e mobile com pulso mais suave */}
-          <div className="flex">
-            <Link 
-              href="/" 
-              className={`
-                flex-shrink-0 flex items-center group relative 
-                transition-all duration-700 ease-in-out
-                ${logoAnimated ? 'scale-105' : 'scale-100'}
-              `}
-              onClick={closeMenu}
-              aria-label="Página Inicial"
-            >
-              <span className={`
-                text-xl font-bold transition-all duration-700 ease-in-out
-                ${logoAnimated 
-                  ? 'text-[var(--color3)] drop-shadow-[0_0_3px_var(--color3)]' 
-                  : 'text-[var(--color1)]'} 
-                group-hover:text-[var(--color3)]
-                relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-0.5
-                after:bg-[var(--color3)] after:origin-right after:scale-x-0 after:transition-transform
-                after:duration-300 group-hover:after:origin-left group-hover:after:scale-x-100
-              `}>
-                Prod by GUS
-              </span>
-              
-              {/* Tooltip apenas para desktop */}
-              <span className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 px-2 py-1 
-                           bg-[var(--color4)] text-[var(--foreground)] text-xs rounded 
-                           opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                           pointer-events-none whitespace-nowrap hidden md:block">
-                Ir para a página inicial
-              </span>
-            </Link>
-          </div>
-
-          {/* Navegação para desktop */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navLinks.map(link => (
+    <>
+      <header 
+        className={`
+          fixed top-0 left-0 right-0 z-50 
+          transition-all duration-300 ease-in-out
+          ${scrolled 
+            ? 'bg-[var(--background)]/65 backdrop-blur-xl shadow-lg shadow-[var(--color2)]/30' 
+            : 'bg-[var(--background)]/85 backdrop-blur-md shadow-sm shadow-transparent'
+          }
+        `}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo melhorado - Versão unificada para desktop e mobile com pulso mais suave */}
+            <div className="flex">
               <Link 
-                key={link.href} 
-                href={link.href}
+                href="/" 
                 className={`
-                  relative text-[var(--foreground)] hover:text-[var(--color1)] transition-colors py-2
-                  after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--foreground)] 
-                  after:transition-all after:duration-300 after:ease-in-out
-                  hover:after:w-full
-                  ${isActive(link.href) ? 'after:w-full after:bg-[var(--color1)]' : ''}
+                  flex-shrink-0 flex items-center group relative 
+                  transition-all duration-700 ease-in-out
+                  ${logoAnimated ? 'scale-105' : 'scale-100'}
                 `}
+                onClick={closeMenu}
+                aria-label="Página Inicial"
               >
-                {link.text}
+                <span className={`
+                  text-xl font-bold transition-all duration-700 ease-in-out
+                  ${logoAnimated 
+                    ? 'text-[var(--color3)] drop-shadow-[0_0_3px_var(--color3)]' 
+                    : 'text-[var(--color1)]'} 
+                  group-hover:text-[var(--color3)]
+                  relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-0.5
+                  after:bg-[var(--color3)] after:origin-right after:scale-x-0 after:transition-transform
+                  after:duration-300 group-hover:after:origin-left group-hover:after:scale-x-100
+                `}>
+                  Prod by GUS
+                </span>
+                
+                {/* Tooltip apenas para desktop */}
+                <span className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 px-2 py-1 
+                             bg-[var(--color4)] text-[var(--foreground)] text-xs rounded 
+                             opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                             pointer-events-none whitespace-nowrap hidden md:block">
+                  Ir para a página inicial
+                </span>
               </Link>
-            ))}
-          </nav>
+            </div>
 
-          {/* Botão do menu mobile */}
-          <div className="md:hidden flex items-center">
+            {/* Navegação para desktop */}
+            <nav className="hidden md:flex items-center space-x-8">
+              {navLinks.map(link => (
+                <Link 
+                  key={link.href} 
+                  href={link.href}
+                  className={`
+                    relative text-[var(--foreground)] hover:text-[var(--color1)] transition-colors py-2
+                    after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--foreground)] 
+                    after:transition-all after:duration-300 after:ease-in-out
+                    hover:after:w-full
+                    ${isActive(link.href) ? 'after:w-full after:bg-[var(--color1)]' : ''}
+                  `}
+                >
+                  {link.text}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Botão do menu mobile */}
             <button
-              className="text-[var(--foreground)] p-2 rounded-md hover:bg-[var(--color4)] transition-colors focus:outline-none"
+              className="md:hidden text-[var(--foreground)] p-2 rounded-md hover:bg-[var(--color4)] transition-colors focus:outline-none"
               onClick={toggleMenu}
               aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
             >
-              {menuOpen ? (
-                <FaTimes className="h-6 w-6" />
-              ) : (
-                <FaBars className="h-6 w-6" />
-              )}
+              <FaBars className="h-6 w-6" />
             </button>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Menu mobile overlay */}
+      {/* Menu mobile - Corrigido para preencher a tela inteira com blur */}
       <div 
         className={`
-          md:hidden fixed inset-0 bg-[var(--background)]/90 backdrop-blur-2xl z-40
-          flex flex-col justify-center items-center
-          transform transition-transform duration-300 ease-in-out
-          ${menuOpen ? 'translate-x-0' : 'translate-x-full'}
-          pt-16 /* Espaço para o header */
+          fixed inset-0 z-[100] md:hidden
+          transition-opacity duration-500 ease-in-out
+          ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
+          flex flex-col bg-[var(--background)]/80 backdrop-blur-3xl
         `}
       >
-        {/* Botão para fechar menu posicionado no canto superior direito */}
-        <button
-          className="absolute top-5 right-5 text-[var(--foreground)] bg-[var(--color4)] p-2 rounded-full hover:bg-[var(--color1)] transition-colors focus:outline-none"
-          onClick={closeMenu}
-          aria-label="Fechar menu"
-        >
-          <FaTimes className="h-6 w-6" />
-        </button>
+        <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          {/* Logo no menu mobile */}
+          <Link 
+            href="/" 
+            onClick={closeMenu}
+            className="text-xl font-bold text-[var(--color1)]"
+          >
+            Prod by GUS
+          </Link>
+          
+          {/* Botão para fechar menu */}
+          <button
+            onClick={closeMenu}
+            className="p-2 rounded-full text-[var(--foreground)] bg-[var(--color4)]/60 hover:bg-[var(--color1)]/60 transition-colors"
+            aria-label="Fechar menu"
+          >
+            <FaTimes className="h-6 w-6" />
+          </button>
+        </div>
         
-        <nav className="flex flex-col items-center space-y-6 py-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={closeMenu}
-              className={`
-                text-2xl font-medium relative
-                ${isActive(link.href) ? 'text-[var(--color1)]' : 'text-[var(--foreground)]'}
-                after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[var(--foreground)]
-                after:transition-all after:duration-300 after:ease-in-out
-                ${isActive(link.href) ? 'after:w-full after:bg-[var(--color1)]' : 'after:w-0'}
-                hover:text-[var(--color1)] hover:after:w-full
-              `}
-            >
-              {link.text}
-            </Link>
-          ))}
-        </nav>
+        {/* Links de navegação - centralizado na tela */}
+        <div className="flex-1 flex flex-col justify-center items-center py-8">
+          <nav className="w-full max-w-xs mx-auto">
+            <ul className="space-y-8">
+              {navLinks.map((link) => (
+                <li key={link.href} className="text-center">
+                  <Link
+                    href={link.href}
+                    onClick={closeMenu}
+                    className={`
+                      text-2xl font-medium relative inline-block
+                      ${isActive(link.href) ? 'text-[var(--color1)]' : 'text-[var(--foreground)]'}
+                      transition-colors duration-300 hover:text-[var(--color1)]
+                    `}
+                  >
+                    {link.text}
+                    <span className={`
+                      absolute -bottom-2 left-0 right-0 h-0.5 bg-[var(--color1)]
+                      transform transition-transform duration-300 ease-out
+                      ${isActive(link.href) ? 'scale-x-100' : 'scale-x-0'}
+                      origin-center
+                      group-hover:scale-x-100
+                    `}></span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+        
+        {/* Rodapé do menu */}
+        <div className="py-6 text-center text-sm text-[var(--foreground-muted)]">
+          © {new Date().getFullYear()} Prod by GUS
+        </div>
       </div>
-    </header>
+    </>
   );
 };
 
