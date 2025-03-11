@@ -58,15 +58,15 @@ const Header = () => {
 
   // Efeito para mostrar a animação do logo periodicamente
   useEffect(() => {
-    // Animar o logo a cada 8 segundos para chamar atenção
+    // Animar o logo a cada 10 segundos para chamar atenção
     const interval = setInterval(() => {
       setLogoAnimated(true);
       
-      // Desligar a animação após 1.2 segundos
+      // Desligar a animação após 1.8 segundos (mais lento)
       setTimeout(() => {
         setLogoAnimated(false);
-      }, 1200);
-    }, 8000); // Intervalo longo para não ser irritante
+      }, 1800);
+    }, 10000); // Intervalo mais longo para ser menos frequente
     
     return () => clearInterval(interval);
   }, []);
@@ -92,22 +92,22 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo melhorado - Versão unificada para desktop e mobile */}
+          {/* Logo melhorado - Versão unificada para desktop e mobile com pulso mais suave */}
           <div className="flex">
             <Link 
               href="/" 
               className={`
                 flex-shrink-0 flex items-center group relative 
-                transition-all duration-500 ease-out
-                ${logoAnimated ? 'scale-110' : 'scale-100'}
+                transition-all duration-700 ease-in-out
+                ${logoAnimated ? 'scale-105' : 'scale-100'}
               `}
               onClick={closeMenu}
               aria-label="Página Inicial"
             >
               <span className={`
-                text-xl font-bold transition-all duration-500
+                text-xl font-bold transition-all duration-700 ease-in-out
                 ${logoAnimated 
-                  ? 'text-[var(--color3)] drop-shadow-[0_0_6px_var(--color3)]' 
+                  ? 'text-[var(--color3)] drop-shadow-[0_0_3px_var(--color3)]' 
                   : 'text-[var(--color1)]'} 
                 group-hover:text-[var(--color3)]
                 relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-0.5
