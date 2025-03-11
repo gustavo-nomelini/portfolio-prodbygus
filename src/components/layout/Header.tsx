@@ -1,6 +1,14 @@
+"use client";
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
+  const pathname = usePathname();
+
+  // Função para verificar se o link está ativo
+  const isActive = (path: string) => pathname === path;
+
   return (
     <header className="bg-[var(--background)] shadow-md shadow-[var(--color2)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,18 +19,26 @@ const Header = () => {
             </Link>
           </div>
           <nav className="flex items-center space-x-8">
-            <Link href="/" className="text-[var(--foreground)] hover:text-[var(--color1)] transition-colors">
-              Home
-            </Link>
-            <Link href="/about" className="text-[var(--foreground)] hover:text-[var(--color1)] transition-colors">
-              About
-            </Link>
-            <Link href="/projects" className="text-[var(--foreground)] hover:text-[var(--color1)] transition-colors">
-              Projects
-            </Link>
-            <Link href="/contact" className="text-[var(--foreground)] hover:text-[var(--color1)] transition-colors">
-              Contact
-            </Link>
+            {[
+              { href: '/', text: 'Home' },
+              { href: '/about', text: 'About' },
+              { href: '/projects', text: 'Projects' },
+              { href: '/contact', text: 'Contact' }
+            ].map(link => (
+              <Link 
+                key={link.href} 
+                href={link.href}
+                className={`
+                  relative text-[var(--foreground)] hover:text-[var(--color1)] transition-colors py-2
+                  after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--foreground)] 
+                  after:transition-all after:duration-300 after:ease-in-out
+                  hover:after:w-full
+                  ${isActive(link.href) ? 'after:w-full after:bg-[var(--color1)]' : ''}
+                `}
+              >
+                {link.text}
+              </Link>
+            ))}
           </nav>
         </div>
       </div>
