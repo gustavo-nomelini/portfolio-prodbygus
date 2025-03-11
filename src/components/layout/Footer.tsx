@@ -1,41 +1,33 @@
+import { FaGithub } from 'react-icons/fa';
+
 const Footer = () => {
-    return (
-      <footer className="bg-[var(--color4)] text-[var(--foreground)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <p className="text-sm">© {new Date().getFullYear()} Prod by GUS. All rights reserved.</p>
-            </div>
-            <div className="flex space-x-6">
-              <a 
-                href="https://github.com/yourusername" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-[var(--foreground-muted)] hover:text-[var(--color1)] transition-colors"
-              >
-                GitHub
-              </a>
-              <a 
-                href="https://linkedin.com/in/yourusername" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-[var(--foreground-muted)] hover:text-[var(--color1)] transition-colors"
-              >
-                LinkedIn
-              </a>
-              <a 
-                href="https://twitter.com/yourusername" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-[var(--foreground-muted)] hover:text-[var(--color1)] transition-colors"
-              >
-                Twitter
-              </a>
-            </div>
+  return (
+    <footer className="bg-[var(--color4)] text-[var(--foreground)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="mb-4 md:mb-0">
+            <p className="text-sm">© {new Date().getFullYear()} Prod by GUS. All rights reserved.</p>
           </div>
+          
+          {/* Link para o repositório do código-fonte */}
+          <a 
+            href="https://github.com/gustavo-nomelini/prod-by-gus-portfolio" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 text-[var(--foreground-muted)] hover:text-[var(--color1)] transition-all group"
+            aria-label="Ver código-fonte no GitHub"
+          >
+            <FaGithub className="text-lg group-hover:scale-110 transition-transform" />
+            <span className="text-sm font-medium relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] 
+                          after:bg-[var(--color1)] after:origin-right after:scale-x-0 after:transition-transform
+                          after:duration-300 group-hover:after:origin-left group-hover:after:scale-x-100">
+              Source Code
+            </span>
+          </a>
         </div>
-      </footer>
-    );
-  };
-  
-  export default Footer;
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
