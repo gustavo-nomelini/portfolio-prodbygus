@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Header = () => {
@@ -10,8 +10,10 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [logoAnimated, setLogoAnimated] = useState(false);
-  // Ano atual - armazenado em um estado para garantir consistência na hidratação
-  const [currentYear, setCurrentYear] = useState('');
+  // Para evitar problemas com o useEffect executando duas vezes em desenvolvimento
+  const animationIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  // Usar um valor constante para o ano em vez de um estado
+  const currentYear = "2025";
 
   // Função para verificar se o link está ativo
   const isActive = (path: string) => pathname === path;
@@ -28,6 +30,7 @@ const Header = () => {
 
   // Efeito para detectar a rolagem da página e atualizar o estado
   useEffect(() => {
+    // Função para detectar scroll
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
       if (isScrolled !== scrolled) {
@@ -37,8 +40,8 @@ const Header = () => {
 
     // Adicionar event listener
     window.addEventListener('scroll', handleScroll);
-
-    // Verificar o estado inicial
+    
+    // Verificar o estado inicial depois que o componente montar
     handleScroll();
 
     // Remover event listener ao desmontar
@@ -50,35 +53,41 @@ const Header = () => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     }
 
+    // Limpar ao desmontar
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     };
   }, [menuOpen]);
 
   // Efeito para mostrar a animação do logo periodicamente
   useEffect(() => {
-    // Animar o logo a cada 10 segundos para chamar atenção
-    const interval = setInterval(() => {
+    // Limpar qualquer intervalo existente primeiro
+    if (animationIntervalRef.current) {
+      clearInterval(animationIntervalRef.current);
+    }
+    
+    // Criar novo intervalo
+    animationIntervalRef.current = setInterval(() => {
       setLogoAnimated(true);
       
-      // Desligar a animação após 1.8 segundos (mais lento)
+      // Desligar a animação após 1.8 segundos
       setTimeout(() => {
         setLogoAnimated(false);
       }, 1800);
-    }, 10000); // Intervalo mais longo para ser menos frequente
+    }, 10000);
     
-    return () => clearInterval(interval);
-  }, []);
+    // Limpar intervalos ao desmontar
+    return () => {
+      if (animationIntervalRef.current) {
+        clearInterval(animationIntervalRef.current);
+      }
+    };
+  }, []); // Dependências vazias para executar apenas uma vez
 
-  // Efeito para inicializar o ano atual no cliente
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear().toString());
-  }, []);
-
-  // Links de navegação (incluindo "Home")
+  // Links de navegação
   const navLinks = [
     { href: '/', text: 'Home' },
     { href: '/about', text: 'About' },
@@ -100,7 +109,7 @@ const Header = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo melhorado - Versão unificada para desktop e mobile com pulso mais suave */}
+            {/* Logo melhorado */}
             <div className="flex">
               <Link 
                 href="/" 
@@ -166,69 +175,67 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Menu mobile - Corrigido para preencher a tela inteira com blur */}
-      <div 
-        className={`
-          fixed inset-0 z-[100] md:hidden
-          transition-opacity duration-500 ease-in-out
-          ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
-          flex flex-col bg-[var(--background)]/80 backdrop-blur-3xl
-        `}
-      >
-        <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          {/* Logo no menu mobile */}
-          <Link 
-            href="/" 
-            onClick={closeMenu}
-            className="text-xl font-bold text-[var(--color1)]"
-          >
-            Prod by GUS
-          </Link>
+      {/* Menu mobile - Agora com key para forçar remontagem quando o estado muda */}
+      {menuOpen && (
+        <div 
+          key="mobile-menu"
+          className="fixed inset-0 z-[100] md:hidden flex flex-col bg-[var(--background)]/80 backdrop-blur-3xl"
+        >
+          <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            {/* Logo no menu mobile */}
+            <Link 
+              href="/" 
+              onClick={closeMenu}
+              className="text-xl font-bold text-[var(--color1)]"
+            >
+              Prod by GUS
+            </Link>
+            
+            {/* Botão para fechar menu */}
+            <button
+              onClick={closeMenu}
+              className="p-2 rounded-full text-[var(--foreground)] bg-[var(--color4)]/60 hover:bg-[var(--color1)]/60 transition-colors"
+              aria-label="Fechar menu"
+            >
+              <FaTimes className="h-6 w-6" />
+            </button>
+          </div>
           
-          {/* Botão para fechar menu */}
-          <button
-            onClick={closeMenu}
-            className="p-2 rounded-full text-[var(--foreground)] bg-[var(--color4)]/60 hover:bg-[var(--color1)]/60 transition-colors"
-            aria-label="Fechar menu"
-          >
-            <FaTimes className="h-6 w-6" />
-          </button>
+          {/* Links de navegação - centralizado na tela */}
+          <div className="flex-1 flex flex-col justify-center items-center py-8">
+            <nav className="w-full max-w-xs mx-auto">
+              <ul className="space-y-8">
+                {navLinks.map((link) => (
+                  <li key={link.href} className="text-center">
+                    <Link
+                      href={link.href}
+                      onClick={closeMenu}
+                      className={`
+                        text-2xl font-medium relative inline-block
+                        ${isActive(link.href) ? 'text-[var(--color1)]' : 'text-[var(--foreground)]'}
+                        transition-colors duration-300 hover:text-[var(--color1)]
+                      `}
+                    >
+                      {link.text}
+                      <span className={`
+                        absolute -bottom-2 left-0 right-0 h-0.5 bg-[var(--color1)]
+                        transform transition-transform duration-300 ease-out
+                        ${isActive(link.href) ? 'scale-x-100' : 'scale-x-0'}
+                        origin-center
+                      `}></span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+          
+          {/* Rodapé do menu - Versão simplificada para evitar problemas de hidratação */}
+          <div className="py-6 text-center text-sm text-[var(--foreground-muted)]">
+            © {currentYear} Prod by GUS
+          </div>
         </div>
-        
-        {/* Links de navegação - centralizado na tela */}
-        <div className="flex-1 flex flex-col justify-center items-center py-8">
-          <nav className="w-full max-w-xs mx-auto">
-            <ul className="space-y-8">
-              {navLinks.map((link) => (
-                <li key={link.href} className="text-center">
-                  <Link
-                    href={link.href}
-                    onClick={closeMenu}
-                    className={`
-                      text-2xl font-medium relative inline-block
-                      ${isActive(link.href) ? 'text-[var(--color1)]' : 'text-[var(--foreground)]'}
-                      transition-colors duration-300 hover:text-[var(--color1)]
-                    `}
-                  >
-                    {link.text}
-                    <span className={`
-                      absolute -bottom-2 left-0 right-0 h-0.5 bg-[var(--color1)]
-                      transform transition-transform duration-300 ease-out
-                      ${isActive(link.href) ? 'scale-x-100' : 'scale-x-0'}
-                      origin-center
-                    `}></span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-        
-        {/* Rodapé do menu - Corrigido para evitar problemas de hidratação */}
-        <div className="py-6 text-center text-sm text-[var(--foreground-muted)]">
-          {currentYear ? `© ${currentYear} Prod by GUS` : '© Prod by GUS'}
-        </div>
-      </div>
+      )}
     </>
   );
 };
