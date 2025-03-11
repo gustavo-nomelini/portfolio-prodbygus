@@ -1,10 +1,16 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Fira_Code } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
-const inter = Inter({ subsets: ['latin'] });
+// Configuração da fonte Fira Code - popular entre desenvolvedores
+const firaCode = Fira_Code({ 
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-fira-code',
+});
 
 export const metadata: Metadata = {
   title: 'Prod by GUS - Portfolio',
@@ -17,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={firaCode.variable}>
+      <body className={firaCode.className}>
         <div className="min-h-screen flex flex-col bg-background text-foreground">
           <Header />
           {/* Adicionado padding-top para compensar o header fixo */}

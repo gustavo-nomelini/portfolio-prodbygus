@@ -14,6 +14,10 @@
   /* Cores para texto */
   --foreground: #E8D7EB;
   --foreground-muted: #C2A5C7;
+  
+  /* Configurações de fonte */
+  --font-family-main: var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --letter-spacing: -0.025em;
 }
 
 @theme inline {
@@ -24,8 +28,8 @@
   --color-accent: var(--color3);
   --color-surface: var(--color4);
   --color-highlight: var(--color5);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-fira-code);
+  --font-mono: var(--font-fira-code);
 }
 
 @media (prefers-color-scheme: light) {
@@ -41,5 +45,25 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-family-main);
+  letter-spacing: var(--letter-spacing);
+  font-feature-settings: "calt" 1, "ss01" 1, "ss02" 1; /* Habilitar ligaduras */
+}
+
+/* Estilo para blocos de código - aparência de terminal */
+code, pre {
+  font-family: var(--font-family-main);
+  font-size: 0.9em;
+}
+
+/* Ajustar espaçamento de texto para melhor legibilidade com a nova fonte */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.03em;
+}
+
+/* Customizações específicas para realçar a aparência de "desenvolvedor" */
+::selection {
+  background: var(--color1);
+  color: var(--background);
+  text-shadow: none;
 }
