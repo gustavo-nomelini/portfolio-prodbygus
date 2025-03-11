@@ -85,8 +85,8 @@ const Header = () => {
         fixed top-0 left-0 right-0 z-50 
         transition-all duration-300 ease-in-out
         ${scrolled 
-          ? 'bg-[var(--background)]/80 backdrop-blur-sm shadow-md shadow-[var(--color2)]/60' 
-          : 'bg-[var(--background)] shadow-sm shadow-transparent'
+          ? 'bg-[var(--background)]/65 backdrop-blur-xl shadow-lg shadow-[var(--color2)]/30' 
+          : 'bg-[var(--background)]/85 backdrop-blur-md shadow-sm shadow-transparent'
         }
       `}
     >
@@ -166,7 +166,7 @@ const Header = () => {
       {/* Menu mobile overlay */}
       <div 
         className={`
-          md:hidden fixed inset-0 bg-[var(--background)]/95 backdrop-blur-md z-40
+          md:hidden fixed inset-0 bg-[var(--background)]/90 backdrop-blur-2xl z-40
           flex flex-col justify-center items-center
           transform transition-transform duration-300 ease-in-out
           ${menuOpen ? 'translate-x-0' : 'translate-x-full'}
