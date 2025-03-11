@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import { Fira_Code } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
+import dynamic from 'next/dynamic';
+
+// Importação dinâmica dos componentes client-side
+const Header = dynamic(() => import('@/components/layout/Header'), { ssr: true });
+const Footer = dynamic(() => import('@/components/layout/Footer'), { ssr: true });
 
 // Configuração da fonte Fira Code - popular entre desenvolvedores
 const firaCode = Fira_Code({ 
@@ -19,15 +22,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className={firaCode.variable}>
+    <html lang="pt-BR" className={firaCode.variable}>
       <body className={firaCode.className}>
         <div className="min-h-screen flex flex-col bg-background text-foreground">
           <Header />
-          {/* Adicionado padding-top para compensar o header fixo */}
           <main className="flex-grow pt-16">{children}</main>
           <Footer />
         </div>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import ClientOnly from './ClientOnly';
 
 const Header = () => {
   const pathname = usePathname();
@@ -96,7 +97,7 @@ const Header = () => {
   ];
 
   return (
-    <>
+    <ClientOnly>
       <header 
         className={`
           fixed top-0 left-0 right-0 z-50 
@@ -236,7 +237,7 @@ const Header = () => {
           </div>
         </div>
       )}
-    </>
+    </ClientOnly>
   );
 };
 
