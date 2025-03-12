@@ -2,6 +2,7 @@
 
 import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { useState } from 'react';
+import ContactForm from './ContactForm';
 
 const Contact = () => {
   // Estado para controlar a mensagem de feedback
@@ -122,49 +123,7 @@ const Contact = () => {
             <h3 className="text-2xl font-semibold text-center text-[var(--foreground)] mb-6">
               Envie uma Mensagem
             </h3>
-            <form>
-              <div className="mb-6">
-                <label htmlFor="name" className="block text-sm font-medium text-[var(--foreground-muted)] mb-2">
-                  Nome
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full px-4 py-3 bg-[var(--background)] border border-[var(--color2)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color1)] text-[var(--foreground)]"
-                  placeholder="Seu nome"
-                />
-              </div>
-              <div className="mb-6">
-                <label htmlFor="email" className="block text-sm font-medium text-[var(--foreground-muted)] mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full px-4 py-3 bg-[var(--background)] border border-[var(--color2)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color1)] text-[var(--foreground)]"
-                  placeholder="seu.email@exemplo.com"
-                />
-              </div>
-              <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium text-[var(--foreground-muted)] mb-2">
-                  Mensagem
-                </label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  className="w-full px-4 py-3 bg-[var(--background)] border border-[var(--color2)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color1)] text-[var(--foreground)] resize-none"
-                  placeholder="Digite sua mensagem aqui..."
-                ></textarea>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="w-full px-6 py-4 bg-[var(--color1)] text-[var(--background)] rounded-md font-medium hover:bg-[var(--color3)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color1)] focus:ring-offset-2 focus:ring-offset-[var(--color4)]"
-                >
-                  Enviar Mensagem
-                </button>
-              </div>
-            </form>
+            <ContactForm />
           </div>
         </div>
 
