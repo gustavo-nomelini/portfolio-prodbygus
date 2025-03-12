@@ -44,7 +44,7 @@ const projects: Project[] = [
     ],
     categories: ['Frontend', 'Design'],
     technologies: ['Next.js', 'React', 'TailwindCSS', 'TypeScript', 'Vercel'],
-    github: 'https://github.com/username/portfolio',
+    github: 'https://github.com/gustavo-nomelini/prod-by-gus-portfolio',
     liveUrl: 'https://seudominio.com',
     features: [
       'Design responsivo e adaptável para todos os dispositivos',
@@ -64,7 +64,7 @@ const projects: Project[] = [
       'Segui as diretrizes WCAG e testei com leitores de tela'
     ],
     featured: true,
-    date: 'Outubro 2023'
+    date: 'Novembro 2024'
   },
   // Adicione mais projetos aqui...
 ];

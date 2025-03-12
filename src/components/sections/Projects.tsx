@@ -29,7 +29,7 @@ const Projects = () => {
       image: '/images/projects/portfolio.jpg',
       categories: ['Frontend', 'Design'],
       technologies: ['Next.js', 'React', 'TailwindCSS', 'TypeScript'],
-      github: 'https://github.com/username/portfolio',
+      github: 'https://github.com/gustavo-nomelini/prod-by-gus-portfolio',
       liveUrl: 'https://seudominio.com',
       featured: true,
     },
