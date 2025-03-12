@@ -5,11 +5,14 @@ import ContactForm from './ContactForm';
 import Map from '../ui/Map';
 
 const Contact = () => {
-  // WhatsApp URL com mensagem predefinida
-  const whatsappMessage = encodeURIComponent("Vi seu Portfolio Online e fiquei interessado no seu trabalho, gostaria de conversarmos melhor.");
-  const whatsappUrl = `https://wa.me/5545998508634?text=${whatsappMessage}`;
+  // Função para construir a URL do WhatsApp de forma segura
+  const getWhatsappUrl = () => {
+    const phoneNumber = "5545998508634"; // Considere usar variáveis de ambiente para dados sensíveis
+    const message = encodeURIComponent("Vi seu Portfolio Online e fiquei interessado no seu trabalho, gostaria de conversarmos melhor.");
+    return `https://wa.me/${phoneNumber}?text=${message}`;
+  };
   
-  // Email para contato
+  // Email para contato - considere também usar variáveis de ambiente
   const emailAddress = "gustavolnomelini@gmail.com";
 
   // Localização para o mapa
@@ -34,9 +37,10 @@ const Contact = () => {
           <a 
             href={`mailto:${emailAddress}`}
             className="bg-[var(--color4)] rounded-xl shadow-lg p-6 text-center transform transition-all hover:scale-105 hover:shadow-xl group flex flex-col items-center justify-center h-[140px]"
+            aria-label="Enviar email para gustavolnomelini@gmail.com"
           >
             <div className="rounded-full bg-[var(--color1)] text-[var(--background)] w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[var(--color3)] transition-colors">
-              <FaEnvelope className="text-2xl" />
+              <FaEnvelope className="text-2xl" aria-hidden="true" />
             </div>
             <h3 className="text-lg font-semibold text-[var(--foreground)]">Email</h3>
           </a>
@@ -47,9 +51,10 @@ const Contact = () => {
             target="_blank" 
             rel="noopener noreferrer" 
             className="bg-[var(--color4)] rounded-xl shadow-lg p-6 text-center transform transition-all hover:scale-105 hover:shadow-xl group flex flex-col items-center justify-center h-[140px]"
+            aria-label="Visitar perfil no LinkedIn"
           >
             <div className="rounded-full bg-[var(--color1)] text-[var(--background)] w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[var(--color3)] transition-colors">
-              <FaLinkedin className="text-2xl" />
+              <FaLinkedin className="text-2xl" aria-hidden="true" />
             </div>
             <h3 className="text-lg font-semibold text-[var(--foreground)]">LinkedIn</h3>
           </a>
@@ -60,22 +65,24 @@ const Contact = () => {
             target="_blank" 
             rel="noopener noreferrer" 
             className="bg-[var(--color4)] rounded-xl shadow-lg p-6 text-center transform transition-all hover:scale-105 hover:shadow-xl group flex flex-col items-center justify-center h-[140px]"
+            aria-label="Visitar perfil no GitHub"
           >
             <div className="rounded-full bg-[var(--color1)] text-[var(--background)] w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[var(--color3)] transition-colors">
-              <FaGithub className="text-2xl" />
+              <FaGithub className="text-2xl" aria-hidden="true" />
             </div>
             <h3 className="text-lg font-semibold text-[var(--foreground)]">GitHub</h3>
           </a>
 
           {/* Card de WhatsApp */}
           <a 
-            href={whatsappUrl} 
+            href={getWhatsappUrl()} 
             target="_blank" 
             rel="noopener noreferrer" 
             className="bg-[var(--color4)] rounded-xl shadow-lg p-6 text-center transform transition-all hover:scale-105 hover:shadow-xl group flex flex-col items-center justify-center h-[140px]"
+            aria-label="Conversar no WhatsApp"
           >
             <div className="rounded-full bg-[var(--color1)] text-[var(--background)] w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[var(--color3)] transition-colors">
-              <FaWhatsapp className="text-2xl" />
+              <FaWhatsapp className="text-2xl" aria-hidden="true" />
             </div>
             <h3 className="text-lg font-semibold text-[var(--foreground)]">WhatsApp</h3>
           </a>
