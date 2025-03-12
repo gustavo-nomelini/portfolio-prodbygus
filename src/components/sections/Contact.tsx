@@ -1,36 +1,15 @@
 "use client";
 
 import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
-import { useState } from 'react';
 import ContactForm from './ContactForm';
 
 const Contact = () => {
-  // Estado para controlar a mensagem de feedback
-  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
-  
   // WhatsApp URL com mensagem predefinida
   const whatsappMessage = encodeURIComponent("Vi seu Portfolio Online e fiquei interessado no seu trabalho, gostaria de conversarmos melhor.");
   const whatsappUrl = `https://wa.me/5545998508634?text=${whatsappMessage}`;
   
-  // Email que será copiado
+  // Email para contato
   const emailAddress = "gustavolnomelini@gmail.com";
-  
-  // Função para copiar o email para a área de transferência
-  const copyEmailToClipboard = () => {
-    navigator.clipboard.writeText(emailAddress)
-      .then(() => {
-        // Exibe a mensagem de sucesso
-        setShowCopiedMessage(true);
-        
-        // Remove a mensagem após 3 segundos
-        setTimeout(() => {
-          setShowCopiedMessage(false);
-        }, 3000);
-      })
-      .catch(err => {
-        console.error('Erro ao copiar texto: ', err);
-      });
-  };
 
   return (
     <section className="py-16 bg-[var(--background)]">
@@ -47,37 +26,18 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
-          {/* Card de Email */}
-          <div className="relative flex flex-col items-center">
-            <a 
-              href={`mailto:${emailAddress}`}
-              className="bg-[var(--color4)] rounded-xl shadow-lg p-6 text-center w-full flex flex-col items-center justify-center hover:scale-105 hover:shadow-xl transition-all group h-[140px]"
-            >
-              <div className="rounded-full bg-[var(--color1)] text-[var(--background)] w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[var(--color3)] transition-colors">
-                <FaEnvelope className="text-2xl" />
-              </div>
-              <h3 className="text-lg font-semibold text-[var(--foreground)]">Email</h3>
-            </a>
-            
-            {/* Botão para copiar abaixo do card */}
-            <div className="mt-3 relative">
-              <button
-                onClick={copyEmailToClipboard}
-                className="px-4 py-2 bg-[var(--color1)] text-[var(--background)] rounded-md text-sm font-medium hover:bg-[var(--color3)] transition-colors"
-              >
-                Clique para copiar
-              </button>
-              
-              {/* Mensagem de feedback que aparece quando o email é copiado */}
-              {showCopiedMessage && (
-                <div className="absolute left-0 right-0 bottom-full mb-2 bg-[var(--color5)] text-[var(--color1)] py-2 px-3 rounded-md text-xs">
-                  E-mail copiado com sucesso!
-                </div>
-              )}
+          {/* Card de Email - Sem botão de cópia */}
+          <a 
+            href={`mailto:${emailAddress}`}
+            className="bg-[var(--color4)] rounded-xl shadow-lg p-6 text-center transform transition-all hover:scale-105 hover:shadow-xl group flex flex-col items-center justify-center h-[140px]"
+          >
+            <div className="rounded-full bg-[var(--color1)] text-[var(--background)] w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[var(--color3)] transition-colors">
+              <FaEnvelope className="text-2xl" />
             </div>
-          </div>
+            <h3 className="text-lg font-semibold text-[var(--foreground)]">Email</h3>
+          </a>
 
-          {/* Card de LinkedIn - Ajustado para alinhar melhor */}
+          {/* Card de LinkedIn */}
           <a 
             href="https://www.linkedin.com/in/gustavo-lopes-nomelini-144bb1212/" 
             target="_blank" 
@@ -90,7 +50,7 @@ const Contact = () => {
             <h3 className="text-lg font-semibold text-[var(--foreground)]">LinkedIn</h3>
           </a>
 
-          {/* Card de GitHub - Ajustado para alinhar melhor */}
+          {/* Card de GitHub */}
           <a 
             href="https://github.com/gustavo-nomelini" 
             target="_blank" 
@@ -103,7 +63,7 @@ const Contact = () => {
             <h3 className="text-lg font-semibold text-[var(--foreground)]">GitHub</h3>
           </a>
 
-          {/* Card de WhatsApp - Ajustado para alinhar melhor */}
+          {/* Card de WhatsApp */}
           <a 
             href={whatsappUrl} 
             target="_blank" 

@@ -17,6 +17,15 @@ module.exports = {
         surface: 'var(--color4)',
         highlight: 'var(--color5)',
       },
+      animation: {
+        'shrink-width': 'shrink-width 10s linear forwards',
+      },
+      keyframes: {
+        'shrink-width': {
+          '0%': { width: '100%' },
+          '100%': { width: '0%' },
+        },
+      },
     },
   },
   plugins: [],
