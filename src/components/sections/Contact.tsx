@@ -2,6 +2,7 @@
 
 import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import ContactForm from './ContactForm';
+import Map from '../ui/Map';
 
 const Contact = () => {
   // WhatsApp URL com mensagem predefinida
@@ -10,6 +11,9 @@ const Contact = () => {
   
   // Email para contato
   const emailAddress = "gustavolnomelini@gmail.com";
+
+  // Localização para o mapa
+  const location = "Cascavel, Paraná, Brasil";
 
   return (
     <section className="py-16 bg-[var(--background)]">
@@ -26,7 +30,7 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
-          {/* Card de Email - Sem botão de cópia */}
+          {/* Card de Email */}
           <a 
             href={`mailto:${emailAddress}`}
             className="bg-[var(--color4)] rounded-xl shadow-lg p-6 text-center transform transition-all hover:scale-105 hover:shadow-xl group flex flex-col items-center justify-center h-[140px]"
@@ -87,22 +91,10 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Mapa ou elemento visual */}
+        {/* Mapa interativo do Google Maps */}
         <div className="mt-20 max-w-6xl mx-auto">
-          <div className="relative h-[400px] rounded-xl overflow-hidden shadow-lg">
-            <div className="absolute inset-0 bg-[var(--color2)] opacity-20 flex items-center justify-center">
-              <div className="text-center">
-                <h3 className="text-xl font-semibold text-[var(--foreground)] mb-3">
-                  Localização
-                </h3>
-                <p className="text-[var(--foreground-muted)]">
-                  Foz do Iguaçu, Paraná, Brasil
-                </p>
-                <p className="mt-2 text-[var(--color1)]">
-                  Disponível para trabalhos remotos globais
-                </p>
-              </div>
-            </div>
+          <div className="h-[400px] rounded-xl overflow-hidden shadow-lg">
+            <Map location={location} zoom={13} />
           </div>
         </div>
       </div>
