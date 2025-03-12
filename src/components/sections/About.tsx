@@ -16,10 +16,46 @@ const About = () => {
     setFocusedSkill(null);
   };
 
-  // Arrays de habilidades por categoria
-  const designSkills = ['Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'UI/UX'];
-  const frontendSkills = ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS'];
-  const backendSkills = ['Node.js', 'Express', 'Python', 'MongoDB', 'PostgreSQL'];
+  // Arrays de habilidades por categoria e linha
+  const designSkills = ['Figma', 'UX/UI', 'Design Responsivo'];
+  
+  // Front-end habilidades agrupadas por linha
+  const frontendSkills = [
+    ['HTML5', 'CSS3', 'Tailwind CSS'], // 1ª linha
+    ['JavaScript', 'TypeScript'],      // 2ª linha
+    ['React', 'Next.js'],              // 3ª linha
+  ];
+  
+  // Back-end habilidades agrupadas por linha
+  const backendSkills = [
+    ['Node.js', 'Express'],         // 1ª linha
+    ['PostgreSQL', 'MongoDB'],      // 2ª linha
+    ['REST API', 'GraphQL'],        // 3ª linha
+  ];
+
+  // Função para renderizar badges de habilidades
+  const renderSkillBadge = (skill: string) => (
+    <span 
+      key={skill} 
+      className={`px-3 py-1.5 rounded-full border transition-all duration-300 cursor-pointer 
+        ${
+          focusedSkill === skill 
+            ? 'border-[var(--color1)] bg-[var(--color1)]/10 text-[var(--color1)] scale-110 shadow-md' 
+            : (focusedSkill && focusedSkill !== skill)
+              ? 'border-[var(--color2)] bg-[var(--color4)]/25 text-[var(--foreground-muted)] scale-95'
+              : 'border-[var(--color4)] bg-[var(--color4)] text-[var(--foreground)] hover:bg-[var(--color4)]/80 hover:border-[var(--color1)]'
+        }
+        relative overflow-hidden`}
+      onMouseEnter={() => highlightSkill(skill)}
+      onMouseLeave={removeHighlight}
+    >
+      {/* Efeito de brilho */}
+      {focusedSkill === skill && (
+        <span className="absolute inset-0 w-full h-full bg-[var(--color1)]/5 animate-pulse"></span>
+      )}
+      <span className="relative z-10 text-sm font-medium">{skill}</span>
+    </span>
+  );
 
   return (
     <section className="py-16 bg-[var(--background)]">
@@ -65,12 +101,12 @@ const About = () => {
             </div>
           </div>
           
-          {/* Habilidades - ordem alterada: Design, Front-end, Back-end */}
+          {/* Habilidades - ordem: Design, Front-end, Back-end */}
           <div>
             <h3 className="text-2xl font-semibold text-[var(--color1)] mb-6">Minhas Habilidades</h3>
             
             <div className="space-y-6">
-              {/* Design - Agora em primeiro lugar */}
+              {/* Design - mantido como está */}
               <div>
                 <h4 className="text-lg font-medium text-[var(--foreground)] mb-3 flex items-center">
                   <span className="w-6 h-6 rounded-full bg-gradient-to-r from-[var(--color1)] to-[var(--color3)] flex items-center justify-center text-xs text-[var(--background)] mr-2">
@@ -81,32 +117,11 @@ const About = () => {
                   Design
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {designSkills.map((skill) => (
-                    <span 
-                      key={skill} 
-                      className={`px-3 py-1.5 rounded-full border transition-all duration-300 cursor-pointer 
-                        ${
-                          focusedSkill === skill 
-                            ? 'border-[var(--color1)] bg-[var(--color1)]/10 text-[var(--color1)] scale-110 shadow-md' 
-                            : (focusedSkill && focusedSkill !== skill)
-                              ? 'border-[var(--color2)] bg-[var(--color4)]/25 text-[var(--foreground-muted)] scale-95'
-                              : 'border-[var(--color4)] bg-[var(--color4)] text-[var(--foreground)] hover:bg-[var(--color4)]/80 hover:border-[var(--color1)]'
-                        }
-                        relative overflow-hidden`}
-                      onMouseEnter={() => highlightSkill(skill)}
-                      onMouseLeave={removeHighlight}
-                    >
-                      {/* Efeito de brilho */}
-                      {focusedSkill === skill && (
-                        <span className="absolute inset-0 w-full h-full bg-[var(--color1)]/5 animate-pulse"></span>
-                      )}
-                      <span className="relative z-10 text-sm font-medium">{skill}</span>
-                    </span>
-                  ))}
+                  {designSkills.map(renderSkillBadge)}
                 </div>
               </div>
               
-              {/* Front-end - Agora em segundo lugar */}
+              {/* Front-end - agora com linhas separadas */}
               <div>
                 <h4 className="text-lg font-medium text-[var(--foreground)] mb-3 flex items-center">
                   <span className="w-6 h-6 rounded-full bg-gradient-to-r from-[var(--color1)] to-[var(--color3)] flex items-center justify-center text-xs text-[var(--background)] mr-2">
@@ -116,33 +131,16 @@ const About = () => {
                   </span>
                   Front-end
                 </h4>
-                <div className="flex flex-wrap gap-2">
-                  {frontendSkills.map((skill) => (
-                    <span 
-                      key={skill} 
-                      className={`px-3 py-1.5 rounded-full border transition-all duration-300 cursor-pointer 
-                        ${
-                          focusedSkill === skill 
-                            ? 'border-[var(--color1)] bg-[var(--color1)]/10 text-[var(--color1)] scale-110 shadow-md' 
-                            : (focusedSkill && focusedSkill !== skill)
-                              ? 'border-[var(--color2)] bg-[var(--color4)]/25 text-[var(--foreground-muted)] scale-95'
-                              : 'border-[var(--color4)] bg-[var(--color4)] text-[var(--foreground)] hover:bg-[var(--color4)]/80 hover:border-[var(--color1)]'
-                        }
-                        relative overflow-hidden`}
-                      onMouseEnter={() => highlightSkill(skill)}
-                      onMouseLeave={removeHighlight}
-                    >
-                      {/* Efeito de brilho */}
-                      {focusedSkill === skill && (
-                        <span className="absolute inset-0 w-full h-full bg-[var(--color1)]/5 animate-pulse"></span>
-                      )}
-                      <span className="relative z-10 text-sm font-medium">{skill}</span>
-                    </span>
+                <div className="space-y-2">
+                  {frontendSkills.map((lineSkills, index) => (
+                    <div key={`front-line-${index}`} className="flex flex-wrap gap-2">
+                      {lineSkills.map(renderSkillBadge)}
+                    </div>
                   ))}
                 </div>
               </div>
               
-              {/* Back-end - Agora em terceiro lugar */}
+              {/* Back-end - agora com linhas separadas */}
               <div>
                 <h4 className="text-lg font-medium text-[var(--foreground)] mb-3 flex items-center">
                   <span className="w-6 h-6 rounded-full bg-gradient-to-r from-[var(--color1)] to-[var(--color3)] flex items-center justify-center text-xs text-[var(--background)] mr-2">
@@ -153,28 +151,11 @@ const About = () => {
                   </span>
                   Back-end
                 </h4>
-                <div className="flex flex-wrap gap-2">
-                  {backendSkills.map((skill) => (
-                    <span 
-                      key={skill} 
-                      className={`px-3 py-1.5 rounded-full border transition-all duration-300 cursor-pointer 
-                        ${
-                          focusedSkill === skill 
-                            ? 'border-[var(--color1)] bg-[var(--color1)]/10 text-[var(--color1)] scale-110 shadow-md' 
-                            : (focusedSkill && focusedSkill !== skill)
-                              ? 'border-[var(--color2)] bg-[var(--color4)]/25 text-[var(--foreground-muted)] scale-95'
-                              : 'border-[var(--color4)] bg-[var(--color4)] text-[var(--foreground)] hover:bg-[var(--color4)]/80 hover:border-[var(--color1)]'
-                        }
-                        relative overflow-hidden`}
-                      onMouseEnter={() => highlightSkill(skill)}
-                      onMouseLeave={removeHighlight}
-                    >
-                      {/* Efeito de brilho */}
-                      {focusedSkill === skill && (
-                        <span className="absolute inset-0 w-full h-full bg-[var(--color1)]/5 animate-pulse"></span>
-                      )}
-                      <span className="relative z-10 text-sm font-medium">{skill}</span>
-                    </span>
+                <div className="space-y-2">
+                  {backendSkills.map((lineSkills, index) => (
+                    <div key={`back-line-${index}`} className="flex flex-wrap gap-2">
+                      {lineSkills.map(renderSkillBadge)}
+                    </div>
                   ))}
                 </div>
               </div>

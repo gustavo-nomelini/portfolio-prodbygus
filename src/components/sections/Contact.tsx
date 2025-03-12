@@ -9,7 +9,7 @@ const Contact = () => {
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   
   // WhatsApp URL com mensagem predefinida
-  const whatsappMessage = encodeURIComponent("Vi seu Portfolio Online e fiquei interessado, quero contratar seu trabalho.");
+  const whatsappMessage = encodeURIComponent("Vi seu Portfolio Online e fiquei interessado no seu trabalho, gostaria de conversarmos melhor.");
   const whatsappUrl = `https://wa.me/5545998508634?text=${whatsappMessage}`;
   
   // Email que será copiado
