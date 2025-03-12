@@ -13,14 +13,11 @@ const Map = ({ location, zoom = 14 }: MapProps) => {
   
   const encodedLocation = encodeURIComponent(location);
   
-  // Coordenadas atualizadas para Cascavel, Paraná
-  // bbox: minLon,minLat,maxLon,maxLat (oeste, sul, leste, norte)
-  // marker: lat,lon (latitude, longitude)
+  // Coordenadas para Cascavel, Paraná
   const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=-53.5451,-25.0359,-53.3657,-24.8963&layer=mapnik&marker=-24.9577,-53.4590`;
   
-  // URLs para mapas externos
+  // URL para o Google Maps
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
-  const openStreetMapUrl = `https://www.openstreetmap.org/search?query=${encodedLocation}`;
 
   const handleIframeLoad = () => {
     setIsLoaded(true);
@@ -28,7 +25,7 @@ const Map = ({ location, zoom = 14 }: MapProps) => {
 
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden shadow-lg bg-[var(--color4)]">
-      {/* Iframe do OpenStreetMap com coordenadas corretas para Cascavel */}
+      {/* Iframe do OpenStreetMap */}
       <iframe
         src={mapSrc}
         className={`w-full h-full border-0 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -38,7 +35,7 @@ const Map = ({ location, zoom = 14 }: MapProps) => {
         allowFullScreen
       ></iframe>
 
-      {/* Estado de carregamento - mostra enquanto o iframe carrega */}
+      {/* Estado de carregamento */}
       {!isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="animate-pulse flex flex-col items-center">
@@ -48,7 +45,7 @@ const Map = ({ location, zoom = 14 }: MapProps) => {
         </div>
       )}
       
-      {/* Overlay com informações de localização */}
+      {/* Overlay com informações de localização - Botão OpenStreetMap removido */}
       <div className="absolute bottom-0 left-0 right-0 bg-[var(--background)]/80 backdrop-blur-sm p-4">
         <div className="text-center">
           <h3 className="text-xl font-semibold text-[var(--foreground)] mb-1">
@@ -60,22 +57,14 @@ const Map = ({ location, zoom = 14 }: MapProps) => {
           <p className="mt-2 text-[var(--color1)]">
             Disponível para trabalhos remotos globais
           </p>
-          <div className="flex justify-center gap-2 mt-2">
+          <div className="mt-2">
             <a 
               href={googleMapsUrl}
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-3 py-1 bg-[var(--color1)] text-[var(--background)] text-sm rounded-md hover:bg-[var(--color3)] transition-colors"
+              className="inline-flex items-center gap-1 px-4 py-2 bg-[var(--color1)] text-[var(--background)] text-sm rounded-md hover:bg-[var(--color3)] transition-colors"
             >
-              Google Maps <FaExternalLinkAlt className="text-xs" />
-            </a>
-            <a 
-              href={openStreetMapUrl}
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-3 py-1 bg-[var(--color4)] text-[var(--foreground)] border border-[var(--color2)] text-sm rounded-md hover:bg-[var(--color4)]/70 transition-colors"
-            >
-              OpenStreetMap <FaExternalLinkAlt className="text-xs" />
+              Ver no Google Maps <FaExternalLinkAlt className="text-xs" />
             </a>
           </div>
         </div>
