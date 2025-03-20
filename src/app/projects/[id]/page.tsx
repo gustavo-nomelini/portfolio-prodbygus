@@ -1,260 +1,394 @@
+'use client';
+
+import ClientOnly from '@/components/layout/ClientOnly';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaGithub, FaExternalLinkAlt, FaArrowLeft } from 'react-icons/fa';
-import { notFound } from 'next/navigation';
-import type { Metadata, ResolvingMetadata } from 'next';
-
-// Interfaces e tipos
-type ProjectCategory = 'Frontend' | 'Backend' | 'Full Stack' | 'Design';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { FaArrowLeft, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 
 interface Project {
   id: string;
   title: string;
   description: string;
-  longDescription: string[];
+  detailedDescription?: string; // Descrição mais longa para a página de detalhes
   image: string;
-  images: string[];
-  categories: ProjectCategory[];
+  categories: string[];
   technologies: string[];
   github?: string;
   liveUrl?: string;
-  features: string[];
-  challenges: string[];
-  solutions: string[];
   featured: boolean;
-  date: string;
+  repoUrl: string;
+  challenges?: string[]; // Desafios do projeto
+  solutions?: string[]; // Soluções implementadas
+  screenshots?: string[]; // Capturas de tela adicionais
 }
 
-// Dados dos projetos (simulados - em produção você pode usar um CMS ou API)
-const projects: Project[] = [
-  {
-    id: 'portfolio',
-    title: 'Portfolio Pessoal',
-    description: 'Meu site de portfólio pessoal construído com Next.js e TailwindCSS.',
-    longDescription: [
-      'Este é meu site de portfólio pessoal, projetado para destacar minhas habilidades e projetos como desenvolvedor web.',
-      'Construído com Next.js e TailwindCSS, o site é totalmente responsivo, acessível e otimizado para SEO, garantindo uma experiência de usuário excepcional em qualquer dispositivo.',
-      'O design foi cuidadosamente elaborado para refletir minha identidade profissional e mostrar meus trabalhos da melhor forma possível.'
-    ],
-    image: '/images/projects/portfolio.jpg',
-    images: [
-      '/images/projects/portfolio-1.jpg', 
-      '/images/projects/portfolio-2.jpg',
-      '/images/projects/portfolio-3.jpg'
-    ],
-    categories: ['Frontend', 'Design'],
-    technologies: ['Next.js', 'React', 'TailwindCSS', 'TypeScript', 'Vercel'],
-    github: 'https://github.com/gustavo-nomelini/prod-by-gus-portfolio',
-    liveUrl: 'https://seudominio.com',
-    features: [
-      'Design responsivo e adaptável para todos os dispositivos',
-      'Modo claro/escuro automático baseado nas preferências do sistema',
-      'Animações sutis para melhorar a experiência do usuário',
-      'Páginas detalhadas para cada projeto',
-      'Formulário de contato funcional'
-    ],
-    challenges: [
-      'Criar um design único que representasse minha identidade profissional',
-      'Implementar transições de página fluidas e intuitivas',
-      'Garantir acessibilidade em todos os elementos'
-    ],
-    solutions: [
-      'Utilizei TailwindCSS para criar um sistema de design consistente e personalizado',
-      'Implementei animações com framer-motion para transições suaves',
-      'Segui as diretrizes WCAG e testei com leitores de tela'
-    ],
-    featured: true,
-    date: 'Novembro 2024'
-  },
-  // Adicione mais projetos aqui...
-];
+export default function ProjectDetails() {
+  const { id } = useParams();
+  const [project, setProject] = useState<Project | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-// Gerar parâmetros para páginas estáticas
-export async function generateStaticParams() {
-  return projects.map((project) => ({
-    id: project.id,
-  }));
-}
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        setIsLoading(true);
+        // Aqui você buscaria o projeto específico de uma API
+        // Simulando um atraso para demonstrar o carregamento
+        await new Promise((resolve) => setTimeout(resolve, 800));
 
-// Gerar metadados dinâmicos
-export async function generateMetadata(
-  { params }: { params: { id: string } },
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const project = projects.find((p) => p.id === params.id);
-  
-  if (!project) {
-    return {
-      title: 'Projeto não encontrado | Prod by GUS',
+        // Dados de exemplo - em um caso real, você buscaria isso de uma API
+        // com base no ID da URL
+        const mockProjects: Project[] = [
+          {
+            id: '1',
+            title: 'E-commerce Platform',
+            description:
+              'Um e-commerce completo com sistema de pagamentos, carrinho e painel admin.',
+            detailedDescription: `Este projeto é uma plataforma de e-commerce completa desenvolvida com React e Next.js no front-end e Node.js com Express no back-end. A plataforma inclui funcionalidades como:
+
+- Sistema de autenticação com JWT e OAuth
+- Carrinho de compras persistente
+- Integração com gateway de pagamento Stripe
+- Painel de administração para gerenciamento de produtos
+- Sistema de avaliações e comentários
+- Filtros avançados de produtos
+- Interface responsiva para todos os dispositivos
+            
+A arquitetura do projeto seguiu princípios SOLID e foi implementada utilizando TypeScript para garantir tipagem estática e maior segurança no código.`,
+            image: '/projects/ecommerce.jpg',
+            categories: ['Full Stack'],
+            technologies: [
+              'React',
+              'Next.js',
+              'Stripe',
+              'MongoDB',
+              'Node.js',
+              'Express',
+              'TypeScript',
+              'Tailwind CSS',
+            ],
+            github: 'https://github.com/example',
+            liveUrl: 'https://example.com',
+            featured: true,
+            repoUrl: 'https://github.com/example',
+            challenges: [
+              'Implementar um sistema de carrinho que persista entre sessões',
+              'Integrar múltiplos métodos de pagamento de forma segura',
+              'Otimizar o desempenho para um grande catálogo de produtos',
+              'Criar um sistema robusto de gerenciamento de estoque',
+            ],
+            solutions: [
+              'Utilizei localStorage e Context API para persistência do carrinho',
+              'Implementei a API do Stripe com webhooks para confirmação segura',
+              'Apliquei virtualização e paginação para carregamento eficiente',
+              'Desenvolvi um sistema de cache com invalidação inteligente',
+            ],
+            screenshots: [
+              '/projects/ecommerce-1.jpg',
+              '/projects/ecommerce-2.jpg',
+              '/projects/ecommerce-3.jpg',
+            ],
+          },
+          {
+            id: '2',
+            title: 'Dashboard Analytics',
+            description:
+              'Dashboard interativo para visualização de dados com gráficos e filtros avançados.',
+            detailedDescription: `Este dashboard analítico permite que empresas visualizem seus dados de vendas, tráfego e conversão em tempo real. Desenvolvido com React e várias bibliotecas de visualização de dados.
+            
+O dashboard inclui:
+- Gráficos interativos e personalizáveis
+- Filtros avançados por data, região e produto
+- Relatórios exportáveis em PDF e Excel
+- Alertas configuráveis para metas de desempenho
+- Tema claro/escuro adaptável`,
+            image: '/projects/dashboard.jpg',
+            categories: ['Frontend'],
+            technologies: [
+              'React',
+              'Chart.js',
+              'D3.js',
+              'Tailwind CSS',
+              'Redux',
+            ],
+            github: 'https://github.com/example',
+            liveUrl: 'https://example.com',
+            featured: false,
+            repoUrl: 'https://github.com/example',
+            challenges: [
+              'Renderizar gráficos complexos de forma eficiente',
+              'Implementar filtros que afetam múltiplos componentes',
+              'Garantir uma UX intuitiva para análise de dados',
+            ],
+            solutions: [
+              'Utilizei memoização e renderização condicional para otimizar performance',
+              'Implementei gerenciamento de estado com Redux para sincronizar filtros',
+              'Realizei testes de usabilidade com usuários reais para refinar a interface',
+            ],
+          },
+          {
+            id: '3',
+            title: 'API RESTful',
+            description:
+              'API completa com autenticação, validação e documentação automática.',
+            detailedDescription: `Esta API RESTful foi desenvolvida para servir como backend para várias aplicações front-end. Construída com Node.js, Express e MongoDB, a API implementa:
+
+- Autenticação completa com JWT e refresh tokens
+- Autorização baseada em funções (RBAC)
+- Validação de entrada com Joi
+- Documentação automática com Swagger
+- Testes automatizados com Jest
+- Monitoramento e logging
+- Cache com Redis
+            
+A arquitetura foi projetada para ser escalável, seguindo princípios de Clean Architecture e Domain-Driven Design.`,
+            image: '/projects/api.jpg',
+            categories: ['Backend'],
+            technologies: [
+              'Node.js',
+              'Express',
+              'MongoDB',
+              'Swagger',
+              'Jest',
+              'Redis',
+            ],
+            github: 'https://github.com/example',
+            liveUrl: 'https://example.com',
+            featured: true,
+            repoUrl: 'https://github.com/example',
+            challenges: [
+              'Implementar um sistema de autenticação seguro',
+              'Otimizar consultas ao banco de dados para alta carga',
+              'Criar uma estrutura que facilitasse testes e manutenção',
+            ],
+            solutions: [
+              'Utilizei JWT com rotação de tokens e armazenamento seguro',
+              'Implementei índices e agregações otimizadas no MongoDB',
+              'Adotei uma arquitetura em camadas com injeção de dependências',
+            ],
+          },
+        ];
+
+        const projectData = mockProjects.find((p) => p.id === id);
+        if (projectData) {
+          setProject(projectData);
+        }
+      } catch (error) {
+        console.error('Erro ao carregar detalhes do projeto:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
-  }
 
-  return {
-    title: `${project.title} | Prod by GUS`,
-    description: project.description,
-  };
-}
-
-export default function ProjectPage({ params }: { params: { id: string } }) {
-  const project = projects.find((p) => p.id === params.id);
-  
-  // Redirecionar para 404 se o projeto não existe
-  if (!project) {
-    notFound();
-  }
+    if (id) {
+      fetchProject();
+    }
+  }, [id]);
 
   return (
-    <main className="py-16 bg-[var(--background)]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Navegação de retorno */}
-        <div className="mb-8">
-          <Link href="/projects" className="inline-flex items-center text-[var(--foreground-muted)] hover:text-[var(--color1)] transition-colors">
-            <FaArrowLeft className="mr-2" /> Voltar para projetos
-          </Link>
+    <ClientOnly
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-pulse w-16 h-16 border-4 border-[var(--color1)] border-t-transparent rounded-full"></div>
         </div>
-
-        {/* Cabeçalho do projeto */}
-        <div className="mb-10">
-          <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-[var(--foreground)]">{project.title}</h1>
-              <p className="text-[var(--foreground-muted)] mt-2">{project.date}</p>
+      }
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {isLoading ? (
+          <div className="min-h-[70vh] flex items-center justify-center">
+            <div className="animate-pulse w-16 h-16 border-4 border-[var(--color1)] border-t-transparent rounded-full"></div>
+          </div>
+        ) : !project ? (
+          <div className="min-h-[70vh] flex flex-col items-center justify-center">
+            <h2 className="text-2xl font-bold mb-4">Projeto não encontrado</h2>
+            <Link
+              href="/projects"
+              className="text-[var(--color1)] hover:underline flex items-center gap-2"
+            >
+              <FaArrowLeft /> Voltar para projetos
+            </Link>
+          </div>
+        ) : (
+          <>
+            {/* Navegação de volta */}
+            <div className="mb-8">
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-2 text-[var(--foreground-muted)] hover:text-[var(--color1)] transition-colors"
+              >
+                <FaArrowLeft /> Voltar para todos os projetos
+              </Link>
             </div>
-            
-            <div className="flex gap-3">
-              {project.github && (
-                <a 
-                  href={project.github} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 bg-[var(--color4)] text-[var(--foreground)] rounded-md hover:bg-[var(--color2)] transition-colors"
-                >
-                  <FaGithub /> GitHub
-                </a>
-              )}
-              {project.liveUrl && (
-                <a 
-                  href={project.liveUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 bg-[var(--color1)] text-[var(--background)] rounded-md hover:bg-[var(--color3)] transition-colors"
-                >
-                  <FaExternalLinkAlt /> Ver Site
-                </a>
-              )}
-            </div>
-          </div>
-          
-          {/* Tags de categorias e tecnologias */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {project.categories.map((category) => (
-              <span key={category} className="px-3 py-1 bg-[var(--color1)]/10 text-[var(--color1)] rounded-full text-sm">
-                {category}
-              </span>
-            ))}
-            {project.technologies.map((tech) => (
-              <span key={tech} className="px-3 py-1 bg-[var(--color4)] text-[var(--foreground-muted)] rounded-full text-sm">
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
 
-        {/* Imagem principal do projeto */}
-        <div className="relative h-[400px] md:h-[500px] mb-12 rounded-xl overflow-hidden shadow-lg">
-          <Image
-            src={project.image}
-            alt={`Imagem principal do projeto ${project.title}`}
-            fill
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 1024px"
-            priority
-          />
-        </div>
-
-        {/* Descrição detalhada */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-[var(--foreground)] mb-4">Sobre o Projeto</h2>
-          <div className="prose prose-lg max-w-none text-[var(--foreground-muted)]">
-            {project.longDescription.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-          </div>
-        </div>
-
-        {/* Funcionalidades */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-[var(--foreground)] mb-4">Funcionalidades</h2>
-          <ul className="space-y-2 text-[var(--foreground-muted)]">
-            {project.features.map((feature, index) => (
-              <li key={index} className="flex items-start">
-                <span className="text-[var(--color1)] mr-2">•</span>
-                <span>{feature}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Desafios e Soluções */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div>
-            <h2 className="text-2xl font-semibold text-[var(--foreground)] mb-4">Desafios</h2>
-            <ul className="space-y-2 text-[var(--foreground-muted)]">
-              {project.challenges.map((challenge, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="text-[var(--color1)] mr-2">•</span>
-                  <span>{challenge}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold text-[var(--foreground)] mb-4">Soluções</h2>
-            <ul className="space-y-2 text-[var(--foreground-muted)]">
-              {project.solutions.map((solution, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="text-[var(--color1)] mr-2">•</span>
-                  <span>{solution}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Galeria de imagens */}
-        {project.images.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-2xl font-semibold text-[var(--foreground)] mb-6">Galeria</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {project.images.map((image, index) => (
-                <div key={index} className="relative h-[250px] rounded-lg overflow-hidden shadow-md">
-                  <Image
-                    src={image}
-                    alt={`Captura de tela ${index+1} do projeto ${project.title}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 500px"
-                  />
+            {/* Cabeçalho do projeto */}
+            <div className="relative rounded-xl overflow-hidden mb-10 h-[40vh] md:h-[50vh]">
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)]/90 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 p-8 w-full">
+                <h1 className="text-3xl md:text-5xl font-bold text-[var(--foreground)]">
+                  {project.title}
+                </h1>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {project.categories.map((category, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 bg-[var(--color1)]/80 text-[var(--background)] rounded-full text-sm"
+                    >
+                      {category}
+                    </span>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        )}
 
-        {/* CTA - Call to Action */}
-        <div className="bg-[var(--color4)] p-8 rounded-xl text-center">
-          <h2 className="text-2xl font-semibold text-[var(--foreground)] mb-4">Gostou deste projeto?</h2>
-          <p className="text-[var(--foreground-muted)] mb-6">
-            Estou disponível para novos projetos e oportunidades. Entre em contato para discutirmos como posso ajudar a transformar suas ideias em realidade.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block px-6 py-3 bg-[var(--color1)] text-[var(--background)] rounded-md hover:bg-[var(--color3)] transition-colors"
-          >
-            Entre em Contato
-          </Link>
-        </div>
+            {/* Conteúdo principal */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+              <div className="lg:col-span-2">
+                <section className="mb-12">
+                  <h2 className="text-2xl font-bold mb-6 text-[var(--foreground)]">
+                    Sobre o Projeto
+                  </h2>
+                  <div className="prose prose-lg prose-invert max-w-none">
+                    {project.detailedDescription
+                      ?.split('\n\n')
+                      .map((paragraph, index) => (
+                        <p
+                          key={index}
+                          className="text-[var(--foreground-muted)] mb-4"
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                  </div>
+                </section>
+
+                {project.challenges?.length > 0 && (
+                  <section className="mb-12">
+                    <h2 className="text-2xl font-bold mb-6 text-[var(--foreground)]">
+                      Desafios & Soluções
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                        <h3 className="text-xl font-medium mb-4 text-[var(--color1)]">
+                          Desafios
+                        </h3>
+                        <ul className="space-y-2">
+                          {project.challenges.map((challenge, index) => (
+                            <li
+                              key={index}
+                              className="flex items-start gap-2 text-[var(--foreground-muted)]"
+                            >
+                              <span className="text-[var(--color1)] mt-1">
+                                •
+                              </span>
+                              <span>{challenge}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-medium mb-4 text-[var(--color1)]">
+                          Soluções
+                        </h3>
+                        <ul className="space-y-2">
+                          {project.solutions?.map((solution, index) => (
+                            <li
+                              key={index}
+                              className="flex items-start gap-2 text-[var(--foreground-muted)]"
+                            >
+                              <span className="text-[var(--color1)] mt-1">
+                                •
+                              </span>
+                              <span>{solution}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </section>
+                )}
+
+                {project.screenshots && project.screenshots.length > 0 && (
+                  <section className="mb-12">
+                    <h2 className="text-2xl font-bold mb-6 text-[var(--foreground)]">
+                      Screenshots
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {project.screenshots.map((screenshot, index) => (
+                        <div
+                          key={index}
+                          className="relative h-64 rounded-lg overflow-hidden"
+                        >
+                          <Image
+                            src={screenshot}
+                            alt={`Screenshot ${index + 1} of ${project.title}`}
+                            fill
+                            className="object-cover hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
+              </div>
+
+              <div>
+                <div className="bg-[var(--color4)]/30 rounded-xl p-6 sticky top-24">
+                  <h3 className="text-xl font-bold mb-4 text-[var(--foreground)]">
+                    Tecnologias
+                  </h3>
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {project.technologies.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-[var(--color2)] text-sm rounded-full text-[var(--foreground-muted)]"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <h3 className="text-xl font-bold mb-4 text-[var(--foreground)]">
+                    Links
+                  </h3>
+                  <div className="space-y-3">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 px-4 py-3 bg-[var(--color1)] text-[var(--background)] font-medium rounded-md transition-all duration-300 hover:bg-[var(--color3)] w-full"
+                      >
+                        <FaExternalLinkAlt />
+                        <span>Ver Site do Projeto</span>
+                      </a>
+                    )}
+
+                    {project.repoUrl && (
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 px-4 py-3 bg-[var(--color4)] text-[var(--foreground)] font-medium rounded-md transition-all duration-300 hover:bg-[var(--color2)] w-full"
+                      >
+                        <FaGithub className="text-lg" />
+                        <span>Ver no GitHub</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
-    </main>
+    </ClientOnly>
   );
 }

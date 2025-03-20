@@ -1,5 +1,4 @@
 import Projects from '@/components/sections/Projects';
-import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -31,7 +30,6 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <>
-      <Breadcrumbs />
       <Projects />
     </>
   );
