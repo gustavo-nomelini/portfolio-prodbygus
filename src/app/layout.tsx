@@ -1,14 +1,18 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { Fira_Code } from 'next/font/google';
 import './globals.css';
-import dynamic from 'next/dynamic';
 
 // Importação dinâmica dos componentes client-side
-const Header = dynamic(() => import('@/components/layout/Header'), { ssr: true });
-const Footer = dynamic(() => import('@/components/layout/Footer'), { ssr: true });
+const Header = dynamic(() => import('@/components/layout/Header'), {
+  ssr: true,
+});
+const Footer = dynamic(() => import('@/components/layout/Footer'), {
+  ssr: true,
+});
 
 // Configuração da fonte Fira Code - popular entre desenvolvedores
-const firaCode = Fira_Code({ 
+const firaCode = Fira_Code({
   subsets: ['latin'],
   display: 'swap',
   weight: ['300', '400', '500', '600', '700'],
@@ -17,8 +21,15 @@ const firaCode = Fira_Code({
 
 export const metadata: Metadata = {
   title: 'Prod by GUS - Portfolio',
-  description: 'Desenvolvedor web full-stack especializado em criar sites e aplicativos modernos com excelente experiência do usuário',
-  keywords: ['desenvolvedor web', 'full-stack', 'portfolio', 'react', 'next.js'],
+  description:
+    'Desenvolvedor web full-stack especializado em criar sites e aplicativos modernos com excelente experiência do usuário',
+  keywords: [
+    'desenvolvedor web',
+    'full-stack',
+    'portfolio',
+    'react',
+    'next.js',
+  ],
   authors: [{ name: 'Gustavo Lopes Nomelini' }],
   creator: 'Gustavo Lopes Nomelini',
   openGraph: {
@@ -26,7 +37,8 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: 'https://prodbygus.com',
     title: 'Prod by GUS - Portfolio de Desenvolvedor Web',
-    description: 'Desenvolvedor web full-stack especializado em criar sites e aplicativos modernos com excelente experiência do usuário',
+    description:
+      'Desenvolvedor web full-stack especializado em criar sites e aplicativos modernos com excelente experiência do usuário',
     siteName: 'Prod by GUS',
     images: [
       {
@@ -34,13 +46,14 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: 'Prod by GUS Portfolio',
-      }
+      },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Prod by GUS - Portfolio de Desenvolvedor Web',
-    description: 'Desenvolvedor web full-stack especializado em criar sites e aplicativos modernos com excelente experiência do usuário',
+    description:
+      'Desenvolvedor web full-stack especializado em criar sites e aplicativos modernos com excelente experiência do usuário',
     creator: '@seutwitter',
     images: ['/twitter-image.jpg'],
   },
@@ -50,8 +63,8 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-    }
-  }
+    },
+  },
 };
 
 export default function RootLayout({
@@ -61,10 +74,44 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={firaCode.variable}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Gustavo Lopes Nomelini',
+              url: 'https://prodbygus.com',
+              jobTitle: 'Full Stack Web Developer',
+              sameAs: [
+                'https://github.com/seu-usuario',
+                'https://linkedin.com/in/seu-usuario',
+                'https://twitter.com/seutwitter',
+              ],
+              worksFor: {
+                '@type': 'Organization',
+                name: 'Prod by GUS',
+              },
+              knowsAbout: [
+                'Web Development',
+                'React',
+                'Next.js',
+                'TypeScript',
+                'Tailwind CSS',
+                'Node.js',
+              ],
+              image: 'https://prodbygus.com/profile-image.jpg',
+            }),
+          }}
+        />
+      </head>
       <body className={firaCode.className}>
         <div className="min-h-screen flex flex-col bg-background text-foreground">
           <Header />
-          <main className="flex-grow pt-16">{children}</main>
+          <main id="main-content" className="flex-grow pt-16">
+            {children}
+          </main>
           <Footer />
         </div>
       </body>
