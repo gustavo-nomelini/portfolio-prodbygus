@@ -76,7 +76,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 href={repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-[var(--color4)] text-[var(--foreground)] font-medium rounded-md transition-all duration-300 hover:bg-[var(--color2)] focus:outline-none focus:ring-2 focus:ring-[var(--color1)] focus:ring-offset-2 focus:ring-offset-[var(--background)]"
+                className={`${!liveUrl ? 'w-full' : 'flex-1'} flex items-center justify-center gap-2 px-4 py-2 bg-[var(--color4)] text-[var(--foreground)] font-medium rounded-md transition-all duration-300 hover:bg-[var(--color2)] focus:outline-none focus:ring-2 focus:ring-[var(--color1)] focus:ring-offset-2 focus:ring-offset-[var(--background)]`}
                 aria-label={`Ver código fonte do projeto ${title} no GitHub`}
               >
                 <FaGithub className="text-lg" />

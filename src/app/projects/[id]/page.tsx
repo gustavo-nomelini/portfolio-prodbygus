@@ -33,12 +33,10 @@ export default function ProjectDetails() {
     const fetchProject = async () => {
       try {
         setIsLoading(true);
-        // Aqui você buscaria o projeto específico de uma API
-        // Simulando um atraso para demonstrar o carregamento
+        // Simulando atraso
         await new Promise((resolve) => setTimeout(resolve, 800));
 
-        // Dados de exemplo - em um caso real, você buscaria isso de uma API
-        // com base no ID da URL
+        // Dados de exemplo - adicione os novos projetos também aqui
         const mockProjects: Project[] = [
           {
             id: '1',
@@ -166,6 +164,85 @@ A arquitetura foi projetada para ser escalável, seguindo princípios de Clean A
               'Utilizei JWT com rotação de tokens e armazenamento seguro',
               'Implementei índices e agregações otimizadas no MongoDB',
               'Adotei uma arquitetura em camadas com injeção de dependências',
+            ],
+          },
+          {
+            id: '4',
+            title: 'Algoritmos de Machine Learning',
+            description:
+              'Biblioteca de algoritmos de machine learning implementados do zero para fins educacionais.',
+            detailedDescription: `Este projeto consiste em uma implementação manual de diversos algoritmos populares de machine learning, criado com propósitos educacionais para entender profundamente como esses algoritmos funcionam por baixo dos panos.
+            
+A biblioteca inclui implementações dos seguintes algoritmos:
+- Regressão Linear e Logística
+- K-Nearest Neighbors (KNN)
+- Support Vector Machines (SVM)
+- Árvores de Decisão
+- Random Forests
+- K-Means Clustering
+- Principal Component Analysis (PCA)
+
+Cada algoritmo é implementado com visualizações detalhadas e exemplos de uso, permitindo aos estudantes de ciência de dados entender os princípios matemáticos subjacentes e como eles funcionam com dados reais.`,
+            image: '/projects/placeholder.jpg',
+            categories: ['Backend', 'Data Science'],
+            technologies: [
+              'Python',
+              'NumPy',
+              'Pandas',
+              'Scikit-learn',
+              'Jupyter',
+              'Matplotlib',
+            ],
+            featured: false,
+            repoUrl: 'https://github.com/example/ml-algorithms',
+            challenges: [
+              'Implementar algoritmos complexos de maneira didática e eficiente',
+              'Criar visualizações claras do funcionamento interno dos algoritmos',
+              'Otimizar o desempenho para conjuntos de dados maiores',
+            ],
+            solutions: [
+              'Desenvolvi implementações passo a passo com documentação extensa',
+              'Utilizei Matplotlib e Seaborn para criar visualizações interativas',
+              'Apliquei técnicas de vetorização do NumPy para melhorar a performance',
+            ],
+          },
+          {
+            id: '5',
+            title: 'CLI para Automação de DevOps',
+            description:
+              'Ferramenta de linha de comando para automatizar tarefas comuns de DevOps e CI/CD.',
+            detailedDescription: `Esta ferramenta CLI foi desenvolvida para automatizar fluxos de trabalho DevOps comuns, ajudando equipes de desenvolvimento a economizar tempo em tarefas repetitivas.
+            
+Principais funcionalidades:
+- Automação de deploy em múltiplos ambientes (dev, staging, production)
+- Gerenciamento de infraestrutura como código
+- Monitoramento e logs centralizados
+- Configuração e orquestração de contêineres Docker
+- Integração com GitHub, GitLab e Bitbucket
+- Relatórios automáticos de desempenho
+
+A ferramenta é altamente extensível através de um sistema de plugins, permitindo que equipes criem funcionalidades específicas para seus fluxos de trabalho.`,
+            image: '/projects/cli-tool.jpg',
+            categories: ['Backend', 'DevOps'],
+            technologies: [
+              'TypeScript',
+              'Node.js',
+              'Docker',
+              'GitHub Actions',
+              'Kubernetes',
+              'AWS SDK',
+            ],
+            featured: true,
+            repoUrl: 'https://github.com/example/devops-cli',
+            challenges: [
+              'Criar uma ferramenta extensível que atenda a diversas necessidades de DevOps',
+              'Garantir segurança nas operações automatizadas',
+              'Manter compatibilidade com diversos sistemas e serviços cloud',
+            ],
+            solutions: [
+              'Implementei uma arquitetura de plugins baseada em comandos',
+              'Desenvolvi um sistema de credenciais seguro com criptografia',
+              'Criei adaptadores para múltiplas plataformas (AWS, GCP, Azure, etc.)',
             ],
           },
         ];
