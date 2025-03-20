@@ -245,6 +245,54 @@ A ferramenta é altamente extensível através de um sistema de plugins, permiti
               'Criei adaptadores para múltiplas plataformas (AWS, GCP, Azure, etc.)',
             ],
           },
+          {
+            id: '6',
+            title: 'Chá de Panela - Convite Digital',
+            description:
+              'Site interativo desenvolvido como convite digital para meu chá de panela, com contagem regressiva, galeria de fotos e RSVP.',
+            detailedDescription: `Este projeto foi criado como um convite digital interativo para meu chá de panela, programado para acontecer em 19 de Abril de 2025. O site serve como uma alternativa moderna aos convites tradicionais, permitindo que os convidados obtenham informações sobre o evento e confirmem sua presença.
+
+O design foi inspirado em uma temática de chá, com elementos visuais relacionados como bules, xícaras e vapor, implementados através de animações CSS e SVG para criar uma experiência acolhedora e elegante.
+
+Principais características do projeto:
+- Design temático com paleta de cores inspirada em chá (tons de marrom, bege e branco)
+- Contagem regressiva até a data do evento
+- Galeria de fotos com navegação interativa
+- Formulário para confirmação de presença (RSVP)
+- Seção para contribuições com QR Code do PIX
+- Responsividade completa (mobile, tablet, desktop)
+- Animações e efeitos visuais (fade-in, flutuação, vapor e estrelas cadentes)`,
+            image: '/projects/cha-de-panela.jpg',
+            categories: ['Frontend', 'Design'],
+            technologies: [
+              'HTML',
+              'CSS',
+              'JavaScript',
+              'Tailwind CSS',
+              'Animações CSS',
+              'Design Responsivo',
+            ],
+            liveUrl: 'https://gustavo-nomelini.github.io/cha-de-panela/',
+            featured: true,
+            repoUrl: 'https://github.com/gustavo-nomelini/cha-de-panela',
+            challenges: [
+              'Criar uma experiência imersiva e temática usando apenas HTML, CSS e JavaScript',
+              'Implementar animações suaves e eficientes sem comprometer a performance',
+              'Desenvolver um design completamente responsivo para todos os tamanhos de tela',
+              'Integrar um sistema de RSVP funcional para confirmação de presença',
+            ],
+            solutions: [
+              'Utilizei técnicas avançadas de CSS, incluindo animações keyframe personalizadas',
+              'Implementei efeitos visuais como glassmorphism para um design moderno',
+              'Criei um layout fluido com Tailwind CSS para garantir responsividade',
+              'Desenvolvi um carousel de imagens interativo com navegação touch para dispositivos móveis',
+            ],
+            screenshots: [
+              '/projects/cha-de-panela-1.jpg', // Você precisará adicionar estas imagens
+              '/projects/cha-de-panela-2.jpg',
+              '/projects/cha-de-panela-3.jpg',
+            ],
+          },
         ];
 
         const projectData = mockProjects.find((p) => p.id === id);

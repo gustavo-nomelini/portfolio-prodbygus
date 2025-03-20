@@ -42,6 +42,18 @@ const Projects = () => {
         // Dados de exemplo
         setProjects([
           {
+            id: '6',
+            title: 'Chá de Panela - Convite Digital',
+            description:
+              'Site interativo desenvolvido como convite digital para meu chá de panela, com contagem regressiva, galeria de fotos e RSVP.',
+            image: '/projects/cha-de-panela.jpg',
+            categories: ['Frontend', 'Design'],
+            technologies: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'],
+            liveUrl: 'https://gustavo-nomelini.github.io/cha-de-panela/',
+            featured: true,
+            repoUrl: 'https://github.com/gustavo-nomelini/cha-de-panela',
+          },
+          {
             id: '1',
             title: 'E-commerce Platform',
             description:
