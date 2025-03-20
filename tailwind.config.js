@@ -21,9 +21,11 @@ module.exports = {
         'shrink-width': 'shrink-width 10s linear forwards',
         'fade-in': 'fade-in 0.5s ease-out forwards',
         'slide-up': 'slide-up 0.5s ease-out forwards',
-        'slide-in-right': 'slide-in-right 0.5s ease-out forwards', 
+        'slide-in-right': 'slide-in-right 0.5s ease-out forwards',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-        'float': 'float 6s ease-in-out infinite',
+        float: 'float 6s ease-in-out infinite',
+        shimmer: 'shimmer 2s infinite linear',
+        pulse: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         'shrink-width': {
@@ -43,15 +45,29 @@ module.exports = {
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
         'pulse-glow': {
-          '0%, 100%': { opacity: '1', boxShadow: '0 0 0 0 rgba(var(--color1-rgb), 0)' },
-          '50%': { opacity: '0.8', boxShadow: '0 0 20px 5px rgba(var(--color1-rgb), 0.3)' },
+          '0%, 100%': {
+            opacity: '1',
+            boxShadow: '0 0 0 0 rgba(var(--color1-rgb), 0)',
+          },
+          '50%': {
+            opacity: '0.8',
+            boxShadow: '0 0 20px 5px rgba(var(--color1-rgb), 0.3)',
+          },
         },
-        'float': {
+        float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '200% 0' },
+          '100%': { backgroundPosition: '-200% 0' },
+        },
+        pulse: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' },
         },
       },
     },
   },
   plugins: [],
-}
+};

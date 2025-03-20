@@ -1,8 +1,16 @@
-"use client";
+'use client';
 
-import { useState, useEffect, ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
-export default function ClientOnly({ children }: { children: ReactNode }) {
+interface ClientOnlyProps {
+  children: ReactNode;
+  fallback?: ReactNode;
+}
+
+const ClientOnly: React.FC<ClientOnlyProps> = ({
+  children,
+  fallback = null,
+}) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -10,8 +18,10 @@ export default function ClientOnly({ children }: { children: ReactNode }) {
   }, []);
 
   if (!isMounted) {
-    return null; // Ou um placeholder básico para evitar salto de layout
+    return <>{fallback}</>;
   }
 
   return <>{children}</>;
-}
+};
+
+export default ClientOnly;
