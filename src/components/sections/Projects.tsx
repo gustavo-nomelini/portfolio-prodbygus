@@ -28,6 +28,8 @@ interface Project {
 const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] =
+    useState<ProjectCategory>('Todos');
 
   // Simulando o carregamento de dados
   useEffect(() => {
@@ -36,9 +38,6 @@ const Projects = () => {
         // Aqui você normalmente buscaria dados de uma API
         // Por enquanto, vamos simular um atraso para mostrar o skeleton
         await new Promise((resolve) => setTimeout(resolve, 1500));
-
-        // Aqui você colocaria sua lógica real de busca de dados
-        // setProjects(data);
 
         // Dados de exemplo
         setProjects([
@@ -55,7 +54,32 @@ const Projects = () => {
             featured: true,
             repoUrl: 'https://github.com/example',
           },
-          // ... outros projetos
+          {
+            id: '2',
+            title: 'Dashboard Analytics',
+            description:
+              'Dashboard interativo para visualização de dados com gráficos e filtros avançados.',
+            image: '/projects/dashboard.jpg',
+            categories: ['Frontend'],
+            technologies: ['React', 'Chart.js', 'Tailwind CSS'],
+            github: 'https://github.com/example',
+            liveUrl: 'https://example.com',
+            featured: false,
+            repoUrl: 'https://github.com/example',
+          },
+          {
+            id: '3',
+            title: 'API RESTful',
+            description:
+              'API completa com autenticação, validação e documentação automática.',
+            image: '/projects/api.jpg',
+            categories: ['Backend'],
+            technologies: ['Node.js', 'Express', 'MongoDB', 'Swagger'],
+            github: 'https://github.com/example',
+            liveUrl: 'https://example.com',
+            featured: true,
+            repoUrl: 'https://github.com/example',
+          },
         ]);
       } catch (error) {
         console.error('Erro ao carregar projetos:', error);
@@ -101,11 +125,12 @@ const Projects = () => {
   ];
 
   // Filtra os projetos com base na categoria selecionada
-  const filteredProjects = projects.filter((project) =>
-    project.categories.includes('Todos'),
-  );
-
-  console.log('Projects data:', projects);
+  const filteredProjects =
+    selectedCategory === 'Todos'
+      ? projects
+      : projects.filter((project) =>
+          project.categories.includes(selectedCategory),
+        );
 
   return (
     <section id="projects" className="py-16 bg-[var(--background)]">
@@ -122,18 +147,20 @@ const Projects = () => {
           </p>
         </div>
 
-        {/* Filtros de categorias */}
+        {/* Filtros de categorias com efeito de brilho */}
         <div className="flex justify-center flex-wrap gap-2 mb-12">
           {uniqueCategories.map((category) => (
             <button
               key={category}
-              className={`px-4 py-2 rounded-full transition-all ${
-                projects.some((project) =>
-                  project.categories.includes(category),
-                )
-                  ? 'bg-[var(--color1)] text-[var(--background)] font-medium'
-                  : 'bg-[var(--color4)] text-[var(--foreground)] hover:bg-[var(--color2)] hover:text-[var(--foreground)]'
-              }`}
+              onClick={() => setSelectedCategory(category)}
+              className={`
+                px-4 py-2 rounded-full transition-all duration-300
+                ${
+                  selectedCategory === category
+                    ? 'bg-gradient-to-r from-[var(--color1)] via-[var(--color3)] to-[var(--color1)] text-[var(--background)] font-medium bg-[length:200%_100%] animate-shimmer shadow-lg shadow-[var(--color1)]/20'
+                    : 'bg-[var(--color4)] text-[var(--foreground)] hover:bg-[var(--color2)] hover:text-[var(--foreground)]'
+                }
+              `}
             >
               {category}
             </button>
@@ -149,17 +176,19 @@ const Projects = () => {
             </div>
           }
         >
-          {projects.length === 0 ? (
-            <p className="text-center">Nenhum projeto encontrado.</p>
+          {filteredProjects.length === 0 ? (
+            <p className="text-center text-lg text-[var(--foreground-muted)]">
+              Nenhum projeto encontrado nesta categoria.
+            </p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.map((project) => (
+              {filteredProjects.map((project) => (
                 <ProjectCard
                   key={project.id}
                   title={project.title}
                   description={project.description}
                   image={project.image}
-                  tags={project.technologies}
+                  technologies={project.technologies}
                   liveUrl={project.liveUrl}
                   repoUrl={project.repoUrl}
                 />

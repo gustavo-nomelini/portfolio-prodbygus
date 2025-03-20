@@ -24,7 +24,7 @@ module.exports = {
         'slide-in-right': 'slide-in-right 0.5s ease-out forwards',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
         float: 'float 6s ease-in-out infinite',
-        shimmer: 'shimmer 2s infinite linear',
+        shimmer: 'shimmer 3s ease-in-out infinite',
         pulse: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
@@ -59,8 +59,8 @@ module.exports = {
           '50%': { transform: 'translateY(-10px)' },
         },
         shimmer: {
-          '0%': { backgroundPosition: '200% 0' },
-          '100%': { backgroundPosition: '-200% 0' },
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
         },
         pulse: {
           '0%, 100%': { opacity: '1' },
