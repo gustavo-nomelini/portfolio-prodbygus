@@ -105,6 +105,8 @@ const Projects = () => {
     project.categories.includes('Todos'),
   );
 
+  console.log('Projects data:', projects);
+
   return (
     <section id="projects" className="py-16 bg-[var(--background)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -157,7 +159,7 @@ const Projects = () => {
                   title={project.title}
                   description={project.description}
                   image={project.image}
-                  technologies={project.technologies}
+                  tags={project.technologies}
                   liveUrl={project.liveUrl}
                   repoUrl={project.repoUrl}
                 />
