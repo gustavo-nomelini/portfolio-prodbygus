@@ -1,11 +1,19 @@
 'use client';
 
 import ClientOnly from '@/components/layout/ClientOnly';
+import ImageGallery from '@/components/ui/ImageGallery';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaArrowLeft, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+
+interface Screenshot {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
 
 interface Project {
   id: string;
@@ -21,7 +29,7 @@ interface Project {
   repoUrl: string;
   challenges?: string[]; // Desafios do projeto
   solutions?: string[]; // Soluções implementadas
-  screenshots?: string[]; // Capturas de tela adicionais
+  screenshots?: Screenshot[]; // Agora é um array de objetos Screenshot
 }
 
 export default function ProjectDetails() {
@@ -93,9 +101,24 @@ Principais características do projeto:
               'Desenvolvi um carousel de imagens interativo com navegação touch para dispositivos móveis',
             ],
             screenshots: [
-              '/projects/cha-de-panela-1.png',
-              '/projects/cha-de-panela-2.png',
-              '/projects/cha-de-panela-3.png',
+              {
+                src: '/projects/cha-de-panela-1.png',
+                alt: 'Tela inicial do convite digital com contagem regressiva',
+                width: 1200,
+                height: 800,
+              },
+              {
+                src: '/projects/cha-de-panela-2.png',
+                alt: 'Seção de informações do evento',
+                width: 1200,
+                height: 800,
+              },
+              {
+                src: '/projects/cha-de-panela-3.png',
+                alt: 'Galeria de fotos do casal',
+                width: 1200,
+                height: 800,
+              },
             ],
           },
         ];
@@ -250,21 +273,15 @@ Principais características do projeto:
                     <h2 className="text-2xl font-bold mb-6 text-[var(--foreground)]">
                       Screenshots
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {project.screenshots.map((screenshot, index) => (
-                        <div
-                          key={index}
-                          className="relative h-64 rounded-lg overflow-hidden"
-                        >
-                          <Image
-                            src={screenshot}
-                            alt={`Screenshot ${index + 1} of ${project.title}`}
-                            fill
-                            className="object-cover hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                      ))}
-                    </div>
+                    <ImageGallery
+                      images={project.screenshots.map((screenshot) => ({
+                        src: screenshot.src,
+                        alt: screenshot.alt,
+                        width: screenshot.width,
+                        height: screenshot.height,
+                      }))}
+                      className="mt-4"
+                    />
                   </section>
                 )}
               </div>
