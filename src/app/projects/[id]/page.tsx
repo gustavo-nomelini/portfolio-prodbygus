@@ -275,10 +275,12 @@ Principais características do projeto:
                     </h2>
                     <ImageGallery
                       images={project.screenshots.map((screenshot) => ({
-                        src: screenshot.src,
-                        alt: screenshot.alt,
-                        width: screenshot.width,
-                        height: screenshot.height,
+                        src: screenshot.src || '',
+                        alt:
+                          screenshot.alt ||
+                          `Screenshot do projeto ${project.title}`,
+                        width: screenshot.width || 1200,
+                        height: screenshot.height || 800,
                       }))}
                       className="mt-4"
                     />

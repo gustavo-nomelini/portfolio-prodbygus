@@ -23,14 +23,30 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null,
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageLoaded, setImageLoaded] = useState<Record<number, boolean>>({});
 
-  if (!images || images.length === 0) {
-    return <div className="text-center p-4">Nenhuma imagem disponível</div>;
-  }
+  // Garantir que as imagens existam e tenham valores válidos
+  const validImages = images?.filter((img) => img && img.src) || [];
 
+  // Lidar com a abertura do modal
+  const openModal = (index: number) => {
+    setSelectedImageIndex(index);
+    setIsModalOpen(true);
+  };
+
+  // Lidar com o fechamento do modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    // Não resetamos o índice imediatamente para permitir a animação
+  };
+
+  // Navegação
   const handleNext = () => {
-    if (selectedImageIndex !== null && selectedImageIndex < images.length - 1) {
+    if (
+      selectedImageIndex !== null &&
+      selectedImageIndex < validImages.length - 1
+    ) {
       setSelectedImageIndex(selectedImageIndex + 1);
     }
   };
@@ -41,16 +57,18 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
     }
   };
 
+  if (validImages.length === 0) {
+    return <div className="text-center p-4">Nenhuma imagem disponível</div>;
+  }
+
   return (
     <div className={`${className}`}>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {images.map((image, index) => (
+        {validImages.map((image, index) => (
           <div
             key={index}
             className="relative group cursor-pointer overflow-hidden rounded-lg shadow-md transition-transform duration-300 hover:shadow-xl hover:scale-[1.02]"
-            onClick={() => {
-              setSelectedImageIndex(index);
-            }}
+            onClick={() => openModal(index)}
           >
             <div className="relative h-48 sm:h-56 w-full">
               <Image
@@ -72,7 +90,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
               <div className="absolute inset-0 bg-[var(--background)]/0 group-hover:bg-[var(--background)]/30 transition-colors duration-300">
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="bg-[var(--color1)]/80 text-[var(--background)] px-4 py-2 rounded-lg font-medium backdrop-blur-sm">
-                    Ver Imagem
+                    Ampliar
                   </span>
                 </div>
               </div>
@@ -83,13 +101,13 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
 
       {selectedImageIndex !== null && (
         <ImageModal
-          isOpen={selectedImageIndex !== null}
-          imageUrl={images[selectedImageIndex].src}
-          alt={images[selectedImageIndex].alt}
-          onClose={() => setSelectedImageIndex(null)}
+          isOpen={isModalOpen}
+          imageUrl={validImages[selectedImageIndex]?.src || ''}
+          alt={validImages[selectedImageIndex]?.alt || 'Imagem do projeto'}
+          onClose={closeModal}
           onNext={handleNext}
           onPrev={handlePrev}
-          hasNext={selectedImageIndex < images.length - 1}
+          hasNext={selectedImageIndex < validImages.length - 1}
           hasPrev={selectedImageIndex > 0}
         />
       )}

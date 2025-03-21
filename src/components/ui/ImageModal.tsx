@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa';
 
 interface ImageModalProps {
@@ -29,32 +29,56 @@ const ImageModal: React.FC<ImageModalProps> = ({
     'entering' | 'entered' | 'exiting' | 'exited'
   >('exited');
 
-  useEffect(() => {
-    if (isOpen) {
-      setAnimation('entering');
-      document.body.style.overflow = 'hidden'; // Previne rolagem quando modal está aberto
+  const firstRender = useRef(true);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-      // Pequeno atraso para a animação de entrada
-      const enterTimer = setTimeout(() => {
+  // Gerenciar animações e estado do modal
+  useEffect(() => {
+    // Na primeira renderização, não faça nada
+    if (firstRender.current) {
+      firstRender.current = false;
+      if (isOpen) {
+        setAnimation('entering');
+      }
+      return;
+    }
+
+    // Limpar timeouts existentes
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+
+    if (isOpen) {
+      // Modal está abrindo
+      setAnimation('entering');
+      document.body.style.overflow = 'hidden';
+
+      timeoutRef.current = setTimeout(() => {
         setAnimation('entered');
       }, 50);
-
-      return () => clearTimeout(enterTimer);
     } else {
+      // Modal está fechando
       if (animation !== 'exited') {
         setAnimation('exiting');
 
-        // Atraso para permitir a animação de saída completar
-        const exitTimer = setTimeout(() => {
+        timeoutRef.current = setTimeout(() => {
           setAnimation('exited');
-          document.body.style.overflow = ''; // Restaura rolagem
+          document.body.style.overflow = '';
         }, 300);
-
-        return () => clearTimeout(exitTimer);
       }
     }
+
+    // Cleanup ao desmontar componente
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      document.body.style.overflow = '';
+    };
   }, [isOpen, animation]);
 
+  // Navegação por teclado
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -75,6 +99,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
     };
   }, [isOpen, onClose, onNext, onPrev, hasNext, hasPrev]);
 
+  // Não renderizar nada se o modal estiver fechado e a animação de saída concluída
   if (animation === 'exited' && !isOpen) return null;
 
   // Funções para lidar com cliques e evitar propagação
@@ -86,8 +111,8 @@ const ImageModal: React.FC<ImageModalProps> = ({
     e.stopPropagation(); // Previne que o clique em conteúdo feche o modal
   };
 
-  // Verificação para garantir que imageUrl não é uma string vazia
-  const hasValidImage = imageUrl && imageUrl.trim() !== '';
+  // Verificar se a URL da imagem é válida
+  const hasValidImage = typeof imageUrl === 'string' && imageUrl.trim() !== '';
 
   return (
     <div
@@ -110,7 +135,10 @@ const ImageModal: React.FC<ImageModalProps> = ({
       >
         <button
           className="absolute top-3 right-3 z-10 bg-[var(--background)]/70 rounded-full p-2 text-[var(--foreground)] hover:bg-[var(--color1)] transition-colors"
-          onClick={onClose}
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
           aria-label="Fechar imagem"
         >
           <FaTimes size={20} />
@@ -118,10 +146,10 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
         {hasPrev && (
           <button
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-[var(--background)]/70 rounded-full p-3 text-[var(--foreground)] hover:bg-[var(--color1)] transition-colors"
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-[var(--background)]/70 rounded-full p-3 text-[var(--foreground)] hover:bg-[var(--color1)] transition-colors z-10"
             onClick={(e) => {
               e.stopPropagation();
-              onPrev && onPrev();
+              if (onPrev) onPrev();
             }}
             aria-label="Imagem anterior"
           >
@@ -131,10 +159,10 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
         {hasNext && (
           <button
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-[var(--background)]/70 rounded-full p-3 text-[var(--foreground)] hover:bg-[var(--color1)] transition-colors"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-[var(--background)]/70 rounded-full p-3 text-[var(--foreground)] hover:bg-[var(--color1)] transition-colors z-10"
             onClick={(e) => {
               e.stopPropagation();
-              onNext && onNext();
+              if (onNext) onNext();
             }}
             aria-label="Próxima imagem"
           >
@@ -142,19 +170,21 @@ const ImageModal: React.FC<ImageModalProps> = ({
           </button>
         )}
 
-        <div className="relative w-full h-full max-h-[90vh]">
+        <div className="relative w-full h-full">
           {hasValidImage ? (
-            <Image
-              src={imageUrl}
-              alt={alt}
-              className="object-contain w-auto max-w-full max-h-[90vh]"
-              width={1200}
-              height={800}
-              quality={90}
-              priority
-            />
+            <div className="flex items-center justify-center min-h-[50vh] bg-[var(--background)]/50">
+              <Image
+                src={imageUrl}
+                alt={alt}
+                width={1200}
+                height={800}
+                className="object-contain max-w-full max-h-[80vh]"
+                quality={90}
+                priority
+              />
+            </div>
           ) : (
-            <div className="flex items-center justify-center h-64 w-64 bg-[var(--color4)] rounded-lg">
+            <div className="flex items-center justify-center h-64 w-full bg-[var(--color4)] rounded-lg">
               <p className="text-[var(--foreground-muted)]">
                 Imagem não disponível
               </p>
