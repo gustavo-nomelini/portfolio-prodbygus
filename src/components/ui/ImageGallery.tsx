@@ -20,40 +20,29 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   images,
   className = '',
 }) => {
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
-    null,
-  );
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [imageLoaded, setImageLoaded] = useState<Record<number, boolean>>({});
 
-  // Garantir que as imagens existam e tenham valores válidos
+  // Filtra imagens inválidas
   const validImages = images?.filter((img) => img && img.src) || [];
 
-  // Lidar com a abertura do modal
-  const openModal = (index: number) => {
-    setSelectedImageIndex(index);
-    setIsModalOpen(true);
+  const handleImageClick = (index: number) => {
+    setCurrentIndex(index);
   };
 
-  // Lidar com o fechamento do modal
-  const closeModal = () => {
-    setIsModalOpen(false);
-    // Não resetamos o índice imediatamente para permitir a animação
+  const handleCloseModal = () => {
+    setCurrentIndex(null);
   };
 
-  // Navegação
-  const handleNext = () => {
-    if (
-      selectedImageIndex !== null &&
-      selectedImageIndex < validImages.length - 1
-    ) {
-      setSelectedImageIndex(selectedImageIndex + 1);
+  const handleNextImage = () => {
+    if (currentIndex !== null && currentIndex < validImages.length - 1) {
+      setCurrentIndex(currentIndex + 1);
     }
   };
 
-  const handlePrev = () => {
-    if (selectedImageIndex !== null && selectedImageIndex > 0) {
-      setSelectedImageIndex(selectedImageIndex - 1);
+  const handlePrevImage = () => {
+    if (currentIndex !== null && currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
     }
   };
 
@@ -62,13 +51,13 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   }
 
   return (
-    <div className={`${className}`}>
+    <div className={className}>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {validImages.map((image, index) => (
           <div
             key={index}
             className="relative group cursor-pointer overflow-hidden rounded-lg shadow-md transition-transform duration-300 hover:shadow-xl hover:scale-[1.02]"
-            onClick={() => openModal(index)}
+            onClick={() => handleImageClick(index)}
           >
             <div className="relative h-48 sm:h-56 w-full">
               <Image
@@ -99,18 +88,16 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
         ))}
       </div>
 
-      {selectedImageIndex !== null && (
-        <ImageModal
-          isOpen={isModalOpen}
-          imageUrl={validImages[selectedImageIndex]?.src || ''}
-          alt={validImages[selectedImageIndex]?.alt || 'Imagem do projeto'}
-          onClose={closeModal}
-          onNext={handleNext}
-          onPrev={handlePrev}
-          hasNext={selectedImageIndex < validImages.length - 1}
-          hasPrev={selectedImageIndex > 0}
-        />
-      )}
+      <ImageModal
+        isOpen={currentIndex !== null}
+        imageUrl={currentIndex !== null ? validImages[currentIndex].src : ''}
+        alt={currentIndex !== null ? validImages[currentIndex].alt : ''}
+        onClose={handleCloseModal}
+        onNext={handleNextImage}
+        onPrev={handlePrevImage}
+        hasNext={currentIndex !== null && currentIndex < validImages.length - 1}
+        hasPrev={currentIndex !== null && currentIndex > 0}
+      />
     </div>
   );
 };

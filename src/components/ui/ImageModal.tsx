@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa';
 
 interface ImageModalProps {
@@ -25,58 +25,18 @@ const ImageModal: React.FC<ImageModalProps> = ({
   hasNext,
   hasPrev,
 }) => {
-  const [animation, setAnimation] = useState<
-    'entering' | 'entered' | 'exiting' | 'exited'
-  >('exited');
-
-  const firstRender = useRef(true);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Gerenciar animações e estado do modal
+  // Bloqueie o scroll quando o modal estiver aberto
   useEffect(() => {
-    // Na primeira renderização, não faça nada
-    if (firstRender.current) {
-      firstRender.current = false;
-      if (isOpen) {
-        setAnimation('entering');
-      }
-      return;
-    }
-
-    // Limpar timeouts existentes
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-
     if (isOpen) {
-      // Modal está abrindo
-      setAnimation('entering');
       document.body.style.overflow = 'hidden';
-
-      timeoutRef.current = setTimeout(() => {
-        setAnimation('entered');
-      }, 50);
     } else {
-      // Modal está fechando
-      if (animation !== 'exited') {
-        setAnimation('exiting');
-
-        timeoutRef.current = setTimeout(() => {
-          setAnimation('exited');
-          document.body.style.overflow = '';
-        }, 300);
-      }
+      document.body.style.overflow = '';
     }
 
-    // Cleanup ao desmontar componente
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
       document.body.style.overflow = '';
     };
-  }, [isOpen, animation]);
+  }, [isOpen]);
 
   // Navegação por teclado
   useEffect(() => {
@@ -99,16 +59,13 @@ const ImageModal: React.FC<ImageModalProps> = ({
     };
   }, [isOpen, onClose, onNext, onPrev, hasNext, hasPrev]);
 
-  // Não renderizar nada se o modal estiver fechado e a animação de saída concluída
-  if (animation === 'exited' && !isOpen) return null;
+  if (!isOpen) return null;
 
-  // Funções para lidar com cliques e evitar propagação
-  const handleBackdropClick = () => {
-    onClose();
-  };
-
-  const handleContentClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Previne que o clique em conteúdo feche o modal
+  // Função para lidar com cliques no backdrop
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
   // Verificar se a URL da imagem é válida
@@ -116,29 +73,18 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-[var(--background)]/90 backdrop-blur-md transition-opacity duration-300 ${
-        animation === 'entering' || animation === 'exiting'
-          ? 'opacity-0'
-          : 'opacity-100'
-      }`}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--background)]/90 backdrop-blur-md transition-opacity duration-300"
       onClick={handleBackdropClick}
       aria-modal="true"
       role="dialog"
     >
       <div
-        className={`relative max-w-[90vw] max-h-[90vh] rounded-lg overflow-hidden shadow-xl transition-transform duration-300 ${
-          animation === 'entering' || animation === 'exiting'
-            ? 'scale-95'
-            : 'scale-100'
-        }`}
-        onClick={handleContentClick}
+        className="relative max-w-[90vw] max-h-[90vh] rounded-lg overflow-hidden shadow-xl bg-[var(--background)]/80"
+        onClick={(e) => e.stopPropagation()}
       >
         <button
           className="absolute top-3 right-3 z-10 bg-[var(--background)]/70 rounded-full p-2 text-[var(--foreground)] hover:bg-[var(--color1)] transition-colors"
-          onClick={(e) => {
-            e.stopPropagation();
-            onClose();
-          }}
+          onClick={onClose}
           aria-label="Fechar imagem"
         >
           <FaTimes size={20} />
@@ -170,9 +116,9 @@ const ImageModal: React.FC<ImageModalProps> = ({
           </button>
         )}
 
-        <div className="relative w-full h-full">
+        <div className="p-4">
           {hasValidImage ? (
-            <div className="flex items-center justify-center min-h-[50vh] bg-[var(--background)]/50">
+            <div className="flex items-center justify-center">
               <Image
                 src={imageUrl}
                 alt={alt}
@@ -180,7 +126,6 @@ const ImageModal: React.FC<ImageModalProps> = ({
                 height={800}
                 className="object-contain max-w-full max-h-[80vh]"
                 quality={90}
-                priority
               />
             </div>
           ) : (
