@@ -163,11 +163,19 @@ const Projects = () => {
   const uniqueCategories: ProjectCategory[] = [
     'Todos',
     'Frontend',
+    'Backend',
+    'Full Stack',
     'Design',
-    // Comentado para o deploy inicial - apenas categorias usadas no projeto ativo
-    // 'Backend',
-    // 'Full Stack',
+    // Todos os filtros foram restaurados para uso futuro
   ];
+
+  // Primeiro, vamos verificar quais categorias têm projetos
+  const categoriesWithProjects = new Set<ProjectCategory>();
+  projects.forEach((project) => {
+    project.categories.forEach((category) => {
+      categoriesWithProjects.add(category);
+    });
+  });
 
   // Filtra os projetos com base na categoria selecionada
   const filteredProjects =
