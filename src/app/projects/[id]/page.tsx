@@ -199,7 +199,7 @@ Principais características do projeto:
                   </div>
                 </section>
 
-                {project.challenges?.length > 0 && (
+                {project.challenges && project.challenges.length > 0 && (
                   <section className="mb-12">
                     <h2 className="text-2xl font-bold mb-6 text-[var(--foreground)]">
                       Desafios & Soluções
