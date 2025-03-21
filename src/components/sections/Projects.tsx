@@ -53,6 +53,7 @@ const Projects = () => {
             featured: true,
             repoUrl: 'https://github.com/gustavo-nomelini/cha-de-panela',
           },
+          /* Comentado para o deploy inicial
           {
             id: '1',
             title: 'E-commerce Platform',
@@ -117,6 +118,7 @@ const Projects = () => {
             featured: true,
             repoUrl: 'https://github.com/example/devops-cli',
           },
+          */
         ]);
       } catch (error) {
         console.error('Erro ao carregar projetos:', error);
@@ -143,9 +145,14 @@ const Projects = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Renderizar skeletons enquanto carrega */}
-            {[...Array(6)].map((_, i) => (
-              <ProjectCardSkeleton key={i} />
-            ))}
+            {[...Array(1)].map(
+              (
+                _,
+                i, // Alterado de 6 para 1 skeleton
+              ) => (
+                <ProjectCardSkeleton key={i} />
+              ),
+            )}
           </div>
         </div>
       </section>
@@ -156,9 +163,10 @@ const Projects = () => {
   const uniqueCategories: ProjectCategory[] = [
     'Todos',
     'Frontend',
-    'Backend',
-    'Full Stack',
     'Design',
+    // Comentado para o deploy inicial - apenas categorias usadas no projeto ativo
+    // 'Backend',
+    // 'Full Stack',
   ];
 
   // Filtra os projetos com base na categoria selecionada
@@ -207,9 +215,14 @@ const Projects = () => {
         <ClientOnly
           fallback={
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[...Array(6)].map((_, i) => (
-                <ProjectCardSkeleton key={i} />
-              ))}
+              {[...Array(1)].map(
+                (
+                  _,
+                  i, // Alterado de 6 para 1 skeleton
+                ) => (
+                  <ProjectCardSkeleton key={i} />
+                ),
+              )}
             </div>
           }
         >

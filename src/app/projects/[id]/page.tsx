@@ -36,215 +36,20 @@ export default function ProjectDetails() {
         // Simulando atraso
         await new Promise((resolve) => setTimeout(resolve, 800));
 
-        // Dados de exemplo - adicione os novos projetos também aqui
+        // Dados de exemplo - comentando todos exceto o Chá de Panela
         const mockProjects: Project[] = [
+          /* Comentado para o deploy inicial
           {
             id: '1',
             title: 'E-commerce Platform',
             description:
               'Um e-commerce completo com sistema de pagamentos, carrinho e painel admin.',
-            detailedDescription: `Este projeto é uma plataforma de e-commerce completa desenvolvida com React e Next.js no front-end e Node.js com Express no back-end. A plataforma inclui funcionalidades como:
+            detailedDescription: `Este projeto é uma plataforma de e-commerce completa desenvolvida...`,
+            // ... resto do código do projeto ...
+          },
+          // ... outros projetos comentados ...
+          */
 
-- Sistema de autenticação com JWT e OAuth
-- Carrinho de compras persistente
-- Integração com gateway de pagamento Stripe
-- Painel de administração para gerenciamento de produtos
-- Sistema de avaliações e comentários
-- Filtros avançados de produtos
-- Interface responsiva para todos os dispositivos
-            
-A arquitetura do projeto seguiu princípios SOLID e foi implementada utilizando TypeScript para garantir tipagem estática e maior segurança no código.`,
-            image: '/projects/ecommerce.jpg',
-            categories: ['Full Stack'],
-            technologies: [
-              'React',
-              'Next.js',
-              'Stripe',
-              'MongoDB',
-              'Node.js',
-              'Express',
-              'TypeScript',
-              'Tailwind CSS',
-            ],
-            github: 'https://github.com/example',
-            liveUrl: 'https://example.com',
-            featured: true,
-            repoUrl: 'https://github.com/example',
-            challenges: [
-              'Implementar um sistema de carrinho que persista entre sessões',
-              'Integrar múltiplos métodos de pagamento de forma segura',
-              'Otimizar o desempenho para um grande catálogo de produtos',
-              'Criar um sistema robusto de gerenciamento de estoque',
-            ],
-            solutions: [
-              'Utilizei localStorage e Context API para persistência do carrinho',
-              'Implementei a API do Stripe com webhooks para confirmação segura',
-              'Apliquei virtualização e paginação para carregamento eficiente',
-              'Desenvolvi um sistema de cache com invalidação inteligente',
-            ],
-            screenshots: [
-              '/projects/ecommerce-1.jpg',
-              '/projects/ecommerce-2.jpg',
-              '/projects/ecommerce-3.jpg',
-            ],
-          },
-          {
-            id: '2',
-            title: 'Dashboard Analytics',
-            description:
-              'Dashboard interativo para visualização de dados com gráficos e filtros avançados.',
-            detailedDescription: `Este dashboard analítico permite que empresas visualizem seus dados de vendas, tráfego e conversão em tempo real. Desenvolvido com React e várias bibliotecas de visualização de dados.
-            
-O dashboard inclui:
-- Gráficos interativos e personalizáveis
-- Filtros avançados por data, região e produto
-- Relatórios exportáveis em PDF e Excel
-- Alertas configuráveis para metas de desempenho
-- Tema claro/escuro adaptável`,
-            image: '/projects/dashboard.jpg',
-            categories: ['Frontend'],
-            technologies: [
-              'React',
-              'Chart.js',
-              'D3.js',
-              'Tailwind CSS',
-              'Redux',
-            ],
-            github: 'https://github.com/example',
-            liveUrl: 'https://example.com',
-            featured: false,
-            repoUrl: 'https://github.com/example',
-            challenges: [
-              'Renderizar gráficos complexos de forma eficiente',
-              'Implementar filtros que afetam múltiplos componentes',
-              'Garantir uma UX intuitiva para análise de dados',
-            ],
-            solutions: [
-              'Utilizei memoização e renderização condicional para otimizar performance',
-              'Implementei gerenciamento de estado com Redux para sincronizar filtros',
-              'Realizei testes de usabilidade com usuários reais para refinar a interface',
-            ],
-          },
-          {
-            id: '3',
-            title: 'API RESTful',
-            description:
-              'API completa com autenticação, validação e documentação automática.',
-            detailedDescription: `Esta API RESTful foi desenvolvida para servir como backend para várias aplicações front-end. Construída com Node.js, Express e MongoDB, a API implementa:
-
-- Autenticação completa com JWT e refresh tokens
-- Autorização baseada em funções (RBAC)
-- Validação de entrada com Joi
-- Documentação automática com Swagger
-- Testes automatizados com Jest
-- Monitoramento e logging
-- Cache com Redis
-            
-A arquitetura foi projetada para ser escalável, seguindo princípios de Clean Architecture e Domain-Driven Design.`,
-            image: '/projects/api.jpg',
-            categories: ['Backend'],
-            technologies: [
-              'Node.js',
-              'Express',
-              'MongoDB',
-              'Swagger',
-              'Jest',
-              'Redis',
-            ],
-            github: 'https://github.com/example',
-            liveUrl: 'https://example.com',
-            featured: true,
-            repoUrl: 'https://github.com/example',
-            challenges: [
-              'Implementar um sistema de autenticação seguro',
-              'Otimizar consultas ao banco de dados para alta carga',
-              'Criar uma estrutura que facilitasse testes e manutenção',
-            ],
-            solutions: [
-              'Utilizei JWT com rotação de tokens e armazenamento seguro',
-              'Implementei índices e agregações otimizadas no MongoDB',
-              'Adotei uma arquitetura em camadas com injeção de dependências',
-            ],
-          },
-          {
-            id: '4',
-            title: 'Algoritmos de Machine Learning',
-            description:
-              'Biblioteca de algoritmos de machine learning implementados do zero para fins educacionais.',
-            detailedDescription: `Este projeto consiste em uma implementação manual de diversos algoritmos populares de machine learning, criado com propósitos educacionais para entender profundamente como esses algoritmos funcionam por baixo dos panos.
-            
-A biblioteca inclui implementações dos seguintes algoritmos:
-- Regressão Linear e Logística
-- K-Nearest Neighbors (KNN)
-- Support Vector Machines (SVM)
-- Árvores de Decisão
-- Random Forests
-- K-Means Clustering
-- Principal Component Analysis (PCA)
-
-Cada algoritmo é implementado com visualizações detalhadas e exemplos de uso, permitindo aos estudantes de ciência de dados entender os princípios matemáticos subjacentes e como eles funcionam com dados reais.`,
-            image: '/projects/placeholder.jpg',
-            categories: ['Backend', 'Data Science'],
-            technologies: [
-              'Python',
-              'NumPy',
-              'Pandas',
-              'Scikit-learn',
-              'Jupyter',
-              'Matplotlib',
-            ],
-            featured: false,
-            repoUrl: 'https://github.com/example/ml-algorithms',
-            challenges: [
-              'Implementar algoritmos complexos de maneira didática e eficiente',
-              'Criar visualizações claras do funcionamento interno dos algoritmos',
-              'Otimizar o desempenho para conjuntos de dados maiores',
-            ],
-            solutions: [
-              'Desenvolvi implementações passo a passo com documentação extensa',
-              'Utilizei Matplotlib e Seaborn para criar visualizações interativas',
-              'Apliquei técnicas de vetorização do NumPy para melhorar a performance',
-            ],
-          },
-          {
-            id: '5',
-            title: 'CLI para Automação de DevOps',
-            description:
-              'Ferramenta de linha de comando para automatizar tarefas comuns de DevOps e CI/CD.',
-            detailedDescription: `Esta ferramenta CLI foi desenvolvida para automatizar fluxos de trabalho DevOps comuns, ajudando equipes de desenvolvimento a economizar tempo em tarefas repetitivas.
-            
-Principais funcionalidades:
-- Automação de deploy em múltiplos ambientes (dev, staging, production)
-- Gerenciamento de infraestrutura como código
-- Monitoramento e logs centralizados
-- Configuração e orquestração de contêineres Docker
-- Integração com GitHub, GitLab e Bitbucket
-- Relatórios automáticos de desempenho
-
-A ferramenta é altamente extensível através de um sistema de plugins, permitindo que equipes criem funcionalidades específicas para seus fluxos de trabalho.`,
-            image: '/projects/cli-tool.jpg',
-            categories: ['Backend', 'DevOps'],
-            technologies: [
-              'TypeScript',
-              'Node.js',
-              'Docker',
-              'GitHub Actions',
-              'Kubernetes',
-              'AWS SDK',
-            ],
-            featured: true,
-            repoUrl: 'https://github.com/example/devops-cli',
-            challenges: [
-              'Criar uma ferramenta extensível que atenda a diversas necessidades de DevOps',
-              'Garantir segurança nas operações automatizadas',
-              'Manter compatibilidade com diversos sistemas e serviços cloud',
-            ],
-            solutions: [
-              'Implementei uma arquitetura de plugins baseada em comandos',
-              'Desenvolvi um sistema de credenciais seguro com criptografia',
-              'Criei adaptadores para múltiplas plataformas (AWS, GCP, Azure, etc.)',
-            ],
-          },
           {
             id: '6',
             title: 'Chá de Panela - Convite Digital',
@@ -262,7 +67,7 @@ Principais características do projeto:
 - Seção para contribuições com QR Code do PIX
 - Responsividade completa (mobile, tablet, desktop)
 - Animações e efeitos visuais (fade-in, flutuação, vapor e estrelas cadentes)`,
-            image: '/projects/cha-de-panela.jpg',
+            image: '/projects/cha-de-panela.png',
             categories: ['Frontend', 'Design'],
             technologies: [
               'HTML',
@@ -288,9 +93,9 @@ Principais características do projeto:
               'Desenvolvi um carousel de imagens interativo com navegação touch para dispositivos móveis',
             ],
             screenshots: [
-              '/projects/cha-de-panela-1.jpg', // Você precisará adicionar estas imagens
-              '/projects/cha-de-panela-2.jpg',
-              '/projects/cha-de-panela-3.jpg',
+              '/projects/cha-de-panela-1.png',
+              '/projects/cha-de-panela-2.png',
+              '/projects/cha-de-panela-3.png',
             ],
           },
         ];
