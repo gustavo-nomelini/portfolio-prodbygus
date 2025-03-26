@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
 import { FaMapMarkerAlt, FaExternalLinkAlt } from 'react-icons/fa';
@@ -10,12 +10,12 @@ interface MapProps {
 
 const Map = ({ location, zoom = 14 }: MapProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   const encodedLocation = encodeURIComponent(location);
-  
+
   // Coordenadas para Cascavel, Paraná
   const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=-53.5451,-25.0359,-53.3657,-24.8963&layer=mapnik&marker=-24.9577,-53.4590`;
-  
+
   // URL para o Google Maps
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
 
@@ -44,23 +44,21 @@ const Map = ({ location, zoom = 14 }: MapProps) => {
           </div>
         </div>
       )}
-      
+
       {/* Overlay com informações de localização - Botão OpenStreetMap removido */}
       <div className="absolute bottom-0 left-0 right-0 bg-[var(--background)]/80 backdrop-blur-sm p-4">
         <div className="text-center">
           <h3 className="text-xl font-semibold text-[var(--foreground)] mb-1">
             Localização
           </h3>
-          <p className="text-[var(--foreground-muted)]">
-            {location}
-          </p>
+          <p className="text-[var(--foreground-muted)]">{location}</p>
           <p className="mt-2 text-[var(--color1)]">
             Disponível para trabalhos remotos globais
           </p>
           <div className="mt-2">
-            <a 
+            <a
               href={googleMapsUrl}
-              target="_blank" 
+              target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 px-4 py-2 bg-[var(--color1)] text-[var(--background)] text-sm rounded-md hover:bg-[var(--color3)] transition-colors"
             >

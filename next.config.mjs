@@ -12,9 +12,12 @@ const nextConfig = {
   },
   // Melhoria de performance
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? {
-      exclude: ['error', 'warn'],
-    } : false,
+    removeConsole:
+      process.env.NODE_ENV === 'production'
+        ? {
+            exclude: ['error', 'warn'],
+          }
+        : false,
   },
   // Melhoria de segurança
   headers: async () => [

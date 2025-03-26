@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -14,7 +14,7 @@ const Header = () => {
   // Para evitar problemas com o useEffect executando duas vezes em desenvolvimento
   const animationIntervalRef = useRef<NodeJS.Timeout | null>(null);
   // Usar um valor constante para o ano em vez de um estado
-  const currentYear = "2025";
+  const currentYear = '2025';
 
   // Função para verificar se o link está ativo
   const isActive = (path: string) => pathname === path;
@@ -41,7 +41,7 @@ const Header = () => {
 
     // Adicionar event listener
     window.addEventListener('scroll', handleScroll);
-    
+
     // Verificar o estado inicial depois que o componente montar
     handleScroll();
 
@@ -69,17 +69,17 @@ const Header = () => {
     if (animationIntervalRef.current) {
       clearInterval(animationIntervalRef.current);
     }
-    
+
     // Criar novo intervalo
     animationIntervalRef.current = setInterval(() => {
       setLogoAnimated(true);
-      
+
       // Desligar a animação após 1.8 segundos
       setTimeout(() => {
         setLogoAnimated(false);
       }, 1800);
     }, 10000);
-    
+
     // Limpar intervalos ao desmontar
     return () => {
       if (animationIntervalRef.current) {
@@ -93,18 +93,19 @@ const Header = () => {
     { href: '/', text: 'Home' },
     { href: '/about', text: 'About' },
     { href: '/projects', text: 'Projects' },
-    { href: '/contact', text: 'Contact' }
+    { href: '/contact', text: 'Contact' },
   ];
 
   return (
     <ClientOnly>
-      <header 
+      <header
         className={`
           fixed top-0 left-0 right-0 z-50 
           transition-all duration-300 ease-in-out
-          ${scrolled 
-            ? 'bg-[var(--background)]/65 backdrop-blur-xl shadow-lg shadow-[var(--color2)]/30' 
-            : 'bg-[var(--background)]/85 backdrop-blur-md shadow-sm shadow-transparent'
+          ${
+            scrolled
+              ? 'bg-[var(--background)]/65 backdrop-blur-xl shadow-lg shadow-[var(--color2)]/30'
+              : 'bg-[var(--background)]/85 backdrop-blur-md shadow-sm shadow-transparent'
           }
         `}
       >
@@ -112,8 +113,8 @@ const Header = () => {
           <div className="flex justify-between items-center h-16">
             {/* Logo melhorado */}
             <div className="flex">
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 className={`
                   flex-shrink-0 flex items-center group relative 
                   transition-all duration-700 ease-in-out
@@ -122,24 +123,30 @@ const Header = () => {
                 onClick={closeMenu}
                 aria-label="Página Inicial"
               >
-                <span className={`
+                <span
+                  className={`
                   text-xl font-bold transition-all duration-700 ease-in-out
-                  ${logoAnimated 
-                    ? 'text-[var(--color3)]' 
-                    : 'text-[var(--color1)]'} 
+                  ${
+                    logoAnimated
+                      ? 'text-[var(--color3)]'
+                      : 'text-[var(--color1)]'
+                  } 
                   group-hover:text-[var(--color3)]
                   relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-0.5
                   after:bg-[var(--color3)] after:origin-right after:scale-x-0 after:transition-transform
                   after:duration-300 group-hover:after:origin-left group-hover:after:scale-x-100
-                `}>
+                `}
+                >
                   Prod by GUS
                 </span>
-                
+
                 {/* Tooltip apenas para desktop */}
-                <span className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 px-2 py-1 
+                <span
+                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 px-2 py-1 
                              bg-[var(--color4)] text-[var(--foreground)] text-xs rounded 
                              opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                             pointer-events-none whitespace-nowrap hidden md:block">
+                             pointer-events-none whitespace-nowrap hidden md:block"
+                >
                   Ir para a página inicial
                 </span>
               </Link>
@@ -147,9 +154,9 @@ const Header = () => {
 
             {/* Navegação para desktop */}
             <nav className="hidden md:flex items-center space-x-8">
-              {navLinks.map(link => (
-                <Link 
-                  key={link.href} 
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
                   href={link.href}
                   className={`
                     relative text-[var(--foreground)] hover:text-[var(--color1)] transition-colors py-2
@@ -168,7 +175,7 @@ const Header = () => {
             <button
               className="md:hidden text-[var(--foreground)] p-2 rounded-md hover:bg-[var(--color4)] transition-colors focus:outline-none"
               onClick={toggleMenu}
-              aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+              aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
             >
               <FaBars className="h-6 w-6" />
             </button>
@@ -178,20 +185,20 @@ const Header = () => {
 
       {/* Menu mobile - Agora com key para forçar remontagem quando o estado muda */}
       {menuOpen && (
-        <div 
+        <div
           key="mobile-menu"
           className="fixed inset-0 z-[100] md:hidden flex flex-col bg-[var(--background)]/80 backdrop-blur-3xl"
         >
           <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             {/* Logo no menu mobile */}
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               onClick={closeMenu}
               className="text-xl font-bold text-[var(--color1)]"
             >
               Prod by GUS
             </Link>
-            
+
             {/* Botão para fechar menu */}
             <button
               onClick={closeMenu}
@@ -201,7 +208,7 @@ const Header = () => {
               <FaTimes className="h-6 w-6" />
             </button>
           </div>
-          
+
           {/* Links de navegação - centralizado na tela */}
           <div className="flex-1 flex flex-col justify-center items-center py-8">
             <nav className="w-full max-w-xs mx-auto">
@@ -218,19 +225,21 @@ const Header = () => {
                       `}
                     >
                       {link.text}
-                      <span className={`
+                      <span
+                        className={`
                         absolute -bottom-2 left-0 right-0 h-0.5 bg-[var(--color1)]
                         transform transition-transform duration-300 ease-out
                         ${isActive(link.href) ? 'scale-x-100' : 'scale-x-0'}
                         origin-center
-                      `}></span>
+                      `}
+                      ></span>
                     </Link>
                   </li>
                 ))}
               </ul>
             </nav>
           </div>
-          
+
           {/* Rodapé do menu - Versão simplificada para evitar problemas de hidratação */}
           <div className="py-6 text-center text-sm text-[var(--foreground-muted)]">
             © {currentYear} Prod by GUS

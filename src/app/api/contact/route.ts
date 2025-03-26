@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: 'Por favor, preencha todos os campos obrigatórios' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -54,14 +54,14 @@ export async function POST(request: Request) {
     // Retornar resposta de sucesso
     return NextResponse.json(
       { message: 'Email enviado com sucesso' },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error('Erro ao enviar email:', error);
-    
+
     return NextResponse.json(
       { error: 'Erro ao enviar o email. Tente novamente mais tarde.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

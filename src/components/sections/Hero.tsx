@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from 'next/link';
 import { useRef, useEffect, useState } from 'react';
@@ -6,21 +6,21 @@ import { useRef, useEffect, useState } from 'react';
 const Hero = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  
+
   useEffect(() => {
     // Tornar o título visível imediatamente para evitar problemas
     setIsVisible(true);
-    
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (titleRef.current) {
@@ -38,15 +38,23 @@ const Hero = () => {
     <div className="bg-[var(--background)]">
       <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h1 
+          <h1
             ref={titleRef}
             className={`text-4xl font-extrabold tracking-tight text-[var(--foreground)] sm:text-5xl md:text-6xl transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
           >
-            <span className="block">Seja bem-vindo, prazer me chamo Gustavo Lopes Nomelini</span>
-            <span className="block text-[var(--color1)] mt-4">Full Stack<br/>Web Developer</span>
+            <span className="block">
+              Seja bem-vindo, prazer me chamo Gustavo Lopes Nomelini
+            </span>
+            <span className="block text-[var(--color1)] mt-4">
+              Full Stack
+              <br />
+              Web Developer
+            </span>
           </h1>
           <p className="mt-3 max-w-md mx-auto text-base text-[var(--foreground-muted)] sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-            Eu crio sites e aplicativos modernos, sempre prezando por softwares de qualidade e com uma ótima experiência de usuário que seja interativa e responsiva. 
+            Eu crio sites e aplicativos modernos, sempre prezando por softwares
+            de qualidade e com uma ótima experiência de usuário que seja
+            interativa e responsiva.
           </p>
           <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
             <div className="rounded-md shadow">

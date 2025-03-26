@@ -1,28 +1,31 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   /* Cores principais fornecidas */
-  --background: #2A212C;
-  --color1: #9F70A9;
+  --background: #2a212c;
+  --color1: #9f70a9;
   --color2: #544158;
-  
+
   /* Cores complementares geradas */
-  --color3: #C2A5C7;
-  --color4: #382D3B;
-  --color5: #E8D7EB;
-  
+  --color3: #c2a5c7;
+  --color4: #382d3b;
+  --color5: #e8d7eb;
+
   /* Cores para texto */
-  --foreground: #E8D7EB;
-  --foreground-muted: #C2A5C7;
-  
+  --foreground: #e8d7eb;
+  --foreground-muted: #c2a5c7;
+
   /* Valores RGB para efeitos de brilho e transparência */
   --color1-rgb: 159, 112, 169; /* RGB de #9F70A9 */
   --color3-rgb: 194, 165, 199; /* RGB de #C2A5C7 */
   --color5-rgb: 232, 215, 235; /* RGB de #E8D7EB */
-  --glow-color: 215, 180, 220; /* Nova cor para efeito de brilho (tom entre color3 e color5) */
-  
+  --glow-color:
+    215, 180, 220; /* Nova cor para efeito de brilho (tom entre color3 e color5) */
+
   /* Configurações de fonte */
-  --font-family-main: var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-family-main:
+    var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, 'Liberation Mono', 'Courier New', monospace;
   --letter-spacing: -0.025em;
 }
 
@@ -40,11 +43,11 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --background: #F9F5FA;
-    --foreground: #2A212C;
+    --background: #f9f5fa;
+    --foreground: #2a212c;
     --foreground-muted: #544158;
-    --color4: #E8D7EB;
-    --color5: #382D3B;
+    --color4: #e8d7eb;
+    --color5: #382d3b;
   }
 }
 
@@ -53,18 +56,27 @@ body {
   color: var(--foreground);
   font-family: var(--font-family-main);
   letter-spacing: var(--letter-spacing);
-  font-feature-settings: "calt" 1, "ss01" 1, "ss02" 1; /* Habilitar ligaduras */
+  font-feature-settings:
+    'calt' 1,
+    'ss01' 1,
+    'ss02' 1; /* Habilitar ligaduras */
   text-shadow: none;
 }
 
 /* Estilo para blocos de código - aparência de terminal */
-code, pre {
+code,
+pre {
   font-family: var(--font-family-main);
   font-size: 0.9em;
 }
 
 /* Ajustar espaçamento de texto para melhor legibilidade com a nova fonte */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   letter-spacing: -0.03em;
   text-shadow: none;
 }
@@ -77,7 +89,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Remover sombras de texto indesejadas */
-body, h1, h2, h3, h4, h5, h6, p, span, a, div {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+div {
   text-shadow: none;
 }
 
