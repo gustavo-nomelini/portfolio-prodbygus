@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 import ImageModal from './ImageModal';
@@ -50,14 +51,51 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
     return <div className="text-center p-4">Nenhuma imagem disponível</div>;
   }
 
+  // Animation variants for the gallery container
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  // Animation variants for each gallery item
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 260,
+        damping: 20,
+      },
+    },
+    hover: {
+      scale: 1.05,
+      transition: { duration: 0.3 },
+    },
+  };
+
   return (
     <div className={className}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-100px' }}
+      >
         {validImages.map((image, index) => (
-          <div
+          <motion.div
             key={index}
-            className="relative group cursor-pointer overflow-hidden rounded-lg shadow-md transition-transform duration-300 hover:shadow-xl hover:scale-[1.02]"
+            className="relative group cursor-pointer overflow-hidden rounded-lg shadow-md"
             onClick={() => handleImageClick(index)}
+            variants={itemVariants}
+            whileHover="hover"
           >
             <div className="relative h-48 sm:h-56 w-full">
               <Image
@@ -74,19 +112,39 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
                 }}
               />
               {!imageLoaded[index] && (
-                <div className="absolute inset-0 bg-[var(--color4)] animate-pulse"></div>
+                <motion.div
+                  className="absolute inset-0 bg-[var(--color4)]"
+                  animate={{
+                    opacity: [0.5, 0.8, 0.5],
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 1.5,
+                    ease: 'easeInOut',
+                  }}
+                ></motion.div>
               )}
               <div className="absolute inset-0 bg-[var(--background)]/0 group-hover:bg-[var(--background)]/30 transition-colors duration-300">
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="bg-[var(--color1)]/80 text-[var(--background)] px-4 py-2 rounded-lg font-medium backdrop-blur-sm">
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileHover={{ opacity: 1, y: 0 }}
+                >
+                  <motion.span
+                    className="bg-[var(--color1)]/80 text-[var(--background)] px-4 py-2 rounded-lg font-medium backdrop-blur-sm"
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: 'rgba(var(--color1-rgb), 0.95)',
+                    }}
+                  >
                     Ampliar
-                  </span>
-                </div>
+                  </motion.span>
+                </motion.div>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       <ImageModal
         isOpen={currentIndex !== null}

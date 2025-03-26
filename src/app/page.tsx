@@ -1,5 +1,6 @@
 'use client';
 
+import AnimatedLayout from '@/components/layout/AnimatedLayout';
 import Hero from '@/components/sections/Hero';
 import HeroSkeleton from '@/components/ui/skeletons/HeroSkeleton';
 import { useEffect, useState } from 'react';
@@ -16,5 +17,15 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  return <>{isLoading ? <HeroSkeleton /> : <Hero />}</>;
+  return (
+    <>
+      {isLoading ? (
+        <HeroSkeleton />
+      ) : (
+        <AnimatedLayout>
+          <Hero />
+        </AnimatedLayout>
+      )}
+    </>
+  );
 }

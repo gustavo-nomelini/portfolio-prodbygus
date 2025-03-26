@@ -1,3 +1,4 @@
+import { ClientCursor } from '@/components/layout/ClientComponents';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { Fira_Code } from 'next/font/google';
@@ -113,6 +114,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <ClientCursor />
         </div>
       </body>
     </html>
