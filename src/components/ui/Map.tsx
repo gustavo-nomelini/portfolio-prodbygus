@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FaMapMarkerAlt, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
 interface MapProps {
   location: string;
@@ -18,6 +18,8 @@ const Map = ({ location, zoom = 14 }: MapProps) => {
 
   // URL para o Google Maps
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
+
+  const _zoom = 15; // Prefix with underscore to indicate intentionally unused
 
   const handleIframeLoad = () => {
     setIsLoaded(true);
