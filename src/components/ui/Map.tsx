@@ -5,10 +5,9 @@ import { FaExternalLinkAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
 interface MapProps {
   location: string;
-  zoom?: number;
 }
 
-const Map = ({ location, zoom = 14 }: MapProps) => {
+const Map = ({ location }: MapProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const encodedLocation = encodeURIComponent(location);
@@ -18,8 +17,6 @@ const Map = ({ location, zoom = 14 }: MapProps) => {
 
   // URL para o Google Maps
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
-
-  const _zoom = 15; // Prefix with underscore to indicate intentionally unused
 
   const handleIframeLoad = () => {
     setIsLoaded(true);
