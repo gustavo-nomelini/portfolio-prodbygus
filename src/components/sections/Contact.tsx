@@ -1,8 +1,8 @@
 'use client';
 
-import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
-import ContactForm from './ContactForm';
+import { FaEnvelope, FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import Map from '../ui/Map';
+import ContactForm from './ContactForm';
 
 const Contact = () => {
   // Função para construir a URL do WhatsApp de forma segura
@@ -115,7 +115,7 @@ const Contact = () => {
         {/* Mapa interativo do Google Maps */}
         <div className="mt-20 max-w-6xl mx-auto">
           <div className="h-[400px] rounded-xl overflow-hidden shadow-lg">
-            <Map location={location} zoom={13} />
+            <Map location={location} />
           </div>
         </div>
       </div>
