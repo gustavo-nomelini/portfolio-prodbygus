@@ -28,9 +28,10 @@ const About = () => {
 
   // Back-end habilidades agrupadas por linha
   const backendSkills = [
-    ['Node.js', 'Express'], // 1ª linha
-    ['PostgreSQL', 'MongoDB'], // 2ª linha
-    ['REST API', 'GraphQL'], // 3ª linha
+    ['Golang'],
+    ['Node.js', 'Express'],
+    ['PostgreSQL', 'MongoDB'], 
+    ['REST API', 'GraphQL']
   ];
 
   // Função para renderizar badges de habilidades
@@ -230,28 +231,35 @@ const About = () => {
               <div className="space-y-8 ml-11">
                 <div>
                   <h5 className="text-lg font-medium text-[var(--foreground)]">
-                    Desenvolvedor Web Full-stack
+                    Suporte Técnico Pleno (N2)
                   </h5>
                   <p className="text-[var(--color1)]">
-                    Empresa XYZ • 2022-Presente
+                    Empresa Stein Telecom • SET/2024 - Presente
                   </p>
                   <p className="text-[var(--foreground-muted)] mt-2">
-                    Desenvolvimento de aplicações web utilizando React, Next.js
-                    e Node.js. Implementação de designs responsivos e otimização
-                    de performance.
+                    Sou responsável por resolver problemas de Tecnologia da Informação e Infraestrutura.
+                    Faço diagnósticos aprofundados,
+                    configuro sistemas, dou suporte a redes, hardwares e
+                    softwares, e colaboro com a equipe de infraestrutura em
+                    atualizações e melhorias.
                   </p>
                 </div>
 
                 <div>
                   <h5 className="text-lg font-medium text-[var(--foreground)]">
-                    Desenvolvedor Front-end
+                    Gerente Administrativo
                   </h5>
                   <p className="text-[var(--color1)]">
-                    Empresa ABC • 2020-2022
+                    Empresa Lopes & Nomelini • MAR/2020 - SET/2024
                   </p>
                   <p className="text-[var(--foreground-muted)] mt-2">
-                    Construção de interfaces de usuário responsivas e
-                    interativas utilizando HTML, CSS e JavaScript.
+                    Fui responsável por planejar, coordenar e supervisionar as
+                    atividades administrativas da organização.
+                    <br />
+                    Tinha como função garantir a eficiência dos processos
+                    internos, como gestão de recursos, contratos e serviços
+                    gerais. Também atuei no controle orçamentário e apoio às
+                    decisões estratégicas.
                   </p>
                 </div>
               </div>
@@ -276,26 +284,24 @@ const About = () => {
               <div className="space-y-8 ml-11">
                 <div>
                   <h5 className="text-lg font-medium text-[var(--foreground)]">
-                    Bacharelado em Ciência da Computação
+                    Bacharelado em Engenharia de Software
                   </h5>
                   <p className="text-[var(--color1)]">
-                    Universidade XYZ • 2016-2020
+                    Universidade UNINTER • JAN/2023 - DEZ/2026
                   </p>
                   <p className="text-[var(--foreground-muted)] mt-2">
                     Foco em desenvolvimento de software e sistemas
-                    computacionais. TCC sobre otimização de interfaces web para
-                    dispositivos móveis.
+                    computacionais. 
                   </p>
                 </div>
 
                 <div>
                   <h5 className="text-lg font-medium text-[var(--foreground)]">
-                    Especialização em UX/UI Design
+                    Pós-Graduação Lato-sensu<br/>GO Expert
                   </h5>
-                  <p className="text-[var(--color1)]">Instituto ABC • 2021</p>
+                  <p className="text-[var(--color1)]">Faculdade Full Cycle • JAN/2025 - JUL/2025</p>
                   <p className="text-[var(--foreground-muted)] mt-2">
-                    Formação complementar em design de interfaces e experiência
-                    do usuário.
+                    Especialização em desenvolvimento Backend com foco na linguagem de programação Golang.
                   </p>
                 </div>
               </div>
