@@ -67,7 +67,7 @@ const Hero = () => {
             >
               Full Stack
               <br />
-              Web Developer
+              Developer
             </motion.span>
           </motion.h1>
 
@@ -78,9 +78,9 @@ const Hero = () => {
             variants={textVariants}
             custom={3}
           >
-            Eu crio sites e aplicativos modernos, sempre prezando por softwares
+            Eu crio aplicações modernas, sempre prezando por softwares
             de qualidade e com uma ótima experiência de usuário que seja
-            interativa e responsiva.
+            interativa, intuitiva e responsiva.
           </motion.p>
 
           <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">

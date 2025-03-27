@@ -90,7 +90,7 @@ const About = () => {
                 Quem sou eu
               </h3>
               <p>
-                Olá! Me chamo Gustavo Lopes Nomelini, sou um desenvolvedor web e
+                Olá! Me chamo Gustavo Lopes Nomelini, sou um Desenvolvedor Full Stack e
                 designer apaixonado por criar soluções digitais bonitas e
                 funcionais.
               </p>
