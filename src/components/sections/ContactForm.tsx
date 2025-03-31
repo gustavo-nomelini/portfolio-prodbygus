@@ -63,7 +63,7 @@ const ContactForm = () => {
       setSubmitStatus({
         type: 'success',
         message:
-          'Mensagem enviada com sucesso! Entraremos em contato em breve.',
+          'Mensagem enviada com sucesso! Entrarei em contato em breve.',
       });
 
       // Limpar formulário após envio bem-sucedido
