@@ -30,13 +30,23 @@ export const metadata: Metadata = {
     'portfolio',
     'react',
     'next.js',
+    'design ui/ux',
+    'front-end',
+    'back-end',
+    'javascript',
+    'typescript',
   ],
   authors: [{ name: 'Gustavo Lopes Nomelini' }],
   creator: 'Gustavo Lopes Nomelini',
+  publisher: 'Prod by GUS',
+  metadataBase: new URL('https://portfolio-prodbygus.vercel.app'),
+  alternates: {
+    canonical: 'https://portfolio-prodbygus.vercel.app',
+  },
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
-    url: 'https://prodbygus.com',
+    url: 'https://portfolio-prodbygus.vercel.app',
     title: 'Prod by GUS - Portfolio de Desenvolvedor Web',
     description:
       'Desenvolvedor web full-stack especializado em criar sites e aplicativos modernos com excelente experiência do usuário',
@@ -55,7 +65,8 @@ export const metadata: Metadata = {
     title: 'Prod by GUS - Portfolio de Desenvolvedor Web',
     description:
       'Desenvolvedor web full-stack especializado em criar sites e aplicativos modernos com excelente experiência do usuário',
-    creator: '@seutwitter',
+    creator: '@gustavonomelini',
+    site: '@gustavonomelini',
     images: ['/twitter-image.jpg'],
   },
   robots: {
@@ -64,7 +75,18 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
     },
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+  verification: {
+    google: 'google-site-verification-code', // Substitua pelo seu código quando tiver
   },
 };
 
@@ -83,12 +105,11 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Person',
               name: 'Gustavo Lopes Nomelini',
-              url: 'https://prodbygus.com',
+              url: 'https://portfolio-prodbygus.vercel.app',
               jobTitle: 'Full Stack Web Developer',
               sameAs: [
-                'https://github.com/seu-usuario',
-                'https://linkedin.com/in/seu-usuario',
-                'https://twitter.com/seutwitter',
+                'https://github.com/gustavo-nomelini',
+                'https://linkedin.com/in/gustavo-lopes-nomelini-144bb1212',
               ],
               worksFor: {
                 '@type': 'Organization',
@@ -102,9 +123,13 @@ export default function RootLayout({
                 'Tailwind CSS',
                 'Node.js',
               ],
-              image: 'https://prodbygus.com/profile-image.jpg',
+              image: 'https://portfolio-prodbygus.vercel.app/profile-image.jpg',
             }),
           }}
+        />
+        <meta
+          name="format-detection"
+          content="telephone=no, date=no, email=no, address=no"
         />
       </head>
       <body className={firaCode.className}>

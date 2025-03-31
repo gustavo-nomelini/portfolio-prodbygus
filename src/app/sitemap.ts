@@ -1,5 +1,8 @@
 import { MetadataRoute } from 'next';
 
+// Base URL para todas as URLs no sitemap
+const BASE_URL = 'https://portfolio-prodbygus.vercel.app';
+
 // Função para obter a data da última modificação
 const getLastModified = (): string => {
   return new Date().toISOString();
@@ -45,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Gerar rotas de projetos dinâmicos
   const projectRoutes = projectsData.map((project) => ({
-    url: `https://prodbygus.com/projects/${project.id}`,
+    url: `${BASE_URL}/projects/${project.id}`,
     lastModified: project.updatedAt,
     changeFrequency: 'monthly' as const,
     priority: 0.7,
@@ -54,7 +57,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Combinar rotas estáticas e dinâmicas
   return [
     ...staticRoutes.map((route) => ({
-      url: `https://prodbygus.com${route.url}`,
+      url: `${BASE_URL}${route.url}`,
       lastModified: route.lastModified,
       changeFrequency: route.changeFrequency as
         | 'weekly'

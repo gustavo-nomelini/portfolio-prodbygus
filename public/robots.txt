@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://prodbygus.com/sitemap.xml
+# Host
+Host: https://portfolio-prodbygus.vercel.app
+
+# Sitemap
+Sitemap: https://portfolio-prodbygus.vercel.app/sitemap.xml
