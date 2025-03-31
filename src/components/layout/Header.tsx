@@ -1,8 +1,9 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import ClientOnly from './ClientOnly';
 
@@ -74,11 +75,11 @@ const Header = () => {
     animationIntervalRef.current = setInterval(() => {
       setLogoAnimated(true);
 
-      // Desligar a animação após 1.8 segundos
+      // Desligar a animação após 1.8 segundos (manter ou ajustar? manter por enquanto)
       setTimeout(() => {
         setLogoAnimated(false);
-      }, 1800);
-    }, 10000);
+      }, 1800); // A duração da animação é 1.8s
+    }, 1000); // Reduced interval to 1 second
 
     // Limpar intervalos ao desmontar
     return () => {
@@ -117,28 +118,20 @@ const Header = () => {
                 href="/"
                 className={`
                   flex-shrink-0 flex items-center group relative 
-                  transition-all duration-700 ease-in-out
-                  ${logoAnimated ? 'scale-105' : 'scale-100'}
+                  transition-all duration-1000 ease-out
+                  ${logoAnimated ? 'scale-105 brightness-125' : 'scale-100 brightness-100'}
                 `}
                 onClick={closeMenu}
                 aria-label="Página Inicial"
               >
-                <span
-                  className={`
-                  text-xl font-bold transition-all duration-700 ease-in-out
-                  ${
-                    logoAnimated
-                      ? 'text-[var(--color3)]'
-                      : 'text-[var(--color1)]'
-                  } 
-                  group-hover:text-[var(--color3)]
-                  relative after:absolute after:left-0 after:right-0 after:bottom-0 after:h-0.5
-                  after:bg-[var(--color3)] after:origin-right after:scale-x-0 after:transition-transform
-                  after:duration-300 group-hover:after:origin-left group-hover:after:scale-x-100
-                `}
-                >
-                  Prod by GUS
-                </span>
+                <Image
+                  src="/LogoRoxaSemFundo.png"
+                  alt="Prod by GUS Logo"
+                  width={128}
+                  height={32}
+                  className="h-32 w-auto transition-all duration-300 ease-in-out group-hover:brightness-110"
+                  priority
+                />
 
                 {/* Tooltip apenas para desktop */}
                 <span
@@ -194,9 +187,21 @@ const Header = () => {
             <Link
               href="/"
               onClick={closeMenu}
-              className="text-xl font-bold text-[var(--color1)]"
+              className={`
+                flex-shrink-0 flex items-center group relative 
+                transition-all duration-1000 ease-out
+                ${logoAnimated ? 'scale-105 brightness-125' : 'scale-100 brightness-100'}
+              `}
+              aria-label="Página Inicial"
             >
-              Prod by GUS
+              <Image
+                src="/LogoRoxaSemFundo.png"
+                alt="Prod by GUS Logo"
+                width={128}
+                height={32}
+                className="h-8 w-auto"
+                priority
+              />
             </Link>
 
             {/* Botão para fechar menu */}
