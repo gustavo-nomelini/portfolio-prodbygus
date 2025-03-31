@@ -1,7 +1,6 @@
-import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-export function middleware(_request: NextRequest) {
+export function middleware() {
   // Obter a resposta e adicionar cabeçalhos
   const response = NextResponse.next();
 
