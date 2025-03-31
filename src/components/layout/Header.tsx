@@ -79,7 +79,7 @@ const Header = () => {
       setTimeout(() => {
         setLogoAnimated(false);
       }, 1800); // A duração da animação é 1.8s
-    }, 1000); // Reduced interval to 1 second
+    }, 3000); // Reduced interval to 1 second
 
     // Limpar intervalos ao desmontar
     return () => {
