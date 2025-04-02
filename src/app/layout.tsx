@@ -133,7 +133,7 @@ export default function RootLayout({
           content="telephone=no, date=no, email=no, address=no"
         />
       </head>
-      <body className={firaCode.className}>
+      <body className={`${firaCode.className} hide-default-cursor`}>
         {/* Persistent Global Background */}
         <ClientBackground />
 
