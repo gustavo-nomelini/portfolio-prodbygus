@@ -5,7 +5,11 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ParticlesEffect from '../ui/ParticlesEffect';
 
-const Hero = () => {
+interface HeroProps {
+  keepBackgroundElements?: boolean;
+}
+
+const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
   const [isGlitching, setIsGlitching] = useState(false);
 
   // Random glitch effect
@@ -76,21 +80,26 @@ const Hero = () => {
 
   return (
     <section className="relative overflow-hidden min-h-[85vh] flex items-center justify-center">
-      {/* Background gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--color1)]/10 to-[var(--color3)]/10 z-[-1]"></div>
-      <div className="absolute inset-0 z-[-2]">
-        <div className="absolute top-20 left-10 w-80 h-80 bg-[var(--color1)]/20 rounded-full filter blur-[80px]"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[var(--color3)]/20 rounded-full filter blur-[80px]"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[var(--color1)]/10 rounded-full filter blur-[60px]"></div>
-      </div>
+      {/* Background elements - only show if keepBackgroundElements is true */}
+      {keepBackgroundElements && (
+        <>
+          {/* Background gradients */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color1)]/10 to-[var(--color3)]/10 z-[-1]"></div>
+          <div className="absolute inset-0 z-[-2]">
+            <div className="absolute top-20 left-10 w-80 h-80 bg-[var(--color1)]/20 rounded-full filter blur-[80px]"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-[var(--color3)]/20 rounded-full filter blur-[80px]"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[var(--color1)]/10 rounded-full filter blur-[60px]"></div>
+          </div>
 
-      {/* Cyberpunk Grid Lines */}
-      <div className="absolute inset-0 z-[-1] cyberpunk-grid opacity-20"></div>
+          {/* Cyberpunk Grid Lines */}
+          <div className="absolute inset-0 z-[-1] cyberpunk-grid opacity-20"></div>
 
-      {/* Particles Effect */}
-      <ParticlesEffect />
+          {/* Particles Effect */}
+          <ParticlesEffect />
+        </>
+      )}
 
-      {/* Glitch Effect Overlay */}
+      {/* Glitch Effect Overlay - always show this */}
       <div
         className={`absolute inset-0 z-[1] pointer-events-none transition-all duration-100 ${isGlitching ? 'glitching' : ''}`}
       ></div>
@@ -112,7 +121,9 @@ const Hero = () => {
               variants={textVariants}
               custom={2}
             >
-              Me chamo<br/>Gustavo Lopes Nomelini
+              Me chamo
+              <br />
+              Gustavo Lopes Nomelini
             </motion.span>
             <motion.span
               className="block mt-4"

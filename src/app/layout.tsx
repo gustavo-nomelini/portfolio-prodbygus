@@ -1,3 +1,4 @@
+import ClientBackground from '@/components/layout/ClientBackground';
 import { ClientCursor } from '@/components/layout/ClientComponents';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
@@ -133,7 +134,10 @@ export default function RootLayout({
         />
       </head>
       <body className={firaCode.className}>
-        <div className="min-h-screen flex flex-col bg-background text-foreground">
+        {/* Persistent Global Background */}
+        <ClientBackground />
+
+        <div className="min-h-screen flex flex-col bg-transparent text-foreground">
           <Header />
           <main id="main-content" className="flex-grow pt-16">
             {children}

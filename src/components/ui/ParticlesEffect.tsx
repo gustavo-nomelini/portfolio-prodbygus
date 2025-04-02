@@ -16,6 +16,7 @@ const ParticlesEffect = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particles = useRef<Particle[]>([]);
   const animationFrameId = useRef<number>(0);
+  const isInitialized = useRef<boolean>(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -23,6 +24,13 @@ const ParticlesEffect = () => {
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    // Set initial dimensions
+    if (!isInitialized.current) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      isInitialized.current = true;
+    }
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
@@ -32,7 +40,8 @@ const ParticlesEffect = () => {
 
     const initializeParticles = () => {
       particles.current = [];
-      const particleCount = Math.min(50, window.innerWidth / 20); // Adjust count based on screen size
+      // Increase particle count for better effect
+      const particleCount = Math.min(80, window.innerWidth / 15);
 
       const colors = [
         'rgba(var(--color1-rgb), 0.7)',
@@ -54,6 +63,16 @@ const ParticlesEffect = () => {
     };
 
     const animate = () => {
+      // Check if canvas context is still valid (might be lost during page transitions)
+      if (!ctx || !canvas) {
+        // Try to recover
+        if (animationFrameId.current) {
+          cancelAnimationFrame(animationFrameId.current);
+        }
+        animationFrameId.current = requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Update and draw particles
@@ -104,20 +123,30 @@ const ParticlesEffect = () => {
       }
     };
 
-    handleResize();
+    // Only initialize particles if we haven't done so yet or we're resizing
+    if (particles.current.length === 0) {
+      initializeParticles();
+    }
+
     window.addEventListener('resize', handleResize);
     animate();
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId.current);
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 z-[-1] pointer-events-none opacity-60"
+      className="fixed inset-0 z-[-1] pointer-events-none"
+      style={{
+        opacity: 0.7,
+        willChange: 'transform',
+      }}
     />
   );
 };
