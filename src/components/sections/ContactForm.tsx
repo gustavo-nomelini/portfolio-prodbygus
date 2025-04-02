@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const ContactForm = () => {
   // Estado para o formulário
@@ -15,6 +16,9 @@ const ContactForm = () => {
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
+
+  // Estados para efeitos visuais
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   // Efeito para limpar mensagem de sucesso após 10 segundos
   useEffect(() => {
@@ -62,8 +66,7 @@ const ContactForm = () => {
 
       setSubmitStatus({
         type: 'success',
-        message:
-          'Mensagem enviada com sucesso! Entrarei em contato em breve.',
+        message: 'Mensagem enviada com sucesso! Entrarei em contato em breve.',
       });
 
       // Limpar formulário após envio bem-sucedido
@@ -87,46 +90,106 @@ const ContactForm = () => {
     <span className="text-[var(--color1)] ml-1">*</span>
   );
 
+  // Variantes para animações
+  const formVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const inputVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+      },
+    },
+    focus: {
+      scale: 1.02,
+      boxShadow: '0 0 0 2px rgba(var(--color1-rgb), 0.5)',
+    },
+  };
+
+  // Classes base para inputs
+  const inputBaseClasses = `
+    w-full px-4 py-3 bg-[var(--background)]/60 backdrop-blur-sm 
+    border border-[var(--color2)] rounded-md 
+    focus:outline-none focus:ring-2 focus:ring-[var(--color1)] 
+    text-[var(--foreground)] transition-all duration-300
+  `;
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div>
+    <motion.form
+      onSubmit={handleSubmit}
+      className="space-y-6"
+      variants={formVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div variants={inputVariants}>
         <label
           htmlFor="name"
           className="block text-sm font-medium text-[var(--foreground-muted)] mb-2"
         >
           Nome{requiredFieldMark}
         </label>
-        <input
-          type="text"
-          id="name"
-          value={formState.name}
-          onChange={handleInputChange}
-          required
-          className="w-full px-4 py-3 bg-[var(--background)] border border-[var(--color2)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color1)] text-[var(--foreground)]"
-          placeholder="Seu nome completo"
-        />
-      </div>
+        <motion.div
+          whileFocus={{ scale: 1.01 }}
+          className={`relative ${focusedField === 'name' ? 'cyberpunk-input-focus' : ''}`}
+        >
+          <input
+            type="text"
+            id="name"
+            value={formState.name}
+            onChange={handleInputChange}
+            onFocus={() => setFocusedField('name')}
+            onBlur={() => setFocusedField(null)}
+            required
+            className={inputBaseClasses}
+            placeholder="Seu nome completo"
+          />
+          {focusedField === 'name' && (
+            <div className="absolute inset-0 bg-[var(--color1)]/5 rounded-md pointer-events-none"></div>
+          )}
+        </motion.div>
+      </motion.div>
 
-      <div>
+      <motion.div variants={inputVariants}>
         <label
           htmlFor="email"
           className="block text-sm font-medium text-[var(--foreground-muted)] mb-2"
         >
           Email{requiredFieldMark}
         </label>
-        <input
-          type="email"
-          id="email"
-          value={formState.email}
-          onChange={handleInputChange}
-          required
-          className="w-full px-4 py-3 bg-[var(--background)] border border-[var(--color2)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color1)] text-[var(--foreground)]"
-          placeholder="seu.email@exemplo.com"
-        />
-      </div>
+        <motion.div
+          whileFocus={{ scale: 1.01 }}
+          className={`relative ${focusedField === 'email' ? 'cyberpunk-input-focus' : ''}`}
+        >
+          <input
+            type="email"
+            id="email"
+            value={formState.email}
+            onChange={handleInputChange}
+            onFocus={() => setFocusedField('email')}
+            onBlur={() => setFocusedField(null)}
+            required
+            className={inputBaseClasses}
+            placeholder="seu.email@exemplo.com"
+          />
+          {focusedField === 'email' && (
+            <div className="absolute inset-0 bg-[var(--color1)]/5 rounded-md pointer-events-none"></div>
+          )}
+        </motion.div>
+      </motion.div>
 
       {/* Novo campo de telefone */}
-      <div>
+      <motion.div variants={inputVariants}>
         <label
           htmlFor="phone"
           className="block text-sm font-medium text-[var(--foreground-muted)] mb-2"
@@ -136,37 +199,59 @@ const ContactForm = () => {
             (opcional)
           </span>
         </label>
-        <input
-          type="tel"
-          id="phone"
-          value={formState.phone}
-          onChange={handleInputChange}
-          className="w-full px-4 py-3 bg-[var(--background)] border border-[var(--color2)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color1)] text-[var(--foreground)]"
-          placeholder="(XX) XXXXX-XXXX"
-        />
-      </div>
+        <motion.div
+          whileFocus={{ scale: 1.01 }}
+          className={`relative ${focusedField === 'phone' ? 'cyberpunk-input-focus' : ''}`}
+        >
+          <input
+            type="tel"
+            id="phone"
+            value={formState.phone}
+            onChange={handleInputChange}
+            onFocus={() => setFocusedField('phone')}
+            onBlur={() => setFocusedField(null)}
+            className={inputBaseClasses}
+            placeholder="(XX) XXXXX-XXXX"
+          />
+          {focusedField === 'phone' && (
+            <div className="absolute inset-0 bg-[var(--color1)]/5 rounded-md pointer-events-none"></div>
+          )}
+        </motion.div>
+      </motion.div>
 
-      <div>
+      <motion.div variants={inputVariants}>
         <label
           htmlFor="message"
           className="block text-sm font-medium text-[var(--foreground-muted)] mb-2"
         >
           Mensagem{requiredFieldMark}
         </label>
-        <textarea
-          id="message"
-          rows={5}
-          value={formState.message}
-          onChange={handleInputChange}
-          required
-          className="w-full px-4 py-3 bg-[var(--background)] border border-[var(--color2)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color1)] text-[var(--foreground)] resize-none"
-          placeholder="Digite sua mensagem aqui..."
-        ></textarea>
-      </div>
+        <motion.div
+          whileFocus={{ scale: 1.01 }}
+          className={`relative ${focusedField === 'message' ? 'cyberpunk-input-focus' : ''}`}
+        >
+          <textarea
+            id="message"
+            rows={5}
+            value={formState.message}
+            onChange={handleInputChange}
+            onFocus={() => setFocusedField('message')}
+            onBlur={() => setFocusedField(null)}
+            required
+            className={`${inputBaseClasses} resize-none`}
+            placeholder="Digite sua mensagem aqui..."
+          ></textarea>
+          {focusedField === 'message' && (
+            <div className="absolute inset-0 bg-[var(--color1)]/5 rounded-md pointer-events-none"></div>
+          )}
+        </motion.div>
+      </motion.div>
 
       {/* Feedback de status - Sucesso/Erro */}
       {submitStatus.type && (
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
           className={`p-4 rounded-md ${
             submitStatus.type === 'success'
               ? 'bg-green-50 text-green-800 border border-green-200'
@@ -177,36 +262,44 @@ const ContactForm = () => {
           {submitStatus.type === 'success' && (
             <div className="w-full bg-gray-200 h-1 mt-2 rounded overflow-hidden">
               <div
-                className="bg-green-500 h-1 animate-shrink-width"
+                className="bg-gradient-to-r from-[var(--color1)] to-[var(--color3)] h-1 animate-shrink-width"
                 style={{ animationDuration: '10s' }}
               ></div>
             </div>
           )}
-        </div>
+        </motion.div>
       )}
 
-      <div>
+      <motion.div variants={inputVariants}>
         <button
           type="submit"
           disabled={isSubmitting}
           className={`
-            w-full px-6 py-4 rounded-md font-medium 
-            transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color1)] focus:ring-offset-2 focus:ring-offset-[var(--color4)]
+            w-full px-6 py-4 rounded-md font-medium cyberpunk-btn
+            transition-colors focus:outline-none 
+            focus:ring-2 focus:ring-[var(--color1)] 
+            focus:ring-offset-2 focus:ring-offset-[var(--color4)]
+            relative overflow-hidden
             ${
               isSubmitting
                 ? 'bg-[var(--color2)] text-[var(--foreground-muted)] cursor-not-allowed'
-                : 'bg-[var(--color1)] text-[var(--background)] hover:bg-[var(--color3)]'
+                : 'bg-gradient-to-r from-[var(--color1)] to-[var(--color3)] text-[var(--background)] hover:shadow-lg hover:shadow-[var(--color1)]/20'
             }
           `}
         >
-          {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
+          <span className="relative z-10">
+            {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
+          </span>
         </button>
-      </div>
+      </motion.div>
 
-      <div className="text-xs text-[var(--foreground-muted)] text-center">
+      <motion.div
+        variants={inputVariants}
+        className="text-xs text-[var(--foreground-muted)] text-center"
+      >
         Campos com {requiredFieldMark} são obrigatórios
-      </div>
-    </form>
+      </motion.div>
+    </motion.form>
   );
 };
 

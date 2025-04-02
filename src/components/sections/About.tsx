@@ -1,4 +1,5 @@
 'use client';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -36,9 +37,33 @@ const About = () => {
     ['REST API', 'GraphQL'],
   ];
 
+  // Variantes de animação
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut',
+      },
+    },
+  };
+
   // Função para renderizar badges de habilidades
   const renderSkillBadge = (skill: string) => (
-    <span
+    <motion.span
       key={skill}
       className={`px-3 py-1.5 rounded-full border transition-all duration-300 cursor-pointer 
         ${
@@ -46,35 +71,59 @@ const About = () => {
             ? 'border-[var(--color1)] bg-[var(--color1)]/10 text-[var(--color1)] scale-110 shadow-md'
             : focusedSkill && focusedSkill !== skill
               ? 'border-[var(--color2)] bg-[var(--color4)]/25 text-[var(--foreground-muted)] scale-95'
-              : 'border-[var(--color4)] bg-[var(--color4)] text-[var(--foreground)] hover:bg-[var(--color4)]/80 hover:border-[var(--color1)]'
+              : 'border-[var(--color4)] bg-[var(--color4)]/60 backdrop-blur-sm text-[var(--foreground)] hover:bg-[var(--color4)]/80 hover:border-[var(--color1)]'
         }
         relative overflow-hidden`}
       onMouseEnter={() => highlightSkill(skill)}
       onMouseLeave={removeHighlight}
+      whileHover={{
+        scale: 1.05,
+        boxShadow: '0 0 8px rgba(var(--color1-rgb), 0.5)',
+      }}
+      variants={itemVariants}
     >
       {/* Efeito de brilho */}
       {focusedSkill === skill && (
         <span className="absolute inset-0 w-full h-full bg-[var(--color1)]/5 animate-pulse"></span>
       )}
       <span className="relative z-10 text-sm font-medium">{skill}</span>
-    </span>
+    </motion.span>
   );
 
   return (
-    <section className="py-16 bg-[var(--background)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-[var(--foreground)] sm:text-4xl">
+    <section className="relative py-16 min-h-screen overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--color1)]/5 to-[var(--color3)]/5"></div>
+      <div className="absolute inset-0 cyberpunk-grid opacity-10"></div>
+
+      {/* Glowing orbs */}
+      <div className="absolute top-20 left-10 w-64 h-64 bg-[var(--color1)]/10 rounded-full filter blur-[80px]"></div>
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-[var(--color3)]/10 rounded-full filter blur-[80px]"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-gradient text-3xl font-bold sm:text-4xl lg:text-5xl mb-3">
             Sobre Mim
           </h2>
-          <div className="mt-2 w-24 h-1 bg-[var(--color1)] mx-auto"></div>
-        </div>
+          <div className="glass-effect h-1 w-24 mx-auto mb-6 opacity-60"></div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Informações pessoais com foto */}
-          <div className="flex flex-col items-center md:items-start space-y-6">
+          <motion.div
+            className="flex flex-col items-center md:items-start space-y-6"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
             {/* Foto de perfil */}
             <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-[var(--color1)] shadow-lg mb-4 group">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[var(--color1)]/10 to-[var(--color3)]/10 z-[-1] animate-pulse"></div>
               <Image
                 src="/profile.jpg"
                 alt="Gustavo Lopes Nomelini"
@@ -83,36 +132,64 @@ const About = () => {
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                 priority
               />
+              {/* Cyberpunk corners */}
+              <div className="absolute top-0 left-0 w-10 h-10 border-t-2 border-l-2 border-[var(--color1)]/60 rounded-tl-full"></div>
+              <div className="absolute top-0 right-0 w-10 h-10 border-t-2 border-r-2 border-[var(--color1)]/60 rounded-tr-full"></div>
+              <div className="absolute bottom-0 left-0 w-10 h-10 border-b-2 border-l-2 border-[var(--color1)]/60 rounded-bl-full"></div>
+              <div className="absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 border-[var(--color1)]/60 rounded-br-full"></div>
+
               {/* Efeito de brilho na borda ao passar o mouse */}
               <div className="absolute inset-0 border-4 border-transparent rounded-full group-hover:border-[var(--color3)] transition-colors duration-300"></div>
             </div>
 
             <div className="prose prose-lg max-w-none text-[var(--foreground)]">
-              <h3 className="text-2xl font-semibold text-[var(--color1)] mb-4">
+              <motion.h3
+                className="text-2xl font-semibold text-gradient mb-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
                 Quem sou eu
-              </h3>
-              <p>
+              </motion.h3>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
                 Olá! Me chamo Gustavo Lopes Nomelini, sou um Desenvolvedor Full
                 Stack e designer apaixonado por criar soluções digitais bonitas
                 e funcionais.
-              </p>
-              <p>
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+              >
                 Com experiência em desenvolvimento front-end e back-end, tenho
                 trabalhado com tecnologias modernas para construir aplicações
                 web responsivas e de alto desempenho.
-              </p>
-              <p>
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+              >
                 Meu objetivo é unir design e funcionalidade para criar
                 experiências digitais memoráveis que ajudem pessoas e empresas a
                 alcançarem seus objetivos online.
-              </p>
+              </motion.p>
 
               {/* Botão de Download do CV */}
-              <div className="mt-8 flex justify-center md:justify-start">
+              <motion.div
+                className="mt-8 flex justify-center md:justify-start"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+              >
                 <a
                   href="/CV_Gustavo_Lopes_Nomelini.pdf"
                   download
-                  className="relative group overflow-hidden"
+                  className="relative group overflow-hidden cyberpunk-btn"
                   onMouseEnter={() => setIsDownloadHovered(true)}
                   onMouseLeave={() => setIsDownloadHovered(false)}
                 >
@@ -151,19 +228,29 @@ const About = () => {
                   `}
                   ></div>
                 </a>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Habilidades - ordem: Design, Front-end, Back-end */}
-          <div>
-            <h3 className="text-2xl font-semibold text-[var(--color1)] mb-6">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="glass-effect p-6 rounded-xl"
+          >
+            <h3 className="text-2xl font-semibold text-gradient mb-6">
               Minhas Habilidades
             </h3>
 
-            <div className="space-y-6">
-              {/* Design - mantido como está */}
-              <div>
+            <motion.div
+              className="space-y-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {/* Design */}
+              <motion.div variants={itemVariants}>
                 <h4 className="text-lg font-medium text-[var(--foreground)] mb-3 flex items-center">
                   <span className="w-6 h-6 rounded-full bg-gradient-to-r from-[var(--color1)] to-[var(--color3)] flex items-center justify-center text-xs text-[var(--background)] mr-2">
                     <svg
@@ -181,13 +268,16 @@ const About = () => {
                   </span>
                   Design
                 </h4>
-                <div className="flex flex-wrap gap-2">
+                <motion.div
+                  className="flex flex-wrap gap-2"
+                  variants={containerVariants}
+                >
                   {designSkills.map(renderSkillBadge)}
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
 
               {/* Front-end - agora com linhas separadas */}
-              <div>
+              <motion.div variants={itemVariants}>
                 <h4 className="text-lg font-medium text-[var(--foreground)] mb-3 flex items-center">
                   <span className="w-6 h-6 rounded-full bg-gradient-to-r from-[var(--color1)] to-[var(--color3)] flex items-center justify-center text-xs text-[var(--background)] mr-2">
                     <svg
@@ -201,20 +291,21 @@ const About = () => {
                   </span>
                   Front-end
                 </h4>
-                <div className="space-y-2">
+                <motion.div className="space-y-2" variants={containerVariants}>
                   {frontendSkills.map((lineSkills, index) => (
-                    <div
+                    <motion.div
                       key={`front-line-${index}`}
                       className="flex flex-wrap gap-2"
+                      variants={containerVariants}
                     >
                       {lineSkills.map(renderSkillBadge)}
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
 
               {/* Back-end - agora com linhas separadas */}
-              <div>
+              <motion.div variants={itemVariants}>
                 <h4 className="text-lg font-medium text-[var(--foreground)] mb-3 flex items-center">
                   <span className="w-6 h-6 rounded-full bg-gradient-to-r from-[var(--color1)] to-[var(--color3)] flex items-center justify-center text-xs text-[var(--background)] mr-2">
                     <svg
@@ -233,134 +324,25 @@ const About = () => {
                   </span>
                   Back-end
                 </h4>
-                <div className="space-y-2">
+                <motion.div className="space-y-2" variants={containerVariants}>
                   {backendSkills.map((lineSkills, index) => (
-                    <div
+                    <motion.div
                       key={`back-line-${index}`}
                       className="flex flex-wrap gap-2"
+                      variants={containerVariants}
                     >
                       {lineSkills.map(renderSkillBadge)}
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
-              </div>
-            </div>
-          </div>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
 
-        {/* Experiência e educação */}
-        <div className="mt-20">
-          <h3 className="text-2xl font-semibold text-[var(--color1)] mb-8 text-center">
-            Experiência e Educação
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Experiência */}
-            <div>
-              <h4 className="text-xl font-medium text-[var(--foreground)] mb-4 flex items-center">
-                <span className="w-8 h-8 rounded-full bg-[var(--color1)] flex items-center justify-center text-[var(--background)] mr-3">
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                      clipRule="evenodd"
-                    />
-                    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-                  </svg>
-                </span>
-                Experiência Profissional
-              </h4>
-
-              {/* Lista de experiências */}
-              <div className="space-y-8 ml-11">
-                <div>
-                  <h5 className="text-lg font-medium text-[var(--foreground)]">
-                    Suporte Técnico Pleno (N2)
-                  </h5>
-                  <p className="text-[var(--color1)]">
-                    Empresa Stein Telecom • SET/2024 - Presente
-                  </p>
-                  <p className="text-[var(--foreground-muted)] mt-2">
-                    Sou responsável por resolver problemas de Tecnologia da
-                    Informação e Infraestrutura. Faço diagnósticos aprofundados,
-                    configuro sistemas, dou suporte a redes, hardwares e
-                    softwares, e colaboro com a equipe de infraestrutura em
-                    atualizações e melhorias.
-                  </p>
-                </div>
-
-                <div>
-                  <h5 className="text-lg font-medium text-[var(--foreground)]">
-                    Gerente Administrativo
-                  </h5>
-                  <p className="text-[var(--color1)]">
-                    Empresa Lopes & Nomelini • MAR/2020 - SET/2024
-                  </p>
-                  <p className="text-[var(--foreground-muted)] mt-2">
-                    Fui responsável por planejar, coordenar e supervisionar as
-                    atividades administrativas da organização.
-                    <br />
-                    Tinha como função garantir a eficiência dos processos
-                    internos, como gestão de recursos, contratos e serviços
-                    gerais. Também atuei no controle orçamentário e apoio às
-                    decisões estratégicas.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Educação */}
-            <div>
-              <h4 className="text-xl font-medium text-[var(--foreground)] mb-4 flex items-center">
-                <span className="w-8 h-8 rounded-full bg-[var(--color1)] flex items-center justify-center text-[var(--background)] mr-3">
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-                  </svg>
-                </span>
-                Educação
-              </h4>
-
-              {/* Lista de formação */}
-              <div className="space-y-8 ml-11">
-                <div>
-                  <h5 className="text-lg font-medium text-[var(--foreground)]">
-                    Bacharelado em Engenharia de Software
-                  </h5>
-                  <p className="text-[var(--color1)]">
-                    Universidade UNINTER • JAN/2023 - DEZ/2026
-                  </p>
-                  <p className="text-[var(--foreground-muted)] mt-2">
-                    Foco em desenvolvimento de software e sistemas
-                    computacionais.
-                  </p>
-                </div>
-
-                <div>
-                  <h5 className="text-lg font-medium text-[var(--foreground)]">
-                    Pós-Graduação Lato-sensu
-                    <br />
-                    GO Expert
-                  </h5>
-                  <p className="text-[var(--color1)]">
-                    Faculdade Full Cycle • JAN/2025 - JUL/2025
-                  </p>
-                  <p className="text-[var(--foreground-muted)] mt-2">
-                    Especialização em desenvolvimento Backend com foco na
-                    linguagem de programação Golang.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Decorative elements */}
+        <div className="hidden md:block absolute -bottom-20 -left-20 w-40 h-40 border border-[var(--color1)]/20 rounded-full"></div>
+        <div className="hidden md:block absolute -top-10 -right-10 w-20 h-20 border border-[var(--color3)]/20 rounded-full"></div>
       </div>
     </section>
   );

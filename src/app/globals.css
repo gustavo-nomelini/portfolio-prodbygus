@@ -308,3 +308,52 @@ div {
     opacity: 0.7;
   }
 }
+
+.cyberpunk-input-focus {
+  position: relative;
+}
+
+.cyberpunk-input-focus::before,
+.cyberpunk-input-focus::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--color1);
+  z-index: 2;
+}
+
+.cyberpunk-input-focus::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.cyberpunk-input-focus::after {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.cyberpunk-input-focus::before {
+  box-shadow: -2px -2px 4px rgba(var(--color1-rgb), 0.4);
+}
+
+.cyberpunk-input-focus::after {
+  box-shadow: 2px -2px 4px rgba(var(--color1-rgb), 0.4);
+}
+
+.animate-shrink-width {
+  animation: shrinkWidth 10s linear forwards;
+}
+
+@keyframes shrinkWidth {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
