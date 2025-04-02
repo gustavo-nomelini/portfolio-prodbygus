@@ -1,10 +1,12 @@
 'use client';
-import React, { useState } from 'react';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const About = () => {
   // Estado para controlar a habilidade em foco
   const [focusedSkill, setFocusedSkill] = useState<string | null>(null);
+  // Estado para controlar o hover do botão de download
+  const [isDownloadHovered, setIsDownloadHovered] = useState(false);
 
   // Função para destacar uma habilidade
   const highlightSkill = (skill: string) => {
@@ -30,8 +32,8 @@ const About = () => {
   const backendSkills = [
     ['Golang'],
     ['Node.js', 'Express'],
-    ['PostgreSQL', 'MongoDB'], 
-    ['REST API', 'GraphQL']
+    ['PostgreSQL', 'MongoDB'],
+    ['REST API', 'GraphQL'],
   ];
 
   // Função para renderizar badges de habilidades
@@ -90,9 +92,9 @@ const About = () => {
                 Quem sou eu
               </h3>
               <p>
-                Olá! Me chamo Gustavo Lopes Nomelini, sou um Desenvolvedor Full Stack e
-                designer apaixonado por criar soluções digitais bonitas e
-                funcionais.
+                Olá! Me chamo Gustavo Lopes Nomelini, sou um Desenvolvedor Full
+                Stack e designer apaixonado por criar soluções digitais bonitas
+                e funcionais.
               </p>
               <p>
                 Com experiência em desenvolvimento front-end e back-end, tenho
@@ -104,6 +106,52 @@ const About = () => {
                 experiências digitais memoráveis que ajudem pessoas e empresas a
                 alcançarem seus objetivos online.
               </p>
+
+              {/* Botão de Download do CV */}
+              <div className="mt-8 flex justify-center md:justify-start">
+                <a
+                  href="/CV_Gustavo_Lopes_Nomelini.pdf"
+                  download
+                  className="relative group overflow-hidden"
+                  onMouseEnter={() => setIsDownloadHovered(true)}
+                  onMouseLeave={() => setIsDownloadHovered(false)}
+                >
+                  <div
+                    className={`
+                    flex items-center gap-3 px-6 py-3 rounded-lg
+                    bg-gradient-to-r from-[var(--color1)] to-[var(--color3)]
+                    text-[var(--background)] font-medium
+                    transform transition-all duration-300
+                    ${isDownloadHovered ? 'scale-105 shadow-lg' : 'shadow-md'}
+                  `}
+                  >
+                    {/* Ícone de Download */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className={`w-5 h-5 transition-transform duration-500 ${isDownloadHovered ? 'animate-bounce' : ''}`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span className="relative z-10">Download CV</span>
+                  </div>
+
+                  {/* Efeito de brilho */}
+                  <div
+                    className={`
+                    absolute inset-0 -translate-x-full
+                    bg-gradient-to-r from-transparent via-white/20 to-transparent
+                    transform transition-transform duration-1000
+                    ${isDownloadHovered ? 'translate-x-full' : '-translate-x-full'}
+                  `}
+                  ></div>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -237,8 +285,8 @@ const About = () => {
                     Empresa Stein Telecom • SET/2024 - Presente
                   </p>
                   <p className="text-[var(--foreground-muted)] mt-2">
-                    Sou responsável por resolver problemas de Tecnologia da Informação e Infraestrutura.
-                    Faço diagnósticos aprofundados,
+                    Sou responsável por resolver problemas de Tecnologia da
+                    Informação e Infraestrutura. Faço diagnósticos aprofundados,
                     configuro sistemas, dou suporte a redes, hardwares e
                     softwares, e colaboro com a equipe de infraestrutura em
                     atualizações e melhorias.
@@ -291,17 +339,22 @@ const About = () => {
                   </p>
                   <p className="text-[var(--foreground-muted)] mt-2">
                     Foco em desenvolvimento de software e sistemas
-                    computacionais. 
+                    computacionais.
                   </p>
                 </div>
 
                 <div>
                   <h5 className="text-lg font-medium text-[var(--foreground)]">
-                    Pós-Graduação Lato-sensu<br/>GO Expert
+                    Pós-Graduação Lato-sensu
+                    <br />
+                    GO Expert
                   </h5>
-                  <p className="text-[var(--color1)]">Faculdade Full Cycle • JAN/2025 - JUL/2025</p>
+                  <p className="text-[var(--color1)]">
+                    Faculdade Full Cycle • JAN/2025 - JUL/2025
+                  </p>
                   <p className="text-[var(--foreground-muted)] mt-2">
-                    Especialização em desenvolvimento Backend com foco na linguagem de programação Golang.
+                    Especialização em desenvolvimento Backend com foco na
+                    linguagem de programação Golang.
                   </p>
                 </div>
               </div>
