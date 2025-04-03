@@ -23,10 +23,11 @@ module.exports = {
         'slide-up': 'slide-up 0.5s ease-out forwards',
         'slide-in-right': 'slide-in-right 0.5s ease-out forwards',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+        'gradient-x': 'gradient-x 3s ease-in-out infinite',
         float: 'float 6s ease-in-out infinite',
         shimmer: 'shimmer 3s ease-in-out infinite',
         pulse: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'gradient-x': 'gradient-x 3s ease-in-out infinite',
+        glitch: 'glitch 0.5s ease infinite alternate',
       },
       keyframes: {
         'shrink-width': {
@@ -55,6 +56,16 @@ module.exports = {
             boxShadow: '0 0 20px 5px rgba(var(--color1-rgb), 0.3)',
           },
         },
+        'gradient-x': {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center',
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center',
+          },
+        },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
@@ -67,14 +78,24 @@ module.exports = {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.5' },
         },
-        'gradient-x': {
-          '0%, 100%': {
-            'background-size': '200% 200%',
-            'background-position': 'left center',
+        glitch: {
+          '0%': {
+            transform: 'translate(0)',
           },
-          '50%': {
-            'background-size': '200% 200%',
-            'background-position': 'right center',
+          '20%': {
+            transform: 'translate(-2px, 2px)',
+          },
+          '40%': {
+            transform: 'translate(-2px, -2px)',
+          },
+          '60%': {
+            transform: 'translate(2px, 2px)',
+          },
+          '80%': {
+            transform: 'translate(2px, -2px)',
+          },
+          '100%': {
+            transform: 'translate(0)',
           },
         },
       },

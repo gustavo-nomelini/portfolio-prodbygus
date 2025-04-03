@@ -228,7 +228,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-5">
             <motion.div
-              className="rounded-md shadow"
+              className="rounded-md"
               initial="hidden"
               animate="visible"
               variants={buttonVariants}
@@ -238,15 +238,59 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
             >
               <Link
                 href="/projects"
-                className="cyberpunk-btn w-full flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-[var(--background)] bg-[var(--color1)] hover:bg-[var(--color1)]/90 transition-colors md:text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color1)]"
+                className="cyberpunk-btn relative group overflow-hidden flex items-center justify-center px-8 py-5 bg-[var(--color1)] border-2 border-[var(--color1)] rounded-md text-base md:text-lg font-black hover:scale-105 transition-transform duration-300"
                 aria-label="Ver meu portfolio de projetos"
               >
-                Veja meu trabalho
+                {/* Base glow permanente */}
+                <div className="absolute inset-0 bg-[var(--color1)] opacity-50 blur-[5px]"></div>
+
+                {/* Glow animado permanente */}
+                <div className="absolute inset-0 bg-[var(--color1)] opacity-40 blur-[8px] animate-pulse"></div>
+
+                {/* Borda brilhante sempre visível */}
+                <div className="absolute -inset-[1px] border-2 border-white/80 rounded-md opacity-70 shadow-[0_0_15px_var(--color1)]"></div>
+
+                {/* Fundo animado no hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[var(--color1)] via-white to-[var(--color3)] opacity-0 group-hover:opacity-90 transition-opacity duration-300"></div>
+
+                {/* Extra efeito de borda brilhante para hover */}
+                <div className="absolute inset-0 border-2 border-white rounded-md opacity-0 group-hover:opacity-100 blur-[3px] transition-opacity duration-300"></div>
+
+                {/* Detalhes cyberpunk nas esquinas com destaque extremo */}
+                <div className="absolute top-0 left-0 w-5 h-5 border-t-3 border-l-3 border-white rounded-tl-sm shadow-[0_0_10px_white]"></div>
+                <div className="absolute top-0 right-0 w-5 h-5 border-t-3 border-r-3 border-white rounded-tr-sm shadow-[0_0_10px_white]"></div>
+                <div className="absolute bottom-0 left-0 w-5 h-5 border-b-3 border-l-3 border-white rounded-bl-sm shadow-[0_0_10px_white]"></div>
+                <div className="absolute bottom-0 right-0 w-5 h-5 border-b-3 border-r-3 border-white rounded-br-sm shadow-[0_0_10px_white]"></div>
+
+                {/* Linhas de destaque adicionais */}
+                <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-white/80"></div>
+                <div className="absolute bottom-0 left-1/4 right-1/4 h-[2px] bg-white/80"></div>
+
+                {/* Texto com contraste máximo */}
+                <span className="relative z-10 text-[var(--background)] font-black text-lg md:text-xl drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] [text-shadow:_0_0_5px_white] uppercase tracking-wider flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 mr-2 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] filter-none"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={3}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                    />
+                  </svg>
+                  <span className="relative inline-block animate-pulse-glow">
+                    Projetos
+                  </span>
+                </span>
               </Link>
             </motion.div>
 
             <motion.div
-              className="rounded-md shadow"
+              className="rounded-md"
               initial="hidden"
               animate="visible"
               variants={buttonVariants}
@@ -255,12 +299,121 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
               whileTap="tap"
             >
               <Link
+                href="/about"
+                className="cyberpunk-btn relative group overflow-hidden flex items-center justify-center px-8 py-5 bg-[var(--color3)] border-2 border-[var(--color3)] rounded-md text-base md:text-lg font-black hover:scale-105 transition-transform duration-300"
+                aria-label="Conhecer mais sobre mim"
+              >
+                {/* Base glow permanente */}
+                <div className="absolute inset-0 bg-[var(--color3)] opacity-50 blur-[5px]"></div>
+
+                {/* Glow animado permanente */}
+                <div className="absolute inset-0 bg-[var(--color3)] opacity-40 blur-[8px] animate-pulse"></div>
+
+                {/* Borda brilhante sempre visível */}
+                <div className="absolute -inset-[1px] border-2 border-white/80 rounded-md opacity-70 shadow-[0_0_15px_var(--color3)]"></div>
+
+                {/* Fundo animado no hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[var(--color3)] via-white to-[var(--color1)] opacity-0 group-hover:opacity-90 transition-opacity duration-300"></div>
+
+                {/* Extra efeito de borda brilhante para hover */}
+                <div className="absolute inset-0 border-2 border-white rounded-md opacity-0 group-hover:opacity-100 blur-[3px] transition-opacity duration-300"></div>
+
+                {/* Detalhes cyberpunk nas esquinas com destaque extremo */}
+                <div className="absolute top-0 left-0 w-5 h-5 border-t-3 border-l-3 border-white rounded-tl-sm shadow-[0_0_10px_white]"></div>
+                <div className="absolute top-0 right-0 w-5 h-5 border-t-3 border-r-3 border-white rounded-tr-sm shadow-[0_0_10px_white]"></div>
+                <div className="absolute bottom-0 left-0 w-5 h-5 border-b-3 border-l-3 border-white rounded-bl-sm shadow-[0_0_10px_white]"></div>
+                <div className="absolute bottom-0 right-0 w-5 h-5 border-b-3 border-r-3 border-white rounded-br-sm shadow-[0_0_10px_white]"></div>
+
+                {/* Linhas de destaque adicionais */}
+                <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-white/80"></div>
+                <div className="absolute bottom-0 left-1/4 right-1/4 h-[2px] bg-white/80"></div>
+
+                {/* Texto com contraste máximo */}
+                <span className="relative z-10 text-[var(--background)] font-black text-lg md:text-xl drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] [text-shadow:_0_0_5px_white] uppercase tracking-wider flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 mr-2 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] filter-none"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={3}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                  <span className="relative inline-block animate-pulse-glow">
+                    Sobre Mim
+                  </span>
+                </span>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              className="rounded-md"
+              initial="hidden"
+              animate="visible"
+              variants={buttonVariants}
+              custom={2}
+              whileHover="hover"
+              whileTap="tap"
+            >
+              <Link
                 href="/contact"
-                className="cyberpunk-btn w-full flex items-center justify-center px-8 py-4 border border-[var(--color1)] text-base font-medium rounded-md text-[var(--color1)] bg-[var(--background)] hover:bg-[var(--color4)] transition-colors md:text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color1)]"
+                className="cyberpunk-btn relative group overflow-hidden flex items-center justify-center px-8 py-5 bg-[var(--color2)] border-2 border-[var(--color2)] rounded-md text-base md:text-lg font-black hover:scale-105 transition-transform duration-300"
                 aria-label="Entrar em contato comigo"
               >
-                Entre em contato
-                <span aria-hidden="true" className="ml-2">
+                {/* Base glow permanente */}
+                <div className="absolute inset-0 bg-[var(--color2)] opacity-50 blur-[5px]"></div>
+
+                {/* Glow animado permanente */}
+                <div className="absolute inset-0 bg-[var(--color2)] opacity-40 blur-[8px] animate-pulse"></div>
+
+                {/* Borda brilhante sempre visível */}
+                <div className="absolute -inset-[1px] border-2 border-white/80 rounded-md opacity-70 shadow-[0_0_15px_var(--color2)]"></div>
+
+                {/* Fundo animado no hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[var(--color2)] via-white to-[var(--color1)] opacity-0 group-hover:opacity-90 transition-opacity duration-300"></div>
+
+                {/* Extra efeito de borda brilhante para hover */}
+                <div className="absolute inset-0 border-2 border-white rounded-md opacity-0 group-hover:opacity-100 blur-[3px] transition-opacity duration-300"></div>
+
+                {/* Detalhes cyberpunk nas esquinas com destaque extremo */}
+                <div className="absolute top-0 left-0 w-5 h-5 border-t-3 border-l-3 border-white rounded-tl-sm shadow-[0_0_10px_white]"></div>
+                <div className="absolute top-0 right-0 w-5 h-5 border-t-3 border-r-3 border-white rounded-tr-sm shadow-[0_0_10px_white]"></div>
+                <div className="absolute bottom-0 left-0 w-5 h-5 border-b-3 border-l-3 border-white rounded-bl-sm shadow-[0_0_10px_white]"></div>
+                <div className="absolute bottom-0 right-0 w-5 h-5 border-b-3 border-r-3 border-white rounded-br-sm shadow-[0_0_10px_white]"></div>
+
+                {/* Linhas de destaque adicionais */}
+                <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-white/80"></div>
+                <div className="absolute bottom-0 left-1/4 right-1/4 h-[2px] bg-white/80"></div>
+
+                {/* Texto com contraste máximo */}
+                <span className="relative z-10 text-[var(--background)] font-black text-lg md:text-xl drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] [text-shadow:_0_0_5px_white] uppercase tracking-wider flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 mr-2 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] filter-none"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={3}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                    />
+                  </svg>
+                  <span className="relative inline-block animate-pulse-glow">
+                    Contato
+                  </span>
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="ml-2 group-hover:translate-x-2 transition-transform duration-300 animate-pulse"
+                >
                   →
                 </span>
               </Link>
