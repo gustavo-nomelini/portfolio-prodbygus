@@ -182,7 +182,7 @@ const Header = () => {
                     alt="Prod by GUS Logo"
                     width={128}
                     height={32}
-                    className="h-32 w-auto transition-all duration-300 ease-in-out group-hover:brightness-110"
+                    className="h-16 w-auto transition-all duration-300 ease-in-out group-hover:brightness-110"
                     priority
                   />
                 </div>
@@ -283,7 +283,7 @@ const Header = () => {
         >
           {/* Menu header */}
           <div
-            className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between
+            className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16
                         border-b border-[var(--color1)]/30 relative"
           >
             {/* Decorative corner elements for menu header */}
@@ -314,7 +314,7 @@ const Header = () => {
                   alt="Prod by GUS Logo"
                   width={160}
                   height={40}
-                  className="h-14 w-auto"
+                  className="h-16 w-auto"
                   priority
                 />
               </div>
