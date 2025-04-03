@@ -427,3 +427,82 @@ div {
 .hide-default-cursor {
   cursor: none !important;
 }
+
+/* Animação de pulso para linhas */
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+.delay-700 {
+  animation-delay: 0.7s;
+}
+
+/* Efeito de ruído para elementos cyberpunk */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 150px;
+}
+
+/* Efeito de glitch para texto */
+[data-text] {
+  position: relative;
+}
+
+[data-text]::before,
+[data-text]::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.25s ease;
+}
+
+[data-text]:hover::before {
+  opacity: 0.8;
+  transform: translate(-2px, -2px);
+  color: rgba(255, 0, 255, 0.8);
+  filter: blur(1px);
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  animation: glitchTop 0.3s ease-in-out infinite alternate-reverse;
+}
+
+[data-text]:hover::after {
+  opacity: 0.8;
+  transform: translate(2px, 2px);
+  color: rgba(0, 255, 255, 0.8);
+  filter: blur(1px);
+  clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
+  animation: glitchBottom 0.3s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes glitchTop {
+  0% {
+    transform: translate(-2px, -2px);
+  }
+  100% {
+    transform: translate(2px, 2px);
+  }
+}
+
+@keyframes glitchBottom {
+  0% {
+    transform: translate(2px, 2px);
+  }
+  100% {
+    transform: translate(-2px, -2px);
+  }
+}

@@ -279,18 +279,33 @@ const Header = () => {
       {menuOpen && (
         <div
           key="mobile-menu"
-          className="fixed inset-0 z-[100] md:hidden flex flex-col bg-[var(--background)]/75 backdrop-blur-3xl"
+          className="fixed inset-0 z-[100] md:hidden flex flex-col bg-[var(--background)]/90 backdrop-blur-3xl"
         >
+          {/* Cyberpunk grid background */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="cyberpunk-grid w-full h-full opacity-20"></div>
+            {/* Animated glowing lines */}
+            <div className="absolute top-[20%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color1)] to-transparent animate-pulse"></div>
+            <div className="absolute top-[80%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color1)] to-transparent animate-pulse delay-300"></div>
+            <div className="absolute left-[20%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--color1)] to-transparent animate-pulse delay-700"></div>
+            <div className="absolute left-[80%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--color1)] to-transparent animate-pulse delay-500"></div>
+            {/* Cyberpunk corner elements */}
+            <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[var(--color1)] opacity-60"></div>
+            <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[var(--color1)] opacity-60"></div>
+            <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[var(--color1)] opacity-60"></div>
+            <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[var(--color1)] opacity-60"></div>
+          </div>
+
           {/* Menu header */}
           <div
             className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16
-                        border-b border-[var(--color1)]/30 relative"
+                        border-b border-[var(--color1)]/50 relative z-10"
           >
             {/* Decorative corner elements for menu header */}
-            <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-[var(--color1)]"></div>
-            <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[var(--color1)]"></div>
-            <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-[var(--color1)]"></div>
-            <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-[var(--color1)]"></div>
+            <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-[var(--color1)] shadow-[0_0_5px_var(--color1)]"></div>
+            <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[var(--color1)] shadow-[0_0_5px_var(--color1)]"></div>
+            <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-[var(--color1)] shadow-[0_0_5px_var(--color1)]"></div>
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-[var(--color1)] shadow-[0_0_5px_var(--color1)]"></div>
 
             {/* Logo no menu mobile */}
             <Link
@@ -325,16 +340,16 @@ const Header = () => {
               type="button"
               onClick={() => setMenuOpen(false)}
               className="p-2 rounded-full text-[var(--foreground)] bg-[var(--color4)]/60 
-                      hover:bg-[var(--color1)]/60 transition-colors relative group border border-[var(--color1)]/30
-                      flex items-center justify-center z-10"
+                      hover:bg-[var(--color1)]/60 transition-colors relative group border border-[var(--color1)]/50
+                      flex items-center justify-center z-10 shadow-[0_0_8px_var(--color1)]"
               aria-label="Fechar menu"
             >
               {/* Glow effect */}
               <span
-                className="absolute inset-0 bg-[var(--color1)]/0 group-hover:bg-[var(--color1)]/20 
+                className="absolute inset-0 bg-[var(--color1)]/0 group-hover:bg-[var(--color1)]/30 
                             rounded-full transition-colors duration-300"
               ></span>
-              <FaTimes className="h-6 w-6" />
+              <FaTimes className="h-6 w-6 group-hover:text-[var(--color1)] transition-colors duration-300" />
 
               {/* Corner accents */}
               <span className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-[var(--color1)]"></span>
@@ -345,11 +360,10 @@ const Header = () => {
           </div>
 
           {/* Links de navegação - centralizado na tela */}
-          <div className="flex-1 flex flex-col justify-center items-center py-8">
-            <div className="cyberpunk-grid w-full h-full absolute inset-0 opacity-15"></div>
-            <nav className="w-full max-w-xs mx-auto relative z-10">
+          <div className="flex-1 flex flex-col justify-center items-center py-8 relative z-10">
+            <nav className="w-full max-w-xs mx-auto">
               <ul className="space-y-8">
-                {navLinks.map((link) => (
+                {navLinks.map((link, index) => (
                   <li key={link.href} className="text-center">
                     <Link
                       href={link.href}
@@ -358,31 +372,63 @@ const Header = () => {
                         text-2xl font-medium relative inline-block
                         ${isActive(link.href) ? 'text-[var(--color1)]' : 'text-[var(--foreground)]'}
                         transition-colors duration-300 hover:text-[var(--color1)]
-                        px-6 py-2
+                        px-8 py-3 group
                       `}
                     >
-                      {link.text}
+                      {/* Animated background */}
+                      <span
+                        className="absolute inset-0 bg-[var(--background)]/30 group-hover:bg-[var(--color1)]/10 
+                                      transition-colors duration-300 backdrop-blur-sm border border-[var(--color1)]/30 
+                                      group-hover:border-[var(--color1)]/70"
+                      ></span>
 
-                      {/* Animated underline */}
+                      {/* Text with data attributes for glitch effect */}
+                      <span
+                        className="relative z-10 inline-block group-hover:scale-105 transition-transform duration-300"
+                        data-text={link.text}
+                      >
+                        {link.text}
+                      </span>
+
+                      {/* Animated noise effect */}
+                      <span className="absolute inset-0 bg-noise opacity-0 group-hover:opacity-10 mix-blend-overlay transition-opacity duration-300"></span>
+
+                      {/* Animated underline with glow */}
                       <span
                         className={`
-                          absolute -bottom-2 left-0 right-0 h-0.5 bg-[var(--color1)]
+                          absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--color1)]
                           transform transition-transform duration-300 ease-out
                           ${isActive(link.href) ? 'scale-x-100' : 'scale-x-0'}
-                          origin-center hover:scale-x-100
-                          shadow-[0_0_6px_var(--color1)]
+                          origin-center group-hover:scale-x-100
+                          shadow-[0_0_8px_var(--color1)]
                         `}
                       ></span>
 
-                      {/* Show corner accents only for active link */}
-                      {isActive(link.href) && (
-                        <>
-                          <span className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[var(--color1)]"></span>
-                          <span className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[var(--color1)]"></span>
-                          <span className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[var(--color1)]"></span>
-                          <span className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[var(--color1)]"></span>
-                        </>
-                      )}
+                      {/* Digital line effect */}
+                      <span className="absolute right-2 top-0 bottom-0 w-px bg-[var(--color1)]/0 group-hover:bg-[var(--color1)]/50 transition-colors duration-300"></span>
+                      <span className="absolute left-2 top-0 bottom-0 w-px bg-[var(--color1)]/0 group-hover:bg-[var(--color1)]/50 transition-colors duration-300"></span>
+
+                      {/* Corner accents - always visible but brighter on active/hover */}
+                      <span
+                        className={`absolute top-0 left-0 w-2 h-2 border-t border-l ${isActive(link.href) ? 'border-[var(--color1)]' : 'border-[var(--color1)]/50'} 
+                                      group-hover:border-[var(--color1)] transition-colors duration-300 
+                                      ${isActive(link.href) ? 'shadow-[0_0_5px_var(--color1)]' : ''}`}
+                      ></span>
+                      <span
+                        className={`absolute top-0 right-0 w-2 h-2 border-t border-r ${isActive(link.href) ? 'border-[var(--color1)]' : 'border-[var(--color1)]/50'} 
+                                      group-hover:border-[var(--color1)] transition-colors duration-300
+                                      ${isActive(link.href) ? 'shadow-[0_0_5px_var(--color1)]' : ''}`}
+                      ></span>
+                      <span
+                        className={`absolute bottom-0 left-0 w-2 h-2 border-b border-l ${isActive(link.href) ? 'border-[var(--color1)]' : 'border-[var(--color1)]/50'} 
+                                      group-hover:border-[var(--color1)] transition-colors duration-300
+                                      ${isActive(link.href) ? 'shadow-[0_0_5px_var(--color1)]' : ''}`}
+                      ></span>
+                      <span
+                        className={`absolute bottom-0 right-0 w-2 h-2 border-b border-r ${isActive(link.href) ? 'border-[var(--color1)]' : 'border-[var(--color1)]/50'} 
+                                      group-hover:border-[var(--color1)] transition-colors duration-300
+                                      ${isActive(link.href) ? 'shadow-[0_0_5px_var(--color1)]' : ''}`}
+                      ></span>
                     </Link>
                   </li>
                 ))}
@@ -390,13 +436,18 @@ const Header = () => {
             </nav>
           </div>
 
-          {/* Rodapé do menu - Versão simplificada para evitar problemas de hidratação */}
-          <div className="py-6 text-center text-sm text-[var(--foreground-muted)] border-t border-[var(--color1)]/20">
+          {/* Rodapé do menu estilo cyberpunk */}
+          <div className="py-6 text-center text-sm text-[var(--foreground-muted)] border-t border-[var(--color1)]/30 relative z-10">
             <div className="relative max-w-xs mx-auto">
-              <div className="absolute left-4 right-4 h-px bg-gradient-to-r from-transparent via-[var(--color1)]/50 to-transparent top-1/2 -translate-y-1/2"></div>
-              <span className="relative bg-[var(--background)]/90 px-4">
-                © {currentYear} Prod by GUS
+              <div className="absolute left-4 right-4 h-px bg-gradient-to-r from-transparent via-[var(--color1)]/70 to-transparent top-1/2 -translate-y-1/2 shadow-[0_0_5px_var(--color1)]"></div>
+              <span className="relative bg-[var(--background)]/90 px-4 border-x border-[var(--color1)]/50">
+                © {currentYear}{' '}
+                <span className="text-[var(--color1)]">Prod by GUS</span>
               </span>
+            </div>
+            {/* Cyberpunk decoration below footer */}
+            <div className="flex justify-center mt-4">
+              <div className="w-16 h-1 bg-[var(--color1)]/50 shadow-[0_0_5px_var(--color1)]"></div>
             </div>
           </div>
         </div>
