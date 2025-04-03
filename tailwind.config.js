@@ -26,6 +26,7 @@ module.exports = {
         float: 'float 6s ease-in-out infinite',
         shimmer: 'shimmer 3s ease-in-out infinite',
         pulse: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'gradient-x': 'gradient-x 3s ease-in-out infinite',
       },
       keyframes: {
         'shrink-width': {
@@ -65,6 +66,16 @@ module.exports = {
         pulse: {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.5' },
+        },
+        'gradient-x': {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center',
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center',
+          },
         },
       },
     },

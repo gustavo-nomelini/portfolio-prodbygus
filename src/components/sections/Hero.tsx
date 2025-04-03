@@ -117,7 +117,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
               Seja bem-vindo, prazer
             </motion.span>
             <motion.span
-              className="block mt-2"
+              className="block mt-2 mb-12"
               variants={textVariants}
               custom={2}
             >
@@ -130,9 +130,87 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
               variants={textVariants}
               custom={3}
             >
-              Full Stack
-              <br />
-              Developer
+              <div
+                className="relative inline-block group cursor-pointer transition-transform duration-300 hover:scale-105"
+                onClick={() => setIsGlitching(true)}
+                onMouseLeave={() =>
+                  setTimeout(() => setIsGlitching(false), 300)
+                }
+              >
+                {/* Ripple effect on hover */}
+                <div className="absolute inset-0 scale-0 group-hover:scale-100 opacity-0 group-hover:opacity-100 rounded-lg border-2 border-[var(--color1)]/50 transition-all duration-700 ease-out"></div>
+                <div className="absolute inset-0 scale-0 group-hover:scale-[1.3] opacity-0 group-hover:opacity-60 rounded-lg border border-[var(--color3)]/30 transition-all duration-1000 delay-100 ease-out"></div>
+
+                {/* Texto com melhor contraste e destaque */}
+                <div className="relative z-10 py-4 px-6">
+                  {/* Camada base com sombra para contraste */}
+                  <div className="absolute inset-0 bg-[var(--background)]/95 rounded-lg backdrop-blur-md border-2 border-[var(--color1)]/50 shadow-[0_0_15px_rgba(var(--color1-rgb),0.3)]"></div>
+
+                  {/* Marcadores de canto */}
+                  <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[var(--color1)] opacity-80"></div>
+                  <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[var(--color1)] opacity-80"></div>
+                  <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[var(--color3)] opacity-80"></div>
+                  <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[var(--color3)] opacity-80"></div>
+
+                  {/* Texto principal com sombra forte para legibilidade */}
+                  <h2 className="relative z-20 text-5xl font-black leading-tight tracking-tight">
+                    <span className="inline-block text-[var(--color1)] drop-shadow-[0_0_10px_var(--color1)] [text-shadow:_0_0_15px_var(--color1),_0_0_5px_var(--color1)] animate-pulse-glow">
+                      Full Stack
+                    </span>
+                    <br />
+                    <span className="inline-block text-[var(--color3)] drop-shadow-[0_0_10px_var(--color3)] [text-shadow:_0_0_15px_var(--color3),_0_0_5px_var(--color3)] animate-pulse-glow">
+                      Developer
+                    </span>
+                  </h2>
+
+                  {/* Efeito de destaque com linhas */}
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[var(--color1)] to-[var(--color3)] opacity-90"></div>
+                  <div className="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-r from-[var(--color3)] to-[var(--color1)] opacity-90"></div>
+
+                  {/* Efeito de brilho em movimento */}
+                  <div className="absolute inset-0 overflow-hidden rounded-lg opacity-30">
+                    <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--color1)] to-transparent animate-shimmer"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--color3)] to-transparent animate-shimmer"></div>
+                    <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[var(--color1)] to-transparent animate-shimmer"></div>
+                    <div className="absolute right-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[var(--color3)] to-transparent animate-shimmer"></div>
+                  </div>
+                </div>
+
+                {/* Main glowing background */}
+                <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[var(--color1)] via-[var(--color3)] to-[var(--color1)] opacity-75 blur-[10px] animate-gradient-x group-hover:blur-[15px] group-hover:opacity-90 transition-all duration-300"></div>
+
+                {/* Animated border */}
+                <div className="absolute -inset-[3px] rounded-lg border border-[var(--color1)] opacity-50 group-hover:opacity-80 transition-opacity duration-300"></div>
+                <div className="absolute -inset-[5px] rounded-lg border border-[var(--color3)] opacity-30 group-hover:opacity-60 transition-opacity duration-300"></div>
+
+                {/* Animated highlight dots */}
+                <div className="absolute -top-2 -left-2 w-2 h-2 bg-[var(--color1)] rounded-full animate-ping group-hover:w-3 group-hover:h-3 transition-all duration-300"></div>
+                <div className="absolute -bottom-2 -right-2 w-2 h-2 bg-[var(--color3)] rounded-full animate-ping delay-700 group-hover:w-3 group-hover:h-3 transition-all duration-300"></div>
+
+                {/* Tech dots decoration */}
+                <div className="absolute -right-4 top-0 bottom-0 w-1 flex flex-col justify-around">
+                  <div className="w-1 h-1 rounded-full bg-[var(--color1)] animate-pulse"></div>
+                  <div className="w-1 h-1 rounded-full bg-[var(--color3)] animate-pulse delay-300"></div>
+                  <div className="w-1 h-1 rounded-full bg-[var(--color1)] animate-pulse delay-600"></div>
+                </div>
+                <div className="absolute -left-4 top-0 bottom-0 w-1 flex flex-col justify-around">
+                  <div className="w-1 h-1 rounded-full bg-[var(--color3)] animate-pulse delay-150"></div>
+                  <div className="w-1 h-1 rounded-full bg-[var(--color1)] animate-pulse delay-450"></div>
+                  <div className="w-1 h-1 rounded-full bg-[var(--color3)] animate-pulse delay-750"></div>
+                </div>
+
+                {/* Binary code decoration */}
+                <div className="absolute -top-6 right-0 text-[8px] text-[var(--color1)]/40 font-mono opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                  10101
+                </div>
+                <div className="absolute -bottom-6 left-0 text-[8px] text-[var(--color3)]/40 font-mono opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                  01010
+                </div>
+
+                {/* Animated highlight lines */}
+                <div className="absolute h-[1px] w-8 -left-10 top-1/3 bg-gradient-to-r from-transparent to-[var(--color1)] animate-pulse group-hover:w-12 transition-all duration-300"></div>
+                <div className="absolute h-[1px] w-8 -right-10 bottom-1/3 bg-gradient-to-r from-[var(--color3)] to-transparent animate-pulse delay-500 group-hover:w-12 transition-all duration-300"></div>
+              </div>
             </motion.span>
           </motion.h1>
 
