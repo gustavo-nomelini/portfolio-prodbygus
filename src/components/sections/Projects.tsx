@@ -255,7 +255,7 @@ const Projects = () => {
 
         {/* Filtros de categorias com efeito de brilho */}
         <motion.div
-          className="flex justify-center flex-wrap gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-4 mb-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
@@ -265,22 +265,161 @@ const Projects = () => {
               key={category}
               onClick={() => setSelectedCategory(category)}
               className={`
-                px-4 py-2 rounded-full transition-all duration-300 cyberpunk-btn
-                ${
-                  selectedCategory === category
-                    ? 'bg-gradient-to-r from-[var(--color1)] via-[var(--color3)] to-[var(--color1)] text-[var(--background)] font-medium bg-[length:200%_100%] animate-shimmer shadow-lg shadow-[var(--color1)]/20'
-                    : 'bg-[var(--color4)]/60 backdrop-blur-sm text-[var(--foreground)] hover:bg-[var(--color2)] hover:text-[var(--foreground)]'
-                }
+                relative group overflow-hidden px-5 py-3 rounded-md min-w-[120px] transition-all duration-300 font-bold
               `}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 + index * 0.05, duration: 0.4 }}
               whileHover={{
                 scale: 1.05,
-                boxShadow: '0 0 10px rgba(var(--color1-rgb), 0.5)',
               }}
             >
-              {category}
+              {/* Fundo colorido e glow */}
+              {selectedCategory === category ? (
+                <>
+                  {/* Fundo ativo */}
+                  <div className="absolute inset-0 bg-[var(--color1)] opacity-90"></div>
+
+                  {/* Glow effect para botão ativo */}
+                  <div className="absolute inset-0 bg-[var(--color1)] opacity-40 blur-[5px] animate-pulse"></div>
+                  <div className="absolute -inset-[1px] border-2 border-white/60 rounded-md opacity-80 shadow-[0_0_15px_var(--color1)]"></div>
+
+                  {/* Efeito de pulsação na borda para botão ativo */}
+                  <div className="absolute -inset-[3px] border border-white/30 rounded-md opacity-0 animate-ping"></div>
+                </>
+              ) : (
+                <>
+                  {/* Fundo normal */}
+                  <div className="absolute inset-0 bg-[var(--background)] border-2 border-[var(--color4)] opacity-90"></div>
+
+                  {/* Glow no hover */}
+                  <div className="absolute inset-0 bg-[var(--color1)] opacity-0 group-hover:opacity-20 blur-[5px] transition-opacity duration-300"></div>
+                  <div className="absolute -inset-[1px] border-2 border-[var(--color4)] group-hover:border-[var(--color1)]/60 rounded-md opacity-70 transition-colors duration-300"></div>
+
+                  {/* Fundo animado no hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--color1)]/10 to-[var(--color3)]/10 opacity-0 group-hover:opacity-80 transition-opacity duration-300"></div>
+                </>
+              )}
+
+              {/* Detalhes cyberpunk nas esquinas */}
+              <div
+                className={`absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 ${selectedCategory === category ? 'border-white/80' : 'border-[var(--color4)] group-hover:border-[var(--color1)]/60'} rounded-tl-sm transition-colors duration-300`}
+              ></div>
+              <div
+                className={`absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 ${selectedCategory === category ? 'border-white/80' : 'border-[var(--color4)] group-hover:border-[var(--color1)]/60'} rounded-tr-sm transition-colors duration-300`}
+              ></div>
+              <div
+                className={`absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 ${selectedCategory === category ? 'border-white/80' : 'border-[var(--color4)] group-hover:border-[var(--color1)]/60'} rounded-bl-sm transition-colors duration-300`}
+              ></div>
+              <div
+                className={`absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 ${selectedCategory === category ? 'border-white/80' : 'border-[var(--color4)] group-hover:border-[var(--color1)]/60'} rounded-br-sm transition-colors duration-300`}
+              ></div>
+
+              {/* Linhas de destaque adicionais */}
+              <div
+                className={`absolute top-0 left-1/3 right-1/3 h-[1px] ${selectedCategory === category ? 'bg-white/60' : 'bg-[var(--color4)]/40 group-hover:bg-[var(--color1)]/40'} transition-colors duration-300`}
+              ></div>
+              <div
+                className={`absolute bottom-0 left-1/3 right-1/3 h-[1px] ${selectedCategory === category ? 'bg-white/60' : 'bg-[var(--color4)]/40 group-hover:bg-[var(--color1)]/40'} transition-colors duration-300`}
+              ></div>
+
+              {/* Texto com bom contraste */}
+              <span
+                className={`
+                  relative z-10 uppercase tracking-wider text-sm flex items-center justify-center
+                  ${
+                    selectedCategory === category
+                      ? 'text-[var(--background)] font-black drop-shadow-[0_0_4px_rgba(255,255,255,0.8)]'
+                      : 'text-[var(--foreground)] group-hover:text-[var(--color1)]'
+                  }
+                  transition-colors duration-300
+                `}
+              >
+                {/* Ícones para cada categoria */}
+                <span className="mr-2">
+                  {category === 'Todos' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                      />
+                    </svg>
+                  )}
+                  {category === 'Frontend' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                  )}
+                  {category === 'Backend' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
+                      />
+                    </svg>
+                  )}
+                  {category === 'Full Stack' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                  )}
+                  {category === 'Design' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+                      />
+                    </svg>
+                  )}
+                </span>
+                {category}
+              </span>
             </motion.button>
           ))}
         </motion.div>
