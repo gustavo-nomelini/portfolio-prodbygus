@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 const About = () => {
@@ -8,6 +9,8 @@ const About = () => {
   const [focusedSkill, setFocusedSkill] = useState<string | null>(null);
   // Estado para controlar o hover do botão de download
   const [isDownloadHovered, setIsDownloadHovered] = useState(false);
+  // Estado para controlar o hover do botão de contato
+  const [isContactHovered, setIsContactHovered] = useState(false);
 
   // Função para destacar uma habilidade
   const highlightSkill = (skill: string) => {
@@ -179,35 +182,48 @@ const About = () => {
                 alcançarem seus objetivos online.
               </motion.p>
 
-              {/* Botão de Download do CV */}
+              {/* Botões - Download CV e Contato */}
               <motion.div
-                className="mt-8 flex justify-center md:justify-start"
+                className="mt-8 flex flex-row justify-center md:justify-start gap-4 w-full"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
               >
+                {/* Botão de Download CV - Versão Cyberpunk */}
                 <a
                   href="/CV_Gustavo_Lopes_Nomelini.pdf"
                   download
-                  className="relative group overflow-hidden cyberpunk-btn"
+                  className="relative group overflow-hidden flex-1 md:flex-none"
                   onMouseEnter={() => setIsDownloadHovered(true)}
                   onMouseLeave={() => setIsDownloadHovered(false)}
                 >
                   <div
                     className={`
-                    flex items-center gap-3 px-6 py-3 rounded-lg
-                    bg-gradient-to-r from-[var(--color1)] to-[var(--color3)]
-                    text-[var(--background)] font-medium
+                    relative z-10 flex items-center justify-center gap-3 px-4 py-3 
+                    rounded-md border-2 border-[var(--color1)] 
+                    bg-[var(--background)] 
+                    text-[var(--color1)] font-medium w-full
                     transform transition-all duration-300
-                    ${isDownloadHovered ? 'scale-105 shadow-lg' : 'shadow-md'}
+                    ${isDownloadHovered ? 'scale-105 shadow-[0_0_15px_rgba(var(--color1-rgb),0.6)]' : 'shadow-md'}
+                    before:content-[''] before:absolute before:left-0 before:top-0 before:w-full before:h-full
+                    before:bg-gradient-to-r before:from-[var(--color1)] before:to-[var(--color3)]
+                    before:opacity-0 before:transition-opacity before:duration-300
+                    hover:before:opacity-100 hover:text-[var(--background)]
+                    overflow-hidden
                   `}
                   >
+                    {/* Cantos cyberpunk */}
+                    <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[var(--color1)]"></span>
+                    <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[var(--color1)]"></span>
+                    <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[var(--color1)]"></span>
+                    <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[var(--color1)]"></span>
+
                     {/* Ícone de Download */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className={`w-5 h-5 transition-transform duration-500 ${isDownloadHovered ? 'animate-bounce' : ''}`}
+                      className={`w-5 h-5 relative z-10 transition-transform duration-500 ${isDownloadHovered ? 'animate-bounce' : ''}`}
                     >
                       <path
                         fillRule="evenodd"
@@ -216,18 +232,82 @@ const About = () => {
                       />
                     </svg>
                     <span className="relative z-10">Download CV</span>
-                  </div>
 
-                  {/* Efeito de brilho */}
+                    {/* Efeito de glitch digital */}
+                    <div className="absolute inset-0 opacity-20">
+                      <div className="absolute top-1/3 left-0 h-0.5 w-full bg-[var(--color1)] animate-pulse"></div>
+                      <div className="absolute top-2/3 left-0 h-0.5 w-full bg-[var(--color1)] animate-pulse delay-75"></div>
+                    </div>
+
+                    {/* Efeito de scan */}
+                    <div
+                      className={`
+                      absolute inset-0 -translate-x-full
+                      bg-gradient-to-r from-transparent via-white/30 to-transparent
+                      transform transition-transform duration-1000
+                      ${isDownloadHovered ? 'translate-x-full' : '-translate-x-full'}
+                    `}
+                    ></div>
+                  </div>
+                </a>
+
+                {/* Botão de Contato */}
+                <Link
+                  href="/contact"
+                  className="relative group overflow-hidden flex-1 md:flex-none"
+                  onMouseEnter={() => setIsContactHovered(true)}
+                  onMouseLeave={() => setIsContactHovered(false)}
+                >
                   <div
                     className={`
-                    absolute inset-0 -translate-x-full
-                    bg-gradient-to-r from-transparent via-white/20 to-transparent
-                    transform transition-transform duration-1000
-                    ${isDownloadHovered ? 'translate-x-full' : '-translate-x-full'}
+                    relative z-10 flex items-center justify-center gap-3 px-4 py-3 
+                    rounded-md border-2 border-[var(--color3)] 
+                    bg-[var(--background)] 
+                    text-[var(--color3)] font-medium w-full
+                    transform transition-all duration-300
+                    ${isContactHovered ? 'scale-105 shadow-[0_0_15px_rgba(var(--color3-rgb),0.6)]' : 'shadow-md'}
+                    before:content-[''] before:absolute before:left-0 before:top-0 before:w-full before:h-full
+                    before:bg-gradient-to-r before:from-[var(--color3)] before:to-[var(--color1)]
+                    before:opacity-0 before:transition-opacity before:duration-300
+                    hover:before:opacity-100 hover:text-[var(--background)]
+                    overflow-hidden
                   `}
-                  ></div>
-                </a>
+                  >
+                    {/* Cantos cyberpunk */}
+                    <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[var(--color3)]"></span>
+                    <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[var(--color3)]"></span>
+                    <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[var(--color3)]"></span>
+                    <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[var(--color3)]"></span>
+
+                    {/* Ícone de Email */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className={`w-5 h-5 relative z-10 transition-transform duration-500 ${isContactHovered ? 'rotate-12' : ''}`}
+                    >
+                      <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+                      <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
+                    </svg>
+                    <span className="relative z-10">Contato</span>
+
+                    {/* Efeito de glitch digital */}
+                    <div className="absolute inset-0 opacity-20">
+                      <div className="absolute top-1/3 left-0 h-0.5 w-full bg-[var(--color3)] animate-pulse"></div>
+                      <div className="absolute top-2/3 left-0 h-0.5 w-full bg-[var(--color3)] animate-pulse delay-150"></div>
+                    </div>
+
+                    {/* Efeito de scan */}
+                    <div
+                      className={`
+                      absolute inset-0 -translate-x-full
+                      bg-gradient-to-r from-transparent via-white/30 to-transparent
+                      transform transition-transform duration-1000
+                      ${isContactHovered ? 'translate-x-full' : '-translate-x-full'}
+                    `}
+                    ></div>
+                  </div>
+                </Link>
               </motion.div>
             </div>
           </motion.div>
