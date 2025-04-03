@@ -2,7 +2,7 @@ import ClientBackground from '@/components/layout/ClientBackground';
 import { ClientCursor } from '@/components/layout/ClientComponents';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-import { Fira_Code } from 'next/font/google';
+import { Bai_Jamjuree, Fira_Code } from 'next/font/google';
 import './globals.css';
 
 // Importação dinâmica dos componentes client-side
@@ -19,6 +19,14 @@ const firaCode = Fira_Code({
   display: 'swap',
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-fira-code',
+});
+
+// Configuração da fonte Bai Jamjuree - para texto principal
+const baiJamjuree = Bai_Jamjuree({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['200', '300', '400', '500', '600', '700'],
+  variable: '--font-bai-jamjuree',
 });
 
 export const metadata: Metadata = {
@@ -97,7 +105,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className={firaCode.variable}>
+    <html
+      lang="pt-BR"
+      className={`${firaCode.variable} ${baiJamjuree.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
@@ -133,18 +144,34 @@ export default function RootLayout({
           content="telephone=no, date=no, email=no, address=no"
         />
       </head>
-      <body className={`${firaCode.className} hide-default-cursor`}>
-        {/* Persistent Global Background */}
+      <body
+        className={`font-sans 
+                  transition-colors duration-150 
+                  min-h-screen flex flex-col overflow-x-hidden 
+                  no-scrollbar relative`}
+      >
+        {/* Cyberpunk grid como fundo para o tema escuro (apenas visível nesse tema) */}
+        <div className="dark:block hidden">
+          <div className="fixed inset-0 cyberpunk-grid opacity-10 z-[-1]"></div>
+          {/* Glow central */}
+          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl aspect-square rounded-full bg-[var(--color1)]/5 blur-[120px] z-[-1]"></div>
+          {/* Outros glows */}
+          <div className="fixed top-0 left-0 w-1/2 aspect-square rounded-full bg-[var(--color1)]/5 blur-[120px] z-[-1]"></div>
+          <div className="fixed bottom-0 right-0 w-1/2 aspect-square rounded-full bg-[var(--color3)]/5 blur-[120px] z-[-1]"></div>
+        </div>
+
+        <Header />
+
+        <main className="flex-grow relative z-10 mx-auto w-full px-4 sm:px-6 lg:px-8 mt-16 sm:mt-20 pb-12 sm:pb-16">
+          {children}
+        </main>
+
+        <Footer />
+
+        {/* Background Particles Animation */}
         <ClientBackground />
 
-        <div className="min-h-screen flex flex-col bg-transparent text-foreground">
-          <Header />
-          <main id="main-content" className="flex-grow pt-16">
-            {children}
-          </main>
-          <Footer />
-          <ClientCursor />
-        </div>
+        <ClientCursor />
       </body>
     </html>
   );

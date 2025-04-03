@@ -83,16 +83,16 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
       {/* Background elements - only show if keepBackgroundElements is true */}
       {keepBackgroundElements && (
         <>
-          {/* Background gradients */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color1)]/10 to-[var(--color3)]/10 z-[-1]"></div>
+          {/* Background gradients - Ajustados para melhor visualização em mobile */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color1)]/15 to-[var(--color3)]/15 z-[-1]"></div>
           <div className="absolute inset-0 z-[-2]">
-            <div className="absolute top-20 left-10 w-80 h-80 bg-[var(--color1)]/20 rounded-full filter blur-[80px]"></div>
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-[var(--color3)]/20 rounded-full filter blur-[80px]"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[var(--color1)]/10 rounded-full filter blur-[60px]"></div>
+            <div className="absolute top-20 left-10 w-60 sm:w-80 h-60 sm:h-80 bg-[var(--color1)]/20 rounded-full filter blur-[60px] sm:blur-[80px]"></div>
+            <div className="absolute bottom-20 right-10 w-72 sm:w-96 h-72 sm:h-96 bg-[var(--color3)]/20 rounded-full filter blur-[60px] sm:blur-[80px]"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-52 sm:w-72 h-52 sm:h-72 bg-[var(--color1)]/10 rounded-full filter blur-[40px] sm:blur-[60px]"></div>
           </div>
 
           {/* Cyberpunk Grid Lines */}
-          <div className="absolute inset-0 z-[-1] cyberpunk-grid opacity-20"></div>
+          <div className="absolute inset-0 z-[-1] cyberpunk-grid opacity-15 sm:opacity-20"></div>
 
           {/* Particles Effect */}
           <ParticlesEffect />
@@ -104,10 +104,10 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
         className={`absolute inset-0 z-[1] pointer-events-none transition-all duration-100 ${isGlitching ? 'glitching' : ''}`}
       ></div>
 
-      <div className="max-w-5xl mx-auto px-6 flex flex-col items-center text-center z-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center z-10">
         <div className="animate-fadeIn">
           <motion.h1
-            className="text-gradient text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-8 leading-[1.2] py-2 relative"
+            className="text-gradient text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 sm:mb-8 leading-[1.2] py-2 relative"
             initial="hidden"
             animate="visible"
             variants={textVariants}
@@ -117,7 +117,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
               Seja bem-vindo, prazer
             </motion.span>
             <motion.span
-              className="block mt-2 mb-12"
+              className="block mt-2 mb-8 sm:mb-12"
               variants={textVariants}
               custom={2}
             >
@@ -142,18 +142,18 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
                 <div className="absolute inset-0 scale-0 group-hover:scale-[1.3] opacity-0 group-hover:opacity-60 rounded-lg border border-[var(--color3)]/30 transition-all duration-1000 delay-100 ease-out"></div>
 
                 {/* Texto com melhor contraste e destaque */}
-                <div className="relative z-10 py-4 px-6">
+                <div className="relative z-10 py-3 sm:py-4 px-4 sm:px-6">
                   {/* Camada base com sombra para contraste */}
                   <div className="absolute inset-0 bg-[var(--background)]/95 rounded-lg backdrop-blur-md border-2 border-[var(--color1)]/50 shadow-[0_0_15px_rgba(var(--color1-rgb),0.3)]"></div>
 
                   {/* Marcadores de canto */}
-                  <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[var(--color1)] opacity-80"></div>
-                  <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[var(--color1)] opacity-80"></div>
-                  <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[var(--color3)] opacity-80"></div>
-                  <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[var(--color3)] opacity-80"></div>
+                  <div className="absolute top-0 left-0 w-2 sm:w-3 h-2 sm:h-3 border-t-2 border-l-2 border-[var(--color1)] opacity-80"></div>
+                  <div className="absolute top-0 right-0 w-2 sm:w-3 h-2 sm:h-3 border-t-2 border-r-2 border-[var(--color1)] opacity-80"></div>
+                  <div className="absolute bottom-0 left-0 w-2 sm:w-3 h-2 sm:h-3 border-b-2 border-l-2 border-[var(--color3)] opacity-80"></div>
+                  <div className="absolute bottom-0 right-0 w-2 sm:w-3 h-2 sm:h-3 border-b-2 border-r-2 border-[var(--color3)] opacity-80"></div>
 
                   {/* Texto principal com sombra forte para legibilidade */}
-                  <h2 className="relative z-20 text-5xl font-black leading-tight tracking-tight">
+                  <h2 className="relative z-20 text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tight">
                     <span className="inline-block text-[var(--color1)] drop-shadow-[0_0_10px_var(--color1)] [text-shadow:_0_0_15px_var(--color1),_0_0_5px_var(--color1)] animate-pulse-glow">
                       Full Stack
                     </span>
@@ -177,45 +177,45 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
                 </div>
 
                 {/* Main glowing background */}
-                <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[var(--color1)] via-[var(--color3)] to-[var(--color1)] opacity-75 blur-[10px] animate-gradient-x group-hover:blur-[15px] group-hover:opacity-90 transition-all duration-300"></div>
+                <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-[var(--color1)] via-[var(--color3)] to-[var(--color1)] opacity-75 blur-[6px] sm:blur-[10px] animate-gradient-x group-hover:blur-[10px] sm:group-hover:blur-[15px] group-hover:opacity-90 transition-all duration-300"></div>
 
                 {/* Animated border */}
-                <div className="absolute -inset-[3px] rounded-lg border border-[var(--color1)] opacity-50 group-hover:opacity-80 transition-opacity duration-300"></div>
-                <div className="absolute -inset-[5px] rounded-lg border border-[var(--color3)] opacity-30 group-hover:opacity-60 transition-opacity duration-300"></div>
+                <div className="absolute -inset-[2px] sm:-inset-[3px] rounded-lg border border-[var(--color1)] opacity-50 group-hover:opacity-80 transition-opacity duration-300"></div>
+                <div className="absolute -inset-[3px] sm:-inset-[5px] rounded-lg border border-[var(--color3)] opacity-30 group-hover:opacity-60 transition-opacity duration-300"></div>
 
                 {/* Animated highlight dots */}
-                <div className="absolute -top-2 -left-2 w-2 h-2 bg-[var(--color1)] rounded-full animate-ping group-hover:w-3 group-hover:h-3 transition-all duration-300"></div>
-                <div className="absolute -bottom-2 -right-2 w-2 h-2 bg-[var(--color3)] rounded-full animate-ping delay-700 group-hover:w-3 group-hover:h-3 transition-all duration-300"></div>
+                <div className="absolute -top-1 sm:-top-2 -left-1 sm:-left-2 w-1.5 sm:w-2 h-1.5 sm:h-2 bg-[var(--color1)] rounded-full animate-ping group-hover:w-2 group-hover:h-2 sm:group-hover:w-3 sm:group-hover:h-3 transition-all duration-300"></div>
+                <div className="absolute -bottom-1 sm:-bottom-2 -right-1 sm:-right-2 w-1.5 sm:w-2 h-1.5 sm:h-2 bg-[var(--color3)] rounded-full animate-ping delay-700 group-hover:w-2 group-hover:h-2 sm:group-hover:w-3 sm:group-hover:h-3 transition-all duration-300"></div>
 
-                {/* Tech dots decoration */}
-                <div className="absolute -right-4 top-0 bottom-0 w-1 flex flex-col justify-around">
+                {/* Tech dots decoration - visíveis apenas em telas maiores */}
+                <div className="absolute -right-4 top-0 bottom-0 w-1 hidden sm:flex flex-col justify-around">
                   <div className="w-1 h-1 rounded-full bg-[var(--color1)] animate-pulse"></div>
                   <div className="w-1 h-1 rounded-full bg-[var(--color3)] animate-pulse delay-300"></div>
                   <div className="w-1 h-1 rounded-full bg-[var(--color1)] animate-pulse delay-600"></div>
                 </div>
-                <div className="absolute -left-4 top-0 bottom-0 w-1 flex flex-col justify-around">
+                <div className="absolute -left-4 top-0 bottom-0 w-1 hidden sm:flex flex-col justify-around">
                   <div className="w-1 h-1 rounded-full bg-[var(--color3)] animate-pulse delay-150"></div>
                   <div className="w-1 h-1 rounded-full bg-[var(--color1)] animate-pulse delay-450"></div>
                   <div className="w-1 h-1 rounded-full bg-[var(--color3)] animate-pulse delay-750"></div>
                 </div>
 
-                {/* Binary code decoration */}
-                <div className="absolute -top-6 right-0 text-[8px] text-[var(--color1)]/40 font-mono opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                {/* Binary code decoration - visível apenas em telas maiores */}
+                <div className="absolute -top-6 right-0 text-[8px] text-[var(--color1)]/40 font-mono opacity-0 sm:opacity-70 group-hover:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                   10101
                 </div>
-                <div className="absolute -bottom-6 left-0 text-[8px] text-[var(--color3)]/40 font-mono opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute -bottom-6 left-0 text-[8px] text-[var(--color3)]/40 font-mono opacity-0 sm:opacity-70 group-hover:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                   01010
                 </div>
 
-                {/* Animated highlight lines */}
-                <div className="absolute h-[1px] w-8 -left-10 top-1/3 bg-gradient-to-r from-transparent to-[var(--color1)] animate-pulse group-hover:w-12 transition-all duration-300"></div>
-                <div className="absolute h-[1px] w-8 -right-10 bottom-1/3 bg-gradient-to-r from-[var(--color3)] to-transparent animate-pulse delay-500 group-hover:w-12 transition-all duration-300"></div>
+                {/* Animated highlight lines - visíveis apenas em telas maiores*/}
+                <div className="absolute h-[1px] w-6 sm:w-8 -left-8 top-1/3 bg-gradient-to-r from-transparent to-[var(--color1)] animate-pulse hidden sm:block group-hover:w-8 sm:group-hover:w-12 transition-all duration-300"></div>
+                <div className="absolute h-[1px] w-6 sm:w-8 -right-8 bottom-1/3 bg-gradient-to-r from-[var(--color3)] to-transparent animate-pulse delay-500 hidden sm:block group-hover:w-8 sm:group-hover:w-12 transition-all duration-300"></div>
               </div>
             </motion.span>
           </motion.h1>
 
           <motion.p
-            className="mt-6 max-w-2xl mx-auto text-xl/8 text-[var(--foreground-muted)]"
+            className="mt-4 sm:mt-6 max-w-2xl mx-auto text-lg sm:text-xl/8 text-[var(--foreground-muted)]"
             initial="hidden"
             animate="visible"
             variants={textVariants}
@@ -226,9 +226,9 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
             interativa, intuitiva e responsiva.
           </motion.p>
 
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-5">
+          <div className="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-8 gap-y-4 sm:gap-y-5">
             <motion.div
-              className="rounded-md"
+              className="rounded-md w-full sm:w-auto"
               initial="hidden"
               animate="visible"
               variants={buttonVariants}
@@ -238,7 +238,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
             >
               <Link
                 href="/projects"
-                className="cyberpunk-btn relative group overflow-hidden flex items-center justify-center px-8 py-5 bg-[var(--color1)] border-2 border-[var(--color1)] rounded-md text-base md:text-lg font-black hover:scale-105 transition-transform duration-300"
+                className="cyberpunk-btn relative group overflow-hidden flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 bg-[var(--color1)] border-2 border-[var(--color1)] rounded-md text-base md:text-lg font-black hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
                 aria-label="Ver meu portfolio de projetos"
               >
                 {/* Base glow permanente */}
@@ -290,7 +290,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
             </motion.div>
 
             <motion.div
-              className="rounded-md"
+              className="rounded-md w-full sm:w-auto"
               initial="hidden"
               animate="visible"
               variants={buttonVariants}
@@ -300,7 +300,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
             >
               <Link
                 href="/about"
-                className="cyberpunk-btn relative group overflow-hidden flex items-center justify-center px-8 py-5 bg-[var(--color3)] border-2 border-[var(--color3)] rounded-md text-base md:text-lg font-black hover:scale-105 transition-transform duration-300"
+                className="cyberpunk-btn relative group overflow-hidden flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 bg-[var(--color3)] border-2 border-[var(--color3)] rounded-md text-base md:text-lg font-black hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
                 aria-label="Conhecer mais sobre mim"
               >
                 {/* Base glow permanente */}
@@ -352,7 +352,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
             </motion.div>
 
             <motion.div
-              className="rounded-md"
+              className="rounded-md w-full sm:w-auto"
               initial="hidden"
               animate="visible"
               variants={buttonVariants}
@@ -362,7 +362,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
             >
               <Link
                 href="/contact"
-                className="cyberpunk-btn relative group overflow-hidden flex items-center justify-center px-8 py-5 bg-[var(--color2)] border-2 border-[var(--color2)] rounded-md text-base md:text-lg font-black hover:scale-105 transition-transform duration-300"
+                className="cyberpunk-btn relative group overflow-hidden flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 bg-[var(--color2)] border-2 border-[var(--color2)] rounded-md text-base md:text-lg font-black hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
                 aria-label="Entrar em contato comigo"
               >
                 {/* Base glow permanente */}

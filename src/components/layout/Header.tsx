@@ -254,22 +254,22 @@ const Header = () => {
             <button
               className="md:hidden text-[var(--foreground)] p-2 rounded-md 
                        hover:bg-[var(--color1)]/20 transition-colors focus:outline-none
-                       border border-[var(--color1)]/30 relative group"
+                       border border-[var(--color1)]/30 relative group shadow-[0_0_8px_rgba(var(--color1-rgb),0.2)]"
               onClick={toggleMenu}
               aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
             >
               {/* Glow effect */}
               <span
                 className="absolute inset-0 bg-[var(--color1)]/0 group-hover:bg-[var(--color1)]/10 
-                            transition-colors duration-300"
+                            transition-colors duration-300 rounded-md"
               ></span>
-              <FaBars className="h-6 w-6" />
+              <FaBars className="h-6 w-6 group-hover:text-[var(--color1)] transition-colors duration-300" />
 
               {/* Corner accents */}
-              <span className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[var(--color1)]"></span>
-              <span className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[var(--color1)]"></span>
-              <span className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[var(--color1)]"></span>
-              <span className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[var(--color1)]"></span>
+              <span className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[var(--color1)] rounded-tl-md"></span>
+              <span className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[var(--color1)] rounded-tr-md"></span>
+              <span className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[var(--color1)] rounded-bl-md"></span>
+              <span className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[var(--color1)] rounded-br-md"></span>
             </button>
           </div>
         </div>
@@ -279,7 +279,7 @@ const Header = () => {
       {menuOpen && (
         <div
           key="mobile-menu"
-          className="fixed inset-0 z-[100] md:hidden flex flex-col bg-[var(--background)]/90 backdrop-blur-3xl"
+          className="fixed inset-0 z-[100] md:hidden flex flex-col bg-[var(--background)]/95 backdrop-blur-3xl"
         >
           {/* Cyberpunk grid background */}
           <div className="absolute inset-0 overflow-hidden">
@@ -329,7 +329,7 @@ const Header = () => {
                   alt="Prod by GUS Logo"
                   width={160}
                   height={40}
-                  className="h-16 w-auto"
+                  className="h-14 w-auto"
                   priority
                 />
               </div>
@@ -362,9 +362,12 @@ const Header = () => {
           {/* Links de navegação - centralizado na tela */}
           <div className="flex-1 flex flex-col justify-center items-center py-8 relative z-10">
             <nav className="w-full max-w-xs mx-auto">
-              <ul className="space-y-8">
-                {navLinks.map((link, index) => (
-                  <li key={link.href} className="text-center">
+              <ul className="space-y-6">
+                {navLinks.map((link) => (
+                  <li
+                    key={link.href}
+                    className="text-center transform transition-transform hover:scale-105"
+                  >
                     <Link
                       href={link.href}
                       onClick={closeMenu}
@@ -372,14 +375,14 @@ const Header = () => {
                         text-2xl font-medium relative inline-block
                         ${isActive(link.href) ? 'text-[var(--color1)]' : 'text-[var(--foreground)]'}
                         transition-colors duration-300 hover:text-[var(--color1)]
-                        px-8 py-3 group
+                        px-8 py-4 group w-full flex items-center justify-center
                       `}
                     >
-                      {/* Animated background */}
+                      {/* Animated background with improved contrast */}
                       <span
-                        className="absolute inset-0 bg-[var(--background)]/30 group-hover:bg-[var(--color1)]/10 
-                                      transition-colors duration-300 backdrop-blur-sm border border-[var(--color1)]/30 
-                                      group-hover:border-[var(--color1)]/70"
+                        className="absolute inset-0 bg-[var(--background)]/50 group-hover:bg-[var(--color1)]/10 
+                                      transition-colors duration-300 backdrop-blur-md border border-[var(--color1)]/30 
+                                      group-hover:border-[var(--color1)]/70 rounded-lg"
                       ></span>
 
                       {/* Text with data attributes for glitch effect */}
@@ -391,12 +394,12 @@ const Header = () => {
                       </span>
 
                       {/* Animated noise effect */}
-                      <span className="absolute inset-0 bg-noise opacity-0 group-hover:opacity-10 mix-blend-overlay transition-opacity duration-300"></span>
+                      <span className="absolute inset-0 bg-noise opacity-0 group-hover:opacity-10 mix-blend-overlay transition-opacity duration-300 rounded-lg"></span>
 
                       {/* Animated underline with glow */}
                       <span
                         className={`
-                          absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--color1)]
+                          absolute -bottom-1 left-1/4 right-1/4 h-0.5 bg-[var(--color1)]
                           transform transition-transform duration-300 ease-out
                           ${isActive(link.href) ? 'scale-x-100' : 'scale-x-0'}
                           origin-center group-hover:scale-x-100
@@ -411,22 +414,22 @@ const Header = () => {
                       {/* Corner accents - always visible but brighter on active/hover */}
                       <span
                         className={`absolute top-0 left-0 w-2 h-2 border-t border-l ${isActive(link.href) ? 'border-[var(--color1)]' : 'border-[var(--color1)]/50'} 
-                                      group-hover:border-[var(--color1)] transition-colors duration-300 
+                                      group-hover:border-[var(--color1)] transition-colors duration-300 rounded-tl-lg
                                       ${isActive(link.href) ? 'shadow-[0_0_5px_var(--color1)]' : ''}`}
                       ></span>
                       <span
                         className={`absolute top-0 right-0 w-2 h-2 border-t border-r ${isActive(link.href) ? 'border-[var(--color1)]' : 'border-[var(--color1)]/50'} 
-                                      group-hover:border-[var(--color1)] transition-colors duration-300
+                                      group-hover:border-[var(--color1)] transition-colors duration-300 rounded-tr-lg
                                       ${isActive(link.href) ? 'shadow-[0_0_5px_var(--color1)]' : ''}`}
                       ></span>
                       <span
                         className={`absolute bottom-0 left-0 w-2 h-2 border-b border-l ${isActive(link.href) ? 'border-[var(--color1)]' : 'border-[var(--color1)]/50'} 
-                                      group-hover:border-[var(--color1)] transition-colors duration-300
+                                      group-hover:border-[var(--color1)] transition-colors duration-300 rounded-bl-lg
                                       ${isActive(link.href) ? 'shadow-[0_0_5px_var(--color1)]' : ''}`}
                       ></span>
                       <span
                         className={`absolute bottom-0 right-0 w-2 h-2 border-b border-r ${isActive(link.href) ? 'border-[var(--color1)]' : 'border-[var(--color1)]/50'} 
-                                      group-hover:border-[var(--color1)] transition-colors duration-300
+                                      group-hover:border-[var(--color1)] transition-colors duration-300 rounded-br-lg
                                       ${isActive(link.href) ? 'shadow-[0_0_5px_var(--color1)]' : ''}`}
                       ></span>
                     </Link>
@@ -447,7 +450,7 @@ const Header = () => {
             </div>
             {/* Cyberpunk decoration below footer */}
             <div className="flex justify-center mt-4">
-              <div className="w-16 h-1 bg-[var(--color1)]/50 shadow-[0_0_5px_var(--color1)]"></div>
+              <div className="w-24 h-1 bg-[var(--color1)]/50 shadow-[0_0_5px_var(--color1)]"></div>
             </div>
           </div>
         </div>
