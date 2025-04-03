@@ -59,6 +59,77 @@ export default function ProjectDetails() {
           */
 
           {
+            id: '1',
+            title: 'Blog PRODBYGUS',
+            description:
+              'Blog pessoal desenvolvido com o framework Astro, focado em compartilhar conhecimentos sobre desenvolvimento web e experiências técnicas.',
+            detailedDescription: `Este projeto é um blog pessoal desenvolvido com o framework Astro, criado para compartilhar meus conhecimentos sobre desenvolvimento web, tecnologia e soluções para problemas do mundo real. O blog serve como uma plataforma para documentar meu aprendizado e contribuir com a comunidade de desenvolvedores.
+
+O design foi pensado para ser minimalista e elegante, priorizando a legibilidade e o foco no conteúdo, com uma navegação intuitiva e interfaces limpas. Utilizei o conceito de Island Architecture do Astro, que permite a hidratação parcial dos componentes, resultando em um site extremamente rápido e eficiente.
+
+Principais características do projeto:
+- Design minimalista com foco na experiência de leitura
+- Sistema de posts em Markdown/MDX para facilitar a criação de conteúdo
+- Carregamento ultrarrápido com SSG (Static Site Generation)
+- Tema claro/escuro conforme preferência do usuário
+- SEO otimizado para melhor visibilidade nos motores de busca
+- Integração com formulário de contato via Nodemailer
+- Suporte a PWA para instalação como aplicativo
+- Responsividade completa para todos os dispositivos
+- Implementação de mapa interativo com OpenStreetMap`,
+            image: '/projects/blog-prodbygus.png',
+            categories: ['Frontend', 'Design'],
+            technologies: [
+              'Astro',
+              'Tailwind CSS',
+              'TypeScript',
+              'MDX',
+              'Markdown',
+              'Nodemailer',
+              'OpenStreetMap',
+              'Leaflet',
+            ],
+            liveUrl: 'https://blog-prodbygus.vercel.app/',
+            featured: true,
+            repoUrl: 'https://github.com/gustavo-nomelini/blog-prodbygus',
+            challenges: [
+              'Aprender e implementar um novo framework (Astro) focado em sites orientados a conteúdo',
+              'Criar um sistema eficiente para gerenciamento de posts em Markdown/MDX',
+              'Implementar carregamento otimizado de recursos para garantir alta performance',
+              'Desenvolver uma solução completa para o envio de mensagens via formulário de contato',
+              'Configurar adequadamente a integração com mapas interativos',
+            ],
+            solutions: [
+              'Aproveitei a arquitetura Islands do Astro para hidratação parcial, melhorando a performance',
+              'Utilizei Content Collections do Astro para organizar e tipar os posts em Markdown',
+              'Implementei estratégias avançadas de carregamento de recursos, como lazy-loading e code-splitting',
+              'Criei uma API endpoint para processar o envio de mensagens do formulário de contato',
+              'Desenvolvi um componente de mapa interativo com Leaflet integrado ao OpenStreetMap',
+              'Configurei a PWA com service workers para permitir a instalação e funcionamento offline',
+            ],
+            screenshots: [
+              {
+                src: '/projects/blog-prodbygus-1.png',
+                alt: 'Página inicial do Blog PRODBYGUS',
+                width: 1200,
+                height: 800,
+              },
+              {
+                src: '/projects/blog-prodbygus-2.png',
+                alt: 'Página de post do blog com formatação em Markdown',
+                width: 1200,
+                height: 800,
+              },
+              {
+                src: '/projects/blog-prodbygus-3.png',
+                alt: 'Formulário de contato com mapa interativo',
+                width: 1200,
+                height: 800,
+              },
+            ],
+          },
+
+          {
             id: '6',
             title: 'Chá de Panela - Convite Digital',
             description:

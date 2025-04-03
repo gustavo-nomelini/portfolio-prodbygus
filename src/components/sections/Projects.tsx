@@ -43,17 +43,36 @@ const Projects = () => {
         // Dados de exemplo
         setProjects([
           {
-            id: '6',
-            title: 'Chá de Panela - Convite Digital',
+            id: '1',
+            title: 'Blog PRODBYGUS',
             description:
-              'Site interativo desenvolvido como convite digital para meu chá de panela, com contagem regressiva, galeria de fotos e RSVP.',
-            image: '/projects/cha-de-panela.png',
+              'Blog pessoal desenvolvido com o framework Astro, focado em compartilhar conhecimentos sobre desenvolvimento web e experiências técnicas. Conta com design minimalista e elegante, sistema de posts em Markdown/MDX, carregamento ultrarrápido com SSG (Static Site Generation), tema claro/escuro, SEO otimizado, integração com formulário de contato via Nodemailer e suporte a PWA. Um excelente aprendizado sobre a criação de sites orientados a conteúdo com alta performance.',
+            image: '/projects/blog-prodbygus.png',
             categories: ['Frontend', 'Design'],
-            technologies: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'],
-            liveUrl: 'https://gustavo-nomelini.github.io/cha-de-panela/',
+            technologies: [
+              'Astro',
+              'Tailwind CSS',
+              'TypeScript',
+              'MDX',
+              'Markdown',
+              'Nodemailer',
+            ],
+            liveUrl: 'https://blog-prodbygus.vercel.app/',
             featured: true,
-            repoUrl: 'https://github.com/gustavo-nomelini/cha-de-panela',
+            repoUrl: 'https://github.com/gustavo-nomelini/blog-prodbygus',
           },
+          // {
+          //   id: '6',
+          //   title: 'Chá de Panela - Convite Digital',
+          //   description:
+          //     'Site interativo desenvolvido como convite digital para meu chá de panela, com contagem regressiva, galeria de fotos e RSVP.',
+          //   image: '/projects/cha-de-panela.png',
+          //   categories: ['Frontend', 'Design'],
+          //   technologies: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'],
+          //   liveUrl: 'https://gustavo-nomelini.github.io/cha-de-panela/',
+          //   featured: true,
+          //   repoUrl: 'https://github.com/gustavo-nomelini/cha-de-panela',
+          // },
           /* Comentado para o deploy inicial
           {
             id: '1',
