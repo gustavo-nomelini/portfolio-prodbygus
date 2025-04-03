@@ -14,7 +14,9 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <p className="text-sm">
-                © {currentYear} Prod by GUS. All rights reserved.
+                © {currentYear}{' '}
+                &lt;PROD/BYGUS&gt;. All rights
+                reserved.
               </p>
             </div>
 
