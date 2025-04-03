@@ -162,7 +162,7 @@ export default function RootLayout({
 
         <Header />
 
-        <main className="flex-grow relative z-10 mx-auto w-full px-4 sm:px-6 lg:px-8 mt-16 sm:mt-20 pb-12 sm:pb-16">
+        <main className="flex-grow relative z-10 mx-auto w-full px-4 sm:px-6 lg:px-8 mt-16 sm:mt-20 pb-20 sm:pb-16">
           {children}
         </main>
 

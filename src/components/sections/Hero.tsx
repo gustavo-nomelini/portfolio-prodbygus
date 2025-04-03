@@ -79,7 +79,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
   };
 
   return (
-    <section className="relative overflow-hidden min-h-[85vh] flex items-center justify-center">
+    <section className="relative overflow-hidden min-h-[85vh] flex items-center justify-center pt-6 sm:pt-0 pb-16 sm:pb-8">
       {/* Background elements - only show if keepBackgroundElements is true */}
       {keepBackgroundElements && (
         <>
@@ -104,7 +104,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
         className={`absolute inset-0 z-[1] pointer-events-none transition-all duration-100 ${isGlitching ? 'glitching' : ''}`}
       ></div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center z-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center z-10 pt-8 sm:pt-0">
         <div className="animate-fadeIn">
           <motion.h1
             className="text-gradient text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 sm:mb-8 leading-[1.2] py-2 relative"
@@ -226,7 +226,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
             interativa, intuitiva e responsiva.
           </motion.p>
 
-          <div className="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-8 gap-y-4 sm:gap-y-5">
+          <div className="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-8 gap-y-6 sm:gap-y-5">
             <motion.div
               className="rounded-md w-full sm:w-auto"
               initial="hidden"

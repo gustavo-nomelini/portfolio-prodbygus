@@ -22,19 +22,22 @@ const Footer = () => {
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-3">
             <div className="mb-3 md:mb-0 text-center md:text-left">
-              <p className="text-sm relative inline-block">
-                <span className="relative z-10">
-                  © {currentYear}{' '}
-                  <span className="text-[var(--color1)] font-medium">
-                    &lt;PROD/BYGUS&gt;
+              <div className="flex flex-col space-y-1">
+                <p className="text-sm relative inline-block">
+                  <span className="relative z-10">
+                    © {currentYear}{' '}
+                    <span className="text-[var(--color1)] font-medium">
+                      &lt;PROD/BYGUS&gt;
+                    </span>
+                    .
                   </span>
-                  <span className="hidden sm:inline">
-                    . All rights reserved.
-                  </span>
-                </span>
-                {/* Highlight effect */}
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[var(--color1)]/40 to-transparent"></span>
-              </p>
+                  {/* Highlight effect */}
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[var(--color1)]/40 to-transparent"></span>
+                </p>
+                <p className="text-sm text-[var(--foreground-muted)]">
+                  All rights reserved.
+                </p>
+              </div>
             </div>
 
             {/* Link para o repositório do código-fonte */}
