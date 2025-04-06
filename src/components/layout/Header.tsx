@@ -16,6 +16,8 @@ const Header = () => {
   // Para evitar problemas com o useEffect executando duas vezes em desenvolvimento
   const animationIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const glitchIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  // Referência para controlar o tempo entre efeitos glitch (throttling)
+  const lastGlitchTimeRef = useRef<number>(0);
   // Usar um valor constante para o ano em vez de um estado
   const currentYear = '2025';
 
@@ -37,14 +39,29 @@ const Header = () => {
     }
   };
 
-  // Função para acionar o efeito glitch
+  // Função para acionar o efeito glitch com throttling
   const triggerGlitchEffect = () => {
-    setGlitchEffect(true);
-    setTimeout(() => setGlitchEffect(false), 300);
+    const now = Date.now();
+    const timeSinceLastGlitch = now - lastGlitchTimeRef.current;
+
+    // Permitir o efeito apenas se passou pelo menos 0.35 segundos desde o último
+    if (timeSinceLastGlitch > 350) {
+      setGlitchEffect(true);
+      setTimeout(() => setGlitchEffect(false), 300);
+      lastGlitchTimeRef.current = now;
+    }
+  };
+
+  // Handler com debounce para eventos de mouse
+  const handleMouseEnter = () => {
+    triggerGlitchEffect();
   };
 
   // Client-side only effects
   useEffect(() => {
+    // Inicializar o tempo do último glitch
+    lastGlitchTimeRef.current = Date.now();
+
     // Efeito para detectar a rolagem da página e atualizar o estado
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -116,7 +133,15 @@ const Header = () => {
     glitchIntervalRef.current = setInterval(() => {
       // Math.random é seguro aqui pois estamos no cliente
       if (Math.random() > 0.7) {
-        triggerGlitchEffect();
+        // Verificar se passou tempo suficiente desde o último glitch
+        const now = Date.now();
+        const timeSinceLastGlitch = now - lastGlitchTimeRef.current;
+
+        if (timeSinceLastGlitch > 1000) {
+          setGlitchEffect(true);
+          setTimeout(() => setGlitchEffect(false), 300);
+          lastGlitchTimeRef.current = now;
+        }
       }
     }, intervalTime);
 
@@ -211,7 +236,7 @@ const Header = () => {
                   transition-colors py-2 px-3 group overflow-hidden
                   ${isActive(link.href) ? 'text-[var(--color1)]' : ''}
                 `}
-                onMouseEnter={triggerGlitchEffect}
+                onMouseEnter={handleMouseEnter}
               >
                 {/* Background hover effect */}
                 <span
