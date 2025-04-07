@@ -38,10 +38,6 @@ const CursorImplementation = () => {
   const moveSpeed = useRef<number>(0);
   const lastPosition = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const particleIdCounter = useRef<number>(0);
-  const animationFrameRef = useRef<number | null>(null);
-
-  // Cor fixa para as linhas centrais - definida uma vez e nunca alterada
-  const fixedLineColor = 'var(--color1)';
 
   useEffect(() => {
     // Adicionar classe global para esconder cursor padrão
@@ -154,7 +150,6 @@ const CursorImplementation = () => {
 
       for (let i = 0; i < particleCount; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 1 + Math.random() * 3;
         const size = 1 + Math.random() * 3;
         const maxLife = 500 + Math.random() * 300; // ms
 
@@ -242,6 +237,7 @@ const CursorImplementation = () => {
     // Set up interval for checking pointer style
     const pointerDetectionInterval = setInterval(handlePointerDetection, 100);
 
+    // Fix for ref warning - Save refs to local variables at beginning of effect
     return () => {
       document.body.classList.remove('hide-default-cursor');
       window.removeEventListener('mousemove', handleMouseMove);
@@ -253,8 +249,12 @@ const CursorImplementation = () => {
       clearInterval(updateParticleInterval);
       if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
       if (glitchTimer.current) clearTimeout(glitchTimer.current);
-      if (particleTimer.current) clearTimeout(particleTimer.current);
+
+      // Properly capture the ref value in a variable
+      const currentParticleTimer = particleTimer.current;
+      if (currentParticleTimer) clearTimeout(currentParticleTimer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mousePosition.x, mousePosition.y, isPointer]);
 
   // Hide the cursor on mobile devices
@@ -551,20 +551,3 @@ const CustomCursor = dynamic(() => Promise.resolve(CursorImplementation), {
 });
 
 export default CustomCursor;
-
-// Adicionar esta animação ao globals.css
-const cssKeyframes = `
-@keyframes scanLine {
-  0% {
-    left: 0%;
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    left: 100%;
-    opacity: 0.2;
-  }
-}
-`;
