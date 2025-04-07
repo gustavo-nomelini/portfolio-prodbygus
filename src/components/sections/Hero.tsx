@@ -11,9 +11,17 @@ interface HeroProps {
 
 const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
   const [isGlitching, setIsGlitching] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-  // Random glitch effect
+  // Set mounted state
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Random glitch effect - only run on client
+  useEffect(() => {
+    if (!isMounted) return;
+
     const triggerGlitch = () => {
       const shouldGlitch = Math.random() > 0.95;
       if (shouldGlitch) {
@@ -33,7 +41,7 @@ const Hero = ({ keepBackgroundElements = true }: HeroProps) => {
     return () => {
       // Cleanup
     };
-  }, []);
+  }, [isMounted]);
 
   // Text animation variants
   const textVariants = {

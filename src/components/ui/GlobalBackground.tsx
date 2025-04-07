@@ -1,7 +1,12 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import ParticlesEffect from './ParticlesEffect';
+
+// Import ParticlesEffect with SSR disabled
+const ParticlesEffect = dynamic(() => import('./ParticlesEffect'), {
+  ssr: false,
+});
 
 export default function GlobalBackground() {
   const [mounted, setMounted] = useState(false);
@@ -9,7 +14,6 @@ export default function GlobalBackground() {
   // Only run the effect on the client side
   useEffect(() => {
     setMounted(true);
-    return () => setMounted(false);
   }, []);
 
   if (!mounted) return null;
@@ -26,9 +30,9 @@ export default function GlobalBackground() {
 
       {/* Cyberpunk Grid Lines */}
       <div className="absolute inset-0 cyberpunk-grid opacity-20"></div>
-      
+
       {/* Particles Effect */}
       <ParticlesEffect />
     </div>
   );
-} 
+}

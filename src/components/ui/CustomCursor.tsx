@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -9,23 +9,26 @@ const CustomCursor = () => {
   const [isClicking, setIsClicking] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [hasGlitchEffect, setHasGlitchEffect] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const inactivityTimer = useRef<NodeJS.Timeout | null>(null);
+  const glitchTimer = useRef<NodeJS.Timeout | null>(null);
 
-  // Timer para esconder o cursor após inatividade
-  const [inactivityTimer, setInactivityTimer] = useState<NodeJS.Timeout | null>(
-    null,
-  );
-  // Timer para o efeito de glitch
-  const [glitchTimer, setGlitchTimer] = useState<NodeJS.Timeout | null>(null);
+  // Only run client-side code after mount
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
+    if (!isMounted) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       setIsHidden(false);
 
       // Reset inactivity timer
-      if (inactivityTimer) clearTimeout(inactivityTimer);
+      if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
       const timer = setTimeout(() => setIsHidden(true), 5000); // 5 segundos de inatividade
-      setInactivityTimer(timer);
+      inactivityTimer.current = timer;
     };
 
     const handlePointerDetection = () => {
@@ -53,9 +56,9 @@ const CustomCursor = () => {
     // Função para criar efeito de glitch
     const triggerGlitchEffect = () => {
       setHasGlitchEffect(true);
-      if (glitchTimer) clearTimeout(glitchTimer);
+      if (glitchTimer.current) clearTimeout(glitchTimer.current);
       const timer = setTimeout(() => setHasGlitchEffect(false), 300); // 300ms de glitch
-      setGlitchTimer(timer);
+      glitchTimer.current = timer;
     };
 
     // Aleatoriamente cria efeito de glitch a cada 8-15 segundos
@@ -82,15 +85,17 @@ const CustomCursor = () => {
       window.removeEventListener('mouseup', handleMouseUp);
       clearInterval(interval);
       clearInterval(randomGlitchInterval);
-      if (inactivityTimer) clearTimeout(inactivityTimer);
-      if (glitchTimer) clearTimeout(glitchTimer);
+      if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
+      if (glitchTimer.current) clearTimeout(glitchTimer.current);
     };
-  }, [mousePosition.x, mousePosition.y, inactivityTimer, glitchTimer]);
+  }, [mousePosition.x, mousePosition.y, isMounted]);
 
   // Hide the cursor on mobile devices
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    if (!isMounted) return;
+
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -101,63 +106,49 @@ const CustomCursor = () => {
     return () => {
       window.removeEventListener('resize', checkMobile);
     };
-  }, []);
+  }, [isMounted]);
 
-  if (isMobile) return null;
+  if (!isMounted || isMobile) return null;
 
   return (
     <>
-      {/* Cursor outer ring */}
+      {/* Ring cursor (outer ring) */}
       <motion.div
         className="fixed top-0 left-0 z-50 pointer-events-none"
         style={{
-          opacity: isHidden ? 0 : 1,
+          width: isPointer ? '48px' : '36px',
+          height: isPointer ? '48px' : '36px',
+          borderRadius: '50%',
+          border: '1px solid var(--color1)',
+          opacity: isHidden ? 0 : isPointer ? 0.8 : 0.6,
           filter: hasGlitchEffect
             ? 'hue-rotate(90deg) brightness(1.5)'
             : 'none',
-          transition: hasGlitchEffect ? 'filter 0.1s' : 'opacity 0.3s',
         }}
         animate={{
-          x: mousePosition.x + (hasGlitchEffect ? Math.random() * 6 - 3 : 0),
-          y: mousePosition.y + (hasGlitchEffect ? Math.random() * 6 - 3 : 0),
-          scale: isPointer ? 1.2 : isClicking ? 0.8 : 1,
+          x:
+            mousePosition.x -
+            (isPointer ? 24 : 18) +
+            (hasGlitchEffect ? Math.floor(Math.random() * 8 - 4) : 0),
+          y:
+            mousePosition.y -
+            (isPointer ? 24 : 18) +
+            (hasGlitchEffect ? Math.floor(Math.random() * 8 - 4) : 0),
+          scale: isClicking ? 0.8 : 1,
         }}
         transition={{
           type: 'spring',
-          damping: 30,
-          stiffness: 300,
-          mass: 0.5,
+          damping: 15,
+          stiffness: 150,
+          mass: 0.1,
         }}
       >
-        {/* Outer glow */}
-        <motion.div
-          className="absolute -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full opacity-20"
-          style={{
-            background: `radial-gradient(circle, rgba(var(--color1-rgb), 1) 0%, rgba(var(--color1-rgb), 0) 70%)`,
-            filter: 'blur(4px)',
-          }}
-          animate={{
-            scale: isPointer ? 1.5 : isClicking ? 1.8 : 1,
-          }}
-        />
-
-        {/* Main ring */}
-        <div className="absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full border-2 border-[var(--color1)] mix-blend-difference"></div>
-
-        {/* Corner accents */}
-        <div className="absolute -translate-x-1/2 -translate-y-1/2">
-          <div className="absolute top-[-6px] left-[-6px] w-3 h-3 border-t border-l border-[var(--color1)]"></div>
-          <div className="absolute top-[-6px] right-[-6px] w-3 h-3 border-t border-r border-[var(--color1)]"></div>
-          <div className="absolute bottom-[-6px] left-[-6px] w-3 h-3 border-b border-l border-[var(--color1)]"></div>
-          <div className="absolute bottom-[-6px] right-[-6px] w-3 h-3 border-b border-r border-[var(--color1)]"></div>
-        </div>
-
-        {/* Scan line effect */}
+        {/* Inner detail lines */}
         <div className="absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 overflow-hidden rounded-full opacity-30">
           <div
             className="w-full h-0.5 bg-[var(--color1)] absolute"
             style={{
-              top: `${Math.sin(Date.now() * 0.005) * 4 + 4}px`,
+              top: `${Math.sin((Date.now() || 0) * 0.005) * 4 + 4}px`,
               boxShadow: '0 0 4px rgba(var(--color1-rgb), 1)',
             }}
           ></div>
@@ -180,11 +171,11 @@ const CustomCursor = () => {
           x:
             mousePosition.x -
             (isPointer ? 3 : 2) +
-            (hasGlitchEffect ? Math.random() * 8 - 4 : 0),
+            (hasGlitchEffect ? Math.floor(Math.random() * 8 - 4) : 0),
           y:
             mousePosition.y -
             (isPointer ? 3 : 2) +
-            (hasGlitchEffect ? Math.random() * 8 - 4 : 0),
+            (hasGlitchEffect ? Math.floor(Math.random() * 8 - 4) : 0),
           scale: isClicking ? 0.5 : 1,
         }}
         transition={{

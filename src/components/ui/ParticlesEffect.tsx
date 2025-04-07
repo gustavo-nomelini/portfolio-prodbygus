@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type Particle = {
   x: number;
@@ -17,15 +17,21 @@ const ParticlesEffect = () => {
   const particles = useRef<Particle[]>([]);
   const animationFrameId = useRef<number>(0);
   const isInitialized = useRef<boolean>(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set initial dimensions
     if (!isInitialized.current) {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -137,7 +143,9 @@ const ParticlesEffect = () => {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
-  }, []);
+  }, [isMounted]);
+
+  if (!isMounted) return null;
 
   return (
     <canvas
