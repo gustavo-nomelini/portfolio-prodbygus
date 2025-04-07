@@ -2,7 +2,7 @@
 
 ![Logo](public/LogoRoxaSemFundo.png)
 
-Um portfólio profissional moderno e responsivo desenvolvido com Next.js, React, TypeScript e Tailwind CSS. O site está otimizado para SEO, com configurações avançadas de CORS e segurança, e conta com um formulário de contato funcional usando Nodemailer.
+Um portfólio profissional moderno e responsivo desenvolvido com Next.js 15, React 19, TypeScript e Tailwind CSS 4. O site apresenta um design cyberpunk com cursor personalizado, efeitos visuais avançados, animações fluidas e um formulário de contato funcional usando Nodemailer.
 
 **URL do Projeto:** [https://portfolio-prodbygus.vercel.app/](https://portfolio-prodbygus.vercel.app/)
 
@@ -10,22 +10,24 @@ Um portfólio profissional moderno e responsivo desenvolvido com Next.js, React,
 
 - **Frontend:**
 
-  - [Next.js 15](https://nextjs.org/) - Framework React com App Router
+  - [Next.js 15.2](https://nextjs.org/) - Framework React com App Router
   - [React 19](https://react.dev/) - Biblioteca para interfaces de usuário
-  - [TypeScript](https://www.typescriptlang.org/) - Tipagem estática para JavaScript
+  - [TypeScript 5](https://www.typescriptlang.org/) - Tipagem estática para JavaScript
   - [Tailwind CSS 4](https://tailwindcss.com/) - Framework CSS utility-first
-  - [Framer Motion](https://www.framer.com/motion/) - Biblioteca de animações
+  - [Framer Motion 12](https://www.framer.com/motion/) - Biblioteca de animações avançadas
+  - [React Icons 5.5](https://react-icons.github.io/react-icons/) - Biblioteca de ícones
 
 - **Backend:**
 
-  - [Nodemailer](https://nodemailer.com/) - Módulo para envio de emails
+  - [Nodemailer 6.10](https://nodemailer.com/) - Módulo para envio de emails
   - [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) - Backend serverless
 
 - **Ferramentas de Desenvolvimento:**
 
-  - [ESLint](https://eslint.org/) - Linter para JavaScript/TypeScript
-  - [Prettier](https://prettier.io/) - Formatador de código
+  - [ESLint 9](https://eslint.org/) - Linter para JavaScript/TypeScript
+  - [Prettier 3.5](https://prettier.io/) - Formatador de código
   - [Turbopack](https://turbo.build/pack) - Bundler para desenvolvimento rápido
+  - [PNPM 10.6](https://pnpm.io/) - Gerenciador de pacotes rápido e eficiente
 
 - **Infraestrutura:**
   - [Vercel](https://vercel.com/) - Plataforma de hospedagem e deploy
@@ -53,14 +55,14 @@ Um portfólio profissional moderno e responsivo desenvolvido com Next.js, React,
   - Transições suaves entre páginas e seções
   - Efeitos de paralaxe em backgrounds
   - Animações de fade e slide nas entradas de elementos
-  - Componente wrapper para gerenciar animações de scroll
+  - Componente ScrollAnimationWrapper para gerenciar animações de scroll
 
 ## 🛠️ Configuração do Projeto
 
 ### Pré-requisitos
 
 - Node.js 18.17.0 ou superior
-- npm, yarn ou pnpm (recomendado)
+- PNPM 10.6.5 ou superior (recomendado)
 
 ### Instalação
 
@@ -74,11 +76,11 @@ Um portfólio profissional moderno e responsivo desenvolvido com Next.js, React,
 2. Instale as dependências
 
    ```bash
+   pnpm install
+   # ou
    npm install
    # ou
    yarn install
-   # ou
-   pnpm install
    ```
 
 3. Configure as variáveis de ambiente
@@ -97,11 +99,11 @@ Um portfólio profissional moderno e responsivo desenvolvido com Next.js, React,
 
 4. Inicie o ambiente de desenvolvimento
    ```bash
+   pnpm dev
+   # ou
    npm run dev
    # ou
    yarn dev
-   # ou
-   pnpm dev
    ```
 
 ## 📂 Estrutura do Projeto
@@ -120,6 +122,7 @@ portfolio-prodbygus/
 │   │   ├── about/        # Página Sobre
 │   │   ├── projects/     # Página de Projetos
 │   │   ├── contact/      # Página de Contato
+│   │   ├── sitemap.ts    # Configuração de sitemap dinâmico
 │   │   └── page.tsx      # Página inicial
 │   ├── components/       # Componentes React reutilizáveis
 │   │   ├── layout/       # Componentes de layout (Header, Footer)
@@ -128,6 +131,11 @@ portfolio-prodbygus/
 │   │       ├── GlobalBackground.tsx # Fundo interativo com partículas
 │   │       ├── CustomCursor.tsx    # Cursor personalizado cyberpunk
 │   │       ├── ParticlesEffect.tsx # Sistema de partículas interativas
+│   │       ├── ImageGallery.tsx    # Galeria de imagens com modal
+│   │       ├── ImageModal.tsx      # Modal para visualização de imagens
+│   │       ├── ProjectCard.tsx     # Card para exibição de projetos
+│   │       ├── ScrollAnimationWrapper.tsx # Wrapper para animações de scroll
+│   │       ├── Map.tsx             # Componente de mapa interativo
 │   │       └── ...                 # Outros componentes UI
 │   └── middleware.ts     # Middleware para CORS e segurança
 ├── .env.local            # Variáveis de ambiente locais
@@ -140,41 +148,45 @@ portfolio-prodbygus/
 
 ### Sistema Visual e UI/UX
 
-- **Tema Cyberpunk**: Implementação completa de um tema cyberpunk com efeitos de glitch, linhas de grade, e gradientes neon
-- **Cursor Personalizado**: Substituição do cursor padrão do navegador por uma versão interativa com partículas e efeitos visuais
-- **Fundo Interativo**: Camadas dinâmicas que respondem ao movimento do cursor com ondas e partículas animadas
-- **Tipografia Avançada**: Uso de fontes monospace (Fira Code) com ligaduras para uma estética de código/terminal
-- **Efeitos Glassmorphism**: Elementos com efeito de vidro usando backdrop-filter e blur para sobreposições modernas
-- **Animações Otimizadas**: Sistema de animações baseado em keyframes CSS e Framer Motion com renderização client-side
+- **Tema Cyberpunk**: Design completo com efeitos de glitch, linhas de grade, e gradientes neon
+- **Cursor Personalizado**: Cursor interativo avançado com partículas e efeitos visuais
+- **Fundo Interativo**: Canvas dinâmico com partículas e ondas que reagem ao movimento do mouse
+- **Tipografia Avançada**: Uso de fontes monospace com ligaduras para uma estética tech/terminal
+- **Efeitos Glassmorphism**: Elementos com efeito de vidro usando backdrop-filter e blur
+- **Animações Otimizadas**: Sistema baseado em Framer Motion 12 com renderização client-side
+- **Galeria de Imagens**: Implementação de galeria com modal para visualização detalhada
+- **Componentes Esqueleto**: Sistema de skeletons para carregamento progressivo
 
 ### Otimizações de Performance
 
-- **Renderização Client-side**: Componentes visuais pesados como animações e efeitos de partículas isolados no cliente
-- **Lazy Loading**: Uso de dynamic imports com SSR desativado para componentes interativos complexos
-- **Otimização de Canvas**: Implementação eficiente de animações em canvas com requestAnimationFrame
-- **Gestão de Recursos**: Limpeza apropriada de timers e event listeners para evitar vazamentos de memória
-- **Throttling de Eventos**: Otimização de eventos de mouse para reduzir sobrecarga em interações contínuas
+- **Renderização Client-side**: Componentes visuais pesados isolados no cliente
+- **Lazy Loading**: Dynamic imports com SSR desativado para componentes interativos complexos
+- **Otimização de Canvas**: Animações em canvas com requestAnimationFrame e debounce
+- **Gestão de Recursos**: Limpeza apropriada de timers e event listeners
+- **Throttling de Eventos**: Otimização de eventos de mouse para reduzir sobrecarga
+- **Turbopack**: Uso do Turbopack para desenvolvimento rápido
 
 ### SEO e Metadados
 
-- **Metadados Avançados**: Implementação completa de metadados com Open Graph e Twitter Cards para melhor compartilhamento em redes sociais
-- **Sitemap Dinâmico**: Geração de sitemap.xml para melhor indexação em motores de busca
+- **Sitemap Dinâmico**: Geração automática de sitemap.xml para melhor indexação
+- **Metadados Avançados**: Open Graph e Twitter Cards para compartilhamento em redes sociais
 - **Robots.txt**: Configuração otimizada para crawlers
 - **Schema.org**: Marcações JSON-LD estruturadas para melhor compreensão por motores de busca
-- **Progressive Web App (PWA)**: Configuração de manifest.json para funcionalidades de PWA
+- **Progressive Web App (PWA)**: Configuração para funcionalidades de PWA
 
 ### Segurança e Otimizações
 
-- **Configurações CORS**: Middleware personalizado para controle de CORS nas rotas da API
-- **Cabeçalhos de Segurança**: Implementação de cabeçalhos como X-Content-Type-Options, X-Frame-Options, etc.
+- **Middleware Personalizado**: Configurações avançadas de CORS e segurança
+- **Cabeçalhos de Segurança**: X-Content-Type-Options, X-Frame-Options, X-XSS-Protection
 - **Cache Otimizado**: Configurações de cache para arquivos estáticos
-- **Verificação Google**: Preparação para verificação do Google Search Console
+- **Cross-Origin Policies**: Configurações de Cross-Origin-Resource-Policy e Cross-Origin-Embedder-Policy
 
 ### Formulário de Contato
 
-- **Nodemailer**: Configuração segura para envio de emails através do formulário de contato
+- **Nodemailer**: Configuração segura para envio de emails
 - **Validação**: Validação de campos obrigatórios no frontend e backend
 - **Feedback Visual**: Indicadores de status durante o envio do formulário
+- **Template HTML**: Email formatado com HTML para melhor apresentação
 
 ## 📱 Responsividade
 
