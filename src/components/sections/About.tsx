@@ -184,7 +184,7 @@ const About = () => {
 
               {/* Botões - Download CV e Contato */}
               <motion.div
-                className="mt-8 flex flex-row justify-center md:justify-start gap-4 w-full"
+                className="mt-8 flex flex-col md:flex-row justify-center md:justify-start gap-4 w-full"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
@@ -193,7 +193,7 @@ const About = () => {
                 <a
                   href="/CV_Gustavo_Lopes_Nomelini.pdf"
                   download
-                  className="relative group overflow-hidden flex-1 md:flex-none"
+                  className="relative group overflow-hidden w-full"
                   onMouseEnter={() => setIsDownloadHovered(true)}
                   onMouseLeave={() => setIsDownloadHovered(false)}
                 >
@@ -254,7 +254,7 @@ const About = () => {
                 {/* Botão de Contato */}
                 <Link
                   href="/contact"
-                  className="relative group overflow-hidden flex-1 md:flex-none"
+                  className="relative group overflow-hidden w-full"
                   onMouseEnter={() => setIsContactHovered(true)}
                   onMouseLeave={() => setIsContactHovered(false)}
                 >

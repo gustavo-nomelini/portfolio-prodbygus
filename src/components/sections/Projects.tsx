@@ -274,7 +274,7 @@ const Projects = () => {
 
         {/* Filtros de categorias com efeito de brilho */}
         <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-col md:flex-row justify-center gap-4 mb-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
