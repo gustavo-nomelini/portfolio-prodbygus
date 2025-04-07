@@ -72,17 +72,17 @@ const GlobalBackgroundImpl = () => {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Calcular intensidade baseada na proximidade/movimento do mouse
-        const intensity = isActive ? 20 : 10;
+        // Removed mouse interaction for intensity - using constant value
+        const intensity = 15;
 
         // Desenhar várias linhas de onda
         for (let i = 0; i < 3; i++) {
           const color =
             i === 0
-              ? `rgba(var(--color1-rgb), 0.05)`
+              ? `rgba(var(--color1-rgb), 0.1)`
               : i === 1
-                ? `rgba(var(--color3-rgb), 0.05)`
-                : `rgba(255, 255, 255, 0.05)`;
+                ? `rgba(var(--color3-rgb), 0.1)`
+                : `rgba(var(--color2-rgb), 0.08)`;
 
           const yOffset = i * 30;
           const amplitude = intensity * (i + 1) * 0.5;
@@ -92,20 +92,13 @@ const GlobalBackgroundImpl = () => {
           ctx.beginPath();
 
           for (let x = 0; x < canvas.width; x += 5) {
-            // Calcular efeito de distorção baseado na posição do mouse
-            const distanceX = mousePosition.x - x;
-            const distanceFactor = isActive
-              ? Math.max(0, 1 - Math.min(Math.abs(distanceX) / 300, 1)) * 10
-              : 0;
-
             const y =
               canvas.height / 2 +
               Math.sin(x * frequency + time * speed) * amplitude +
               Math.sin(x * frequency * 0.5 + time * speed * 0.7) *
                 amplitude *
                 0.5 +
-              yOffset +
-              (isActive ? distanceFactor * Math.sin(time * 2) : 0);
+              yOffset;
 
             if (x === 0) {
               ctx.moveTo(x, y);

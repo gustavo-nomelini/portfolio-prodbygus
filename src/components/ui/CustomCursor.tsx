@@ -30,7 +30,6 @@ const CursorImplementation = () => {
   const [cursorMode, setCursorMode] = useState<'default' | 'scan' | 'target'>(
     'default',
   );
-  const [sinValues, setSinValues] = useState({ h: 0, v: 0 });
 
   const inactivityTimer = useRef<NodeJS.Timeout | null>(null);
   const glitchTimer = useRef<NodeJS.Timeout | null>(null);
@@ -41,24 +40,8 @@ const CursorImplementation = () => {
   const particleIdCounter = useRef<number>(0);
   const animationFrameRef = useRef<number | null>(null);
 
-  // Atualizar valores de seno para animações
-  useEffect(() => {
-    const updateSinValues = () => {
-      setSinValues({
-        h: Math.sin(Date.now() * 0.002) * 2,
-        v: Math.sin(Date.now() * 0.002 + 1) * 2,
-      });
-      animationFrameRef.current = requestAnimationFrame(updateSinValues);
-    };
-
-    animationFrameRef.current = requestAnimationFrame(updateSinValues);
-
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, []);
+  // Cor fixa para as linhas centrais - definida uma vez e nunca alterada
+  const fixedLineColor = 'var(--color1)';
 
   useEffect(() => {
     // Adicionar classe global para esconder cursor padrão
@@ -387,50 +370,69 @@ const CursorImplementation = () => {
           mass: 0.1,
         }}
       >
-        {/* Inner detail lines */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full overflow-hidden rounded-full">
-          {/* Crosshair horizontal line */}
-          <div
-            className="absolute top-1/2 left-0 w-full h-px bg-current opacity-40"
-            style={{
-              boxShadow: `0 0 4px ${cursorColor}`,
-              transform: `translateY(${sinValues.h}px)`,
-            }}
-          ></div>
+        {/* Implementação de cursor especial por modo */}
+        {cursorMode === 'scan' && (
+          <>
+            {/* Scanner animation */}
+            <div
+              className="absolute top-0 left-0 h-full w-2 bg-[var(--color3)]"
+              style={{
+                opacity: 0.3,
+                boxShadow: '0 0 10px var(--color3)',
+                animation: 'scanLine 2s infinite linear',
+              }}
+            />
+          </>
+        )}
 
-          {/* Crosshair vertical line */}
-          <div
-            className="absolute top-0 left-1/2 h-full w-px bg-current opacity-40"
-            style={{
-              boxShadow: `0 0 4px ${cursorColor}`,
-              transform: `translateX(${sinValues.v}px)`,
-            }}
-          ></div>
+        {cursorMode === 'target' && (
+          <>
+            {/* Target corners */}
+            <div className="absolute top-1 left-1 w-3 h-3 border-t border-l border-current opacity-50"></div>
+            <div className="absolute top-1 right-1 w-3 h-3 border-t border-r border-current opacity-50"></div>
+            <div className="absolute bottom-1 left-1 w-3 h-3 border-b border-l border-current opacity-50"></div>
+            <div className="absolute bottom-1 right-1 w-3 h-3 border-b border-r border-current opacity-50"></div>
+          </>
+        )}
+      </motion.div>
 
-          {cursorMode === 'scan' && (
-            <>
-              {/* Scanner animation */}
-              <div
-                className="absolute top-0 left-0 h-full w-2 bg-[var(--color3)]"
-                style={{
-                  opacity: 0.3,
-                  boxShadow: '0 0 10px var(--color3)',
-                  animation: 'scanLine 2s infinite linear',
-                }}
-              />
-            </>
-          )}
+      {/* Linhas de cruzamento completamente separadas e independentes do cursor principal */}
+      <motion.div
+        className="fixed top-0 left-0 z-49 pointer-events-none"
+        style={{
+          width: cursorSize,
+          height: cursorSize,
+          opacity: isHidden ? 0 : 0.25,
+        }}
+        animate={{
+          x: mousePosition.x - cursorSize / 2,
+          y: mousePosition.y - cursorSize / 2,
+          scale: isClicking ? 0.8 : 1,
+        }}
+        transition={{
+          type: 'spring',
+          damping: 15,
+          stiffness: 150,
+          mass: 0.1,
+        }}
+      >
+        {/* Linha horizontal fixa com cor roxa */}
+        <div
+          className="absolute top-1/2 left-0 w-full h-px"
+          style={{
+            backgroundColor: 'var(--color1)',
+            boxShadow: '0 0 4px var(--color1)',
+          }}
+        ></div>
 
-          {cursorMode === 'target' && (
-            <>
-              {/* Target corners */}
-              <div className="absolute top-1 left-1 w-3 h-3 border-t border-l border-current opacity-50"></div>
-              <div className="absolute top-1 right-1 w-3 h-3 border-t border-r border-current opacity-50"></div>
-              <div className="absolute bottom-1 left-1 w-3 h-3 border-b border-l border-current opacity-50"></div>
-              <div className="absolute bottom-1 right-1 w-3 h-3 border-b border-r border-current opacity-50"></div>
-            </>
-          )}
-        </div>
+        {/* Linha vertical fixa com cor roxa */}
+        <div
+          className="absolute top-0 left-1/2 h-full w-px"
+          style={{
+            backgroundColor: 'var(--color1)',
+            boxShadow: '0 0 4px var(--color1)',
+          }}
+        ></div>
       </motion.div>
 
       {/* Texto de hover */}
