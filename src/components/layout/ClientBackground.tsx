@@ -1,12 +1,9 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import GlobalBackground from '@/components/ui/GlobalBackground';
 
-// Import the GlobalBackground with ssr:false in a client component
-const GlobalBackground = dynamic(() => import('../ui/GlobalBackground'), {
-  ssr: false,
-});
-
+// Este componente já não precisa usar dynamic import porque
+// GlobalBackground já está usando dynamic import com ssr: false internamente
 export default function ClientBackground() {
   return <GlobalBackground />;
 }

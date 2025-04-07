@@ -149,6 +149,7 @@ export default function RootLayout({
                   transition-colors duration-150 
                   min-h-screen flex flex-col overflow-x-hidden 
                   no-scrollbar relative`}
+        suppressHydrationWarning
       >
         {/* Cyberpunk grid como fundo para o tema escuro (apenas visível nesse tema) */}
         <div className="dark:block hidden">

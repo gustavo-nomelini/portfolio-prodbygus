@@ -506,3 +506,18 @@ div {
     transform: translate(-2px, -2px);
   }
 }
+
+/* Animação para o scanner do cursor cyberpunk */
+@keyframes scanLine {
+  0% {
+    left: 0%;
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    left: 100%;
+    opacity: 0.2;
+  }
+}

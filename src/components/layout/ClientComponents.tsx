@@ -1,12 +1,9 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import CustomCursor from '@/components/ui/CustomCursor';
 
-// Import cursor with client-side rendering only
-const CustomCursor = dynamic(() => import('@/components/ui/CustomCursor'), {
-  ssr: false,
-});
-
+// Este componente não precisa mais usar dynamic import porque
+// CustomCursor já está usando dynamic import com ssr: false internamente
 export function ClientCursor() {
   return <CustomCursor />;
 }
