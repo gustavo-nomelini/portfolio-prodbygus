@@ -16,11 +16,16 @@ Um portfólio profissional moderno e responsivo desenvolvido com Next.js 15, Rea
   - [Tailwind CSS 4](https://tailwindcss.com/) - Framework CSS utility-first
   - [Framer Motion 12](https://www.framer.com/motion/) - Biblioteca de animações avançadas
   - [React Icons 5.5](https://react-icons.github.io/react-icons/) - Biblioteca de ícones
+  - [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) - Biblioteca 3D para React
+  - [Three.js](https://threejs.org/) - Biblioteca 3D para JavaScript
+  - [GSAP](https://greensock.com/gsap/) - Biblioteca de animações de alta performance
 
 - **Backend:**
 
   - [Nodemailer 6.10](https://nodemailer.com/) - Módulo para envio de emails
   - [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) - Backend serverless
+  - [Zod](https://zod.dev/) - Validação de dados em tempo de execução
+  - [Resend](https://resend.com/) - API de email moderna
 
 - **Ferramentas de Desenvolvimento:**
 
@@ -28,9 +33,14 @@ Um portfólio profissional moderno e responsivo desenvolvido com Next.js 15, Rea
   - [Prettier 3.5](https://prettier.io/) - Formatador de código
   - [Turbopack](https://turbo.build/pack) - Bundler para desenvolvimento rápido
   - [PNPM 10.6](https://pnpm.io/) - Gerenciador de pacotes rápido e eficiente
+  - [Husky](https://typicode.github.io/husky/) - Git hooks
+  - [Commitlint](https://commitlint.js.org/) - Linter de mensagens de commit
+  - [Lint-staged](https://github.com/okonet/lint-staged) - Execução de linters em arquivos staged
 
 - **Infraestrutura:**
   - [Vercel](https://vercel.com/) - Plataforma de hospedagem e deploy
+  - [Cloudflare](https://www.cloudflare.com/) - CDN e proteção DDoS
+  - [Vercel Analytics](https://vercel.com/analytics) - Análise de performance e métricas
 
 ## 🔮 Efeitos Visuais e Interatividade
 
@@ -221,17 +231,27 @@ Um arquivo `vercel.json` personalizado foi criado para:
 - Otimizar o cache para arquivos estáticos
 - Criar redirecionamentos úteis
 
-## 📄 Licença
+## 📄 Licença e Direitos Autorais
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto é propriedade intelectual de Gustavo Lopes Nomelini, também conhecido como "<PROD/BYGUS>". Todos os direitos reservados.
+
+O código fonte deste projeto está licenciado sob os termos da licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+### Termos de Uso
+
+- O código pode ser usado livremente para fins pessoais e comerciais
+- A atribuição ao autor original é obrigatória
+- O código pode ser modificado e distribuído
+- O autor não se responsabiliza por qualquer dano causado pelo uso do código
 
 ## 📧 Contato
 
-- **Gustavo Lopes Nomelini**
+- **Gustavo Lopes Nomelini (PROD/BYGUS)**
 - Email: gustavolnomelini@gmail.com
 - LinkedIn: [Gustavo Lopes Nomelini](https://linkedin.com/in/gustavo-lopes-nomelini-144bb1212)
 - GitHub: [gustavo-nomelini](https://github.com/gustavo-nomelini)
+- Instagram: [@prodbygus](https://instagram.com/prodbygus)
 
 ---
 
-Desenvolvido com ❤️ por Prod by GUS
+Desenvolvido com ❤️ por <PROD/BYGUS>
