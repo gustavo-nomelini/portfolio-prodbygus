@@ -485,6 +485,192 @@ const About = () => {
           </motion.div>
         </div>
 
+        {/* Experience and Education Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="mt-20"
+        >
+          <motion.h3
+            className="text-2xl font-semibold text-gradient mb-8 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            Experiência e Educação
+          </motion.h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* Experience */}
+            <motion.div variants={itemVariants} className="relative group">
+              <div className="glass-effect p-6 rounded-xl border border-[var(--color1)]/20 hover:border-[var(--color1)]/40 transition-all duration-300 relative overflow-hidden">
+                {/* Scanner effect */}
+                <div className="absolute inset-0 overflow-hidden rounded-xl">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--color1)]/20 to-transparent animate-scan"></div>
+                </div>
+
+                {/* Crosshairs */}
+                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-[var(--color1)]/40 rounded-tl-full group-hover:border-[var(--color1)]"></div>
+                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[var(--color1)]/40 rounded-tr-full group-hover:border-[var(--color1)]"></div>
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-[var(--color1)]/40 rounded-bl-full group-hover:border-[var(--color1)]"></div>
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-[var(--color1)]/40 rounded-br-full group-hover:border-[var(--color1)]"></div>
+
+                <h4 className="text-xl font-medium text-[var(--foreground)] mb-4 flex items-center relative z-10">
+                  <span className="w-8 h-8 rounded-full bg-gradient-to-r from-[var(--color1)] to-[var(--color3)] flex items-center justify-center text-[var(--background)] mr-3">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-4 h-4"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.5 5.25a3 3 0 013-3h3a3 3 0 013 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0112 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 017.5 5.455V5.25zm7.5 0v.09a49.488 49.488 0 00-6 0v-.09a1.5 1.5 0 011.5-1.5h3a1.5 1.5 0 011.5 1.5zm-3 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                        clipRule="evenodd"
+                      />
+                      <path d="M3 18.4v-2.796a4.3 4.3 0 00.713.31A26.226 26.226 0 0012 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923-2.12.282-4.282.427-6.477.427a49.19 49.19 0 01-6.477-.427C4.047 21.128 3 19.852 3 18.4z" />
+                    </svg>
+                  </span>
+                  Experiência Profissional
+                </h4>
+
+                <div className="space-y-8 ml-11 relative z-10">
+                  <div>
+                    <h5 className="text-lg font-medium text-[var(--foreground)]">
+                      Influenciador de conteúdo
+                      <br /> sobre Tecnologia e Programação
+                    </h5>
+                    <p className="text-gradient">
+                      &lt;PROD/BYGUS&gt; • 03/2025 - Presente
+                    </p>
+                    <p className="text-[var(--foreground-muted)] mt-2">
+                      Criador de conteúdo sobre Tecnologia e Programação,
+                      divulgando dicas, tutoriais e novas tecnologias.
+                      <br />
+                      Meus meios de comunicação são: meu Blog, meu Instagram e
+                      meu LinkedIn.
+                      <br />
+                      Também tenho um canal no YouTube onde posto vídeos sobre
+                      Tecnologia e Programação.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 className="text-lg font-medium text-[var(--foreground)]">
+                      Suporte Técnico Pleno (N2)
+                    </h5>
+                    <p className="text-gradient">
+                      Empresa Stein Telecom • 09/2024 - 04/2025
+                    </p>
+                    <p className="text-[var(--foreground-muted)] mt-2">
+                      Era responsável por resolver problemas de Tecnologia da
+                      Informação e Infraestrutura. Também realizava diagnósticos
+                      aprofundados, configurava sistemas, dova suporte a redes,
+                      hardwares e softwares, e colaborei com a equipe de
+                      infraestrutura em atualizações e melhorias.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 className="text-lg font-medium text-[var(--foreground)]">
+                      Gerente Administrativo
+                    </h5>
+                    <p className="text-gradient">
+                      Empresa Lopes & Nomelini • 03/2020 - 09/2024
+                    </p>
+                    <p className="text-[var(--foreground-muted)] mt-2">
+                      Fui responsável por planejar, coordenar e supervisionar as
+                      atividades administrativas da organização.
+                      <br />
+                      Tinha como função garantir a eficiência dos processos
+                      internos, como gestão de recursos, contratos e serviços
+                      gerais. Também atuei no controle orçamentário e apoio às
+                      decisões estratégicas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Education */}
+            <motion.div variants={itemVariants} className="relative group">
+              <div className="glass-effect p-6 rounded-xl border border-[var(--color1)]/20 hover:border-[var(--color1)]/40 transition-all duration-300 relative overflow-hidden">
+                {/* Scanner effect */}
+                <div className="absolute inset-0 overflow-hidden rounded-xl">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--color1)]/20 to-transparent animate-scan"></div>
+                </div>
+
+                {/* Crosshairs */}
+                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-[var(--color1)]/40 rounded-tl-full group-hover:border-[var(--color1)]"></div>
+                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[var(--color1)]/40 rounded-tr-full group-hover:border-[var(--color1)]"></div>
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-[var(--color1)]/40 rounded-bl-full group-hover:border-[var(--color1)]"></div>
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-[var(--color1)]/40 rounded-br-full group-hover:border-[var(--color1)]"></div>
+
+                <h4 className="text-xl font-medium text-[var(--foreground)] mb-4 flex items-center relative z-10">
+                  <span className="w-8 h-8 rounded-full bg-gradient-to-r from-[var(--color1)] to-[var(--color3)] flex items-center justify-center text-[var(--background)] mr-3">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-4 h-4"
+                    >
+                      <path d="M11.7 2.805a.75.75 0 01.6 0A60.65 60.65 0 0122.83 8.72a.75.75 0 01-.231 1.337 49.949 49.949 0 00-9.902 3.912l-.003.002-.34.18a.75.75 0 01-.707 0A50.009 50.009 0 007.5 12.174v-.224c0-.131.067-.248.172-.311a54.614 54.614 0 014.653-2.52.75.75 0 00-.65-1.352 56.129 56.129 0 00-4.78 2.589 1.858 1.858 0 00-.859 1.228 49.803 49.803 0 00-4.634-1.527.75.75 0 01-.231-1.337A60.653 60.653 0 0111.7 2.805z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M13.06 2.307a.75.75 0 00-.892 0l-2.88 2.88a.75.75 0 00-.218.55v3.81a.75.75 0 00.218.55l2.88 2.88a.75.75 0 00.892 0l2.88-2.88a.75.75 0 00.218-.55v-3.81a.75.75 0 00-.218-.55l-2.88-2.88zM7.5 8.25a.75.75 0 01.75-.75h7.5a.75.75 0 01.75.75v7.5a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-7.5z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  Educação
+                </h4>
+
+                <div className="space-y-8 ml-11 relative z-10">
+                  <div>
+                    <h5 className="text-lg font-medium text-[var(--foreground)]">
+                      Bacharelado em Engenharia de Software
+                    </h5>
+                    <p className="text-gradient">
+                      Universidade UNINTER • 01/2023 - 12/2026
+                    </p>
+                    <p className="text-[var(--foreground-muted)] mt-2">
+                      Graduação EAD.
+                    </p>
+                  </div>
+
+                  <div className="mt-12">
+                    <h5 className="text-lg font-medium text-[var(--foreground)]">
+                      Tecnólogo em Análise e Desenvolvimento de Sistemas
+                    </h5>
+                    <p className="text-gradient">
+                      UNIVEL • 01/2024 - 12/2026
+                    </p>
+                    <p className="text-[var(--foreground-muted)] mt-2">
+                      Graduação presencial no período noturno.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h5 className="text-lg font-medium text-[var(--foreground)]">
+                      Pós-Graduação Lato-sensu
+                      <br />
+                      GO Expert
+                    </h5>
+                    <p className="text-gradient">
+                      Faculdade Full Cycle • 01/2025 - 07/2025
+                    </p>
+                    <p className="text-[var(--foreground-muted)] mt-2">
+                      Especialização em desenvolvimento Backend com foco na
+                      linguagem de programação Golang.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
         {/* Decorative elements */}
         <div className="hidden md:block absolute -bottom-20 -left-20 w-40 h-40 border border-[var(--color1)]/20 rounded-full"></div>
         <div className="hidden md:block absolute -top-10 -right-10 w-20 h-20 border border-[var(--color3)]/20 rounded-full"></div>
