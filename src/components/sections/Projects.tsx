@@ -47,7 +47,7 @@ const Projects = () => {
             title: 'Blog PRODBYGUS',
             description:
               'Blog pessoal desenvolvido com o framework Astro, focado em compartilhar conhecimentos sobre desenvolvimento web e experiências técnicas. Conta com design minimalista e elegante, sistema de posts em Markdown/MDX, carregamento ultrarrápido com SSG (Static Site Generation), tema claro/escuro, SEO otimizado, integração com formulário de contato via Nodemailer e suporte a PWA. Um excelente aprendizado sobre a criação de sites orientados a conteúdo com alta performance.',
-            image: '/projects/blog-prodbygus.png',
+            image: '/projects/blog-main.png',
             categories: ['Frontend', 'Design'],
             technologies: [
               'Astro',
