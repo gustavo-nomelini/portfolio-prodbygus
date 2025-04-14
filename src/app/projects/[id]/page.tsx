@@ -110,18 +110,18 @@ Principais características do projeto:
             screenshots: [
               {
                 src: '/projects/blog-1.png',
-                alt: 'Página inicial do Blog PRODBYGUS',
+                alt: 'Barra de navegação do blog',
                 width: 1200,
                 height: 800,
               },
               {
-                src: '/projects/blog-prodbygus-2.png',
+                src: '/projects/blog-2.png',
                 alt: 'Página de post do blog com formatação em Markdown',
                 width: 1200,
                 height: 800,
               },
               {
-                src: '/projects/blog-prodbygus-3.png',
+                src: '/projects/blog-3.png',
                 alt: 'Formulário de contato com mapa interativo',
                 width: 1200,
                 height: 800,
