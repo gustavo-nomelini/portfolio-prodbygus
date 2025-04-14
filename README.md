@@ -250,8 +250,8 @@ O código fonte deste projeto está licenciado sob os termos da licença MIT. Ve
 - Email: gustavolnomelini@gmail.com
 - LinkedIn: [Gustavo Lopes Nomelini](https://linkedin.com/in/gustavo-lopes-nomelini-144bb1212)
 - GitHub: [gustavo-nomelini](https://github.com/gustavo-nomelini)
-- Instagram: [@prodbygus](https://instagram.com/prodbygus)
-
+- Instagram: [@prodbygus37](https://instagram.com/prodbygus37)
+- X: [@prodbygus37](https://x.com/prodbygus37)
 ---
 
-Desenvolvido com ❤️ por <PROD/BYGUS>
+<PROD/BYGUS>
