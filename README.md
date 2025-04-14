@@ -246,7 +246,7 @@ O código fonte deste projeto está licenciado sob os termos da licença MIT. Ve
 
 ## 📧 Contato
 
-- **Gustavo Lopes Nomelini (PROD/BYGUS)**
+- **Gustavo Lopes Nomelini <PROD/BYGUS>**
 - Email: gustavolnomelini@gmail.com
 - LinkedIn: [Gustavo Lopes Nomelini](https://linkedin.com/in/gustavo-lopes-nomelini-144bb1212)
 - GitHub: [gustavo-nomelini](https://github.com/gustavo-nomelini)
