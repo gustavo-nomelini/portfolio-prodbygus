@@ -77,7 +77,7 @@ Principais características do projeto:
 - Suporte a PWA para instalação como aplicativo
 - Responsividade completa para todos os dispositivos
 - Implementação de mapa interativo com OpenStreetMap`,
-            image: '/projects/blog-prodbygus.png',
+            image: '/projects/blog-main.png',
             categories: ['Frontend', 'Design'],
             technologies: [
               'Astro',
@@ -109,7 +109,7 @@ Principais características do projeto:
             ],
             screenshots: [
               {
-                src: '/projects/blog-prodbygus-1.png',
+                src: '/projects/blog-1.png',
                 alt: 'Página inicial do Blog PRODBYGUS',
                 width: 1200,
                 height: 800,
