@@ -521,3 +521,19 @@ div {
     opacity: 0.2;
   }
 }
+
+@keyframes scan {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scan {
+  animation: scan 3s linear infinite;
+}
